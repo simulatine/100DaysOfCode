@@ -1,7 +1,7 @@
-![Python programming](/master/_images/100DaysOfCode.png "Python programming)
+Simultine's 100 Days of Code
+============================
 
-Project Goals
-=============
+![Python programming](_images/100DaysOfCode.png "Python programming)
 
 *May 2020*
 
@@ -11,6 +11,9 @@ Welcome to my 100 Days of Code web page. This site will show my progress with th
 - Keep myself publicly accountable by tweeting my daily progress with the hashtag #100DaysOfCode
 - Connecting with the community by linking my Twitter progress updates to my GitHub repository
 - Keep a daily log of progress by posting on this page.
+
+Project Goals
+-------------
 
 My goals are to:
 
