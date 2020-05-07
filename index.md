@@ -1,7 +1,6 @@
 Simultine's 100 Days of Code
-============================
 
-![Python programming](/assets/100DaysOfCode.png "Python programming)
+![Python programming](assets/100DaysOfCode.png "Python programming)
 
 *May 2020*
 
