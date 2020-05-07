@@ -1,6 +1,5 @@
 Simultine's 100 Days of Code
-
-![Python programming](assets/100DaysOfCode.png "Python programming)
+============================
 
 *May 2020*
 
@@ -29,3 +28,11 @@ This project was inspired by [https://100DaysOfCode.com](https://100DaysOfCode.c
 - My twitter feed: [https://twitter.com/simulatine](https://twitter.com/simulatine)
 - My GitHub repository: [https://github.com/simulatine/100DaysOfCode](https://github.com/simulatine/100DaysOfCode)
 
+
+Picture 1:
+
+![Python programming](/assets/100DaysOfCode.png "Python programming)
+
+Picture 2:
+
+![Python programming](assets/100DaysOfCode.png "Python programming)
