@@ -1,11 +1,9 @@
-My daily coding progress for the next 100 days
-
 ![100 Days Of Code](/_images/100DaysOfCode.png "100 Days Of Code")
-
-*May 2020*
 
 Project Goals
 =============
+
+*May 2020*
 
 Welcome to my 100 Days of Code web page. This site will show my progress with the challenge. I plan to
 
