@@ -1,8 +1,5 @@
----
-layout: post
-title:  "Simultine's 100 Days of Code"
----
-
+Simultine's 100 Days of Code
+============================
 
 ![Python programming](/assets/100DaysOfCode.png "Python programming)
 
