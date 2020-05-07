@@ -29,10 +29,10 @@ This project was inspired by [https://100DaysOfCode.com](https://100DaysOfCode.c
 - My GitHub repository: [https://github.com/simulatine/100DaysOfCode](https://github.com/simulatine/100DaysOfCode)
 
 
-Picture 1:
+Picture 1A:
 
 ![Python programming](/assets/100DaysOfCode.png "Python programming)
 
-Picture 2:
+Picture 2A:
 
 ![Python programming](assets/100DaysOfCode.png "Python programming)
