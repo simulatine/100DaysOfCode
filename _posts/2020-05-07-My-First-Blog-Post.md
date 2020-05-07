@@ -1,11 +1,9 @@
 ---
 layout: post
-title:  "100 Days of Code"
+title:  "My First Post: Getting Started"
 ---
 
-# My First Post: Getting Started
-
-May 2020. Along with most of the world, I've been stuck in lockdown for weeks, with no end in sight.
+Along with most of the world, I've been stuck in lockdown for weeks, with no end in sight.
 So I've decided to use this time to learn some new skills.
 
 I have used Python on and off for 15 years, but always as a hobby,
