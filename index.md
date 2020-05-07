@@ -1,4 +1,4 @@
-### Simultine's 100 Days of Code
+### Simulatine's 100 Days of Code
 
 *May 2020*
 
