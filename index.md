@@ -1,4 +1,4 @@
-![Python programming](https://github.com/simulatine/100DaysOfCode/blob/master/_images/100DaysOfCode.png "Python programming)
+![Python programming](/master/_images/100DaysOfCode.png "Python programming)
 
 Project Goals
 =============
