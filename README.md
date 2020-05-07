@@ -3,7 +3,7 @@ My daily coding progress for the next 100 days
 
 *May 2020*
 
-For more information, see my web page(https://simulatine.github.io/100DaysOfCode/) where I will be posting daily blog updates.
+For more information, see my [web page] (https://simulatine.github.io/100DaysOfCode/) where I will be posting daily blog updates.
 
 Useful Links
 ============
