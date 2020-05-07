@@ -1,4 +1,4 @@
-![100 Days Of Code](/_images/100DaysOfCode.png "100 Days Of Code")
+![Python programming](/blob/master/_images/100DaysOfCode.png "Python programming)
 
 Project Goals
 =============
