@@ -1,15 +1,20 @@
-# 100DaysOfCode
-
 My daily coding progress for the next 100 days
 
-[100 Days Of Code](/_images/100DaysOfCode.png "100 Days Of Code")
+![100 Days Of Code](/_images/100DaysOfCode.png "100 Days Of Code")
 
 *May 2020*
 
 Project Goals
 =============
 
-Welcome to my 100 Days of Code page. This site will show my progress with the 100 Days of Code challenge. My goals are to:
+Welcome to my 100 Days of Code web page. This site will show my progress with the challenge. I plan to
+
+- Code one hour every day for the next 100 days
+- Keep myself publicly accountable by tweeting my daily progress with the hashtag #100DaysOfCode
+- Connecting with the community by linking my Twitter progress updates to my GitHub repository
+- Keep a daily log of progress by posting on this page.
+
+My goals are to:
 
 - Improve my Python coding skills
 - Learn more about Python graphics
@@ -18,9 +23,9 @@ Welcome to my 100 Days of Code page. This site will show my progress with the 10
 
 I plan to use Python3 on my Windows 10 laptop and Pydroid3 on my Android tablet, and will aim to create cross platform code.
 
-This project was inspired by https://100DaysOfCode.com
+This project was inspired by [https://100DaysOfCode.com](https://100DaysOfCode.com)
 
 
-- My twitter feed: https://twitter.com/simulatine
-- My GitHub repository: https://github.com/simulatine/100DaysOfCode
+- My twitter feed: [https://twitter.com/simulatine](https://twitter.com/simulatine)
+- My GitHub repository: [https://github.com/simulatine/100DaysOfCode](https://github.com/simulatine/100DaysOfCode)
 
