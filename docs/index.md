@@ -26,3 +26,5 @@ This project was inspired by [https://100DaysOfCode.com](https://100DaysOfCode.c
 
 - My twitter feed: [https://twitter.com/simulatine](https://twitter.com/simulatine)
 - My GitHub repository: [https://github.com/simulatine/100DaysOfCode](https://github.com/simulatine/100DaysOfCode)
+
+My daily blog post is below.
