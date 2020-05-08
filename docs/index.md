@@ -2,6 +2,8 @@
 
 *May 2020*
 
+![Python progrmaming](https://simulatine.github.io/100DaysOfCode/assets/image1.png "Python programming")
+
 Welcome to my 100 Days of Code web page. This site will show my progress with the challenge. I plan to:
 
 - Code one hour every day for the next 100 days
