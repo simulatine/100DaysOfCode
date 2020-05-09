@@ -1,11 +1,12 @@
 title: Simulatine's 100 Days Of Code
-# Use the minima theme
-theme: minima
-
 # Site author information
 author:
   name: Simulatine User
   email: simulatine@gmail.com
+description: Learning and having fun with code. Python, Pygame, simulations.
+
+# Use the minima theme
+theme: minima
 
 minima:
   date_format: "%A, %-d %b, %Y"
