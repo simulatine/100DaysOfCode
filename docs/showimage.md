@@ -2,9 +2,7 @@
 
 *May 2020*
 
-Images can be shown on GitHub pages by using the Markdown image link.
-
-So
+Images can be shown on GitHub pages by using the Markdown image link. For example
 
 ```
 ![Screenshot](assets/image1.png "Screenshot")
