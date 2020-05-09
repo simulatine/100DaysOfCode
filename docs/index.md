@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: home
 title:  "Simulatine's 100 Days of Code"
 ---
 
