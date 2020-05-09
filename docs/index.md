@@ -1,6 +1,5 @@
 ---
 layout: home
-title:  "Simulatine's 100 Days of Code"
 ---
 
 Welcome
@@ -9,7 +8,6 @@ Welcome
 *May 2020*
 
 ![Python progrmaming](https://simulatine.github.io/100DaysOfCode/assets/image1.png "Python programming")
-
 
 -------
 
