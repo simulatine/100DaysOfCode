@@ -1,6 +1,6 @@
 ---
 layout: default
-title:  "Show Images with Markdown"
+title:  "Markdown Image Testing"
 ---
 
 ### Markdown Image Testing
