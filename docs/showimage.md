@@ -1,3 +1,8 @@
+---
+layout: page
+title:  "Show Images with Markdown"
+---
+
 ### Markdown Image Testing
 
 *May 2020*
