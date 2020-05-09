@@ -9,18 +9,18 @@ I create a folder `assets` on my local drive, and added a .png image file. After
 
 But the post markdown wasn't displaying properly. In the post markdown, I originally tried
 
-​	![Image alt text](/assets/image1.png)
+`![Screenshot](/assets/image1.png "Screenshot")`
 
 This displayed
 
-![Image alt text](/assets/image1.png)
+![Screenshot](/assets/image1.png "Screenshot")
 
-This didn't work - it seems that the root `/assets` directory that GitHub sees is not the same as the one I created. After some investigation, and searching on StackExchange, I eventually realised I didn't need the initial "/" on my path to the image.
+This didn't work - it seems that the root `/assets` directory that GitHub sees is not the same as the one I created. After some investigation, and searching on StackExchange, I eventually realised that a relative path will work. As my posts are in the _posts folder, I can do the following.
 
-​	![Image alt text](assets/image1.png)
+`![Screenshot](../assets/image1.png "Screenshot")`
 
-This worked:
+And get
 
-![Image alt text](assets/image1.png)
+![Screenshot](../assets/image1.png "Screenshot")
 
 
