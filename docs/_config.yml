@@ -3,9 +3,8 @@ theme: minima
 
 
 # Site author information
-author:
-    name: Simulatine
-    email: simulatine@gmail.com
+site.author.name: Simulatine
+site.author.email: simulatine@gmail.com
 
 header_pages:
     - index.md
@@ -14,6 +13,8 @@ header_pages:
 # Social media links. The Minima theme will automatically show
 # these at the bottom of each page.
 minima:
-  social_links:
+  social:
     twitter: simulatine
+
+minima:
   skin: dark
