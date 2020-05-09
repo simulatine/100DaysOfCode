@@ -2,9 +2,9 @@
 layout: home
 ---
 
-## Welcome ##
-
 *May 2020*
+
+## Welcome ##
 
 ![Python progrmaming](https://simulatine.github.io/100DaysOfCode/assets/image1.png "Python programming")
 
