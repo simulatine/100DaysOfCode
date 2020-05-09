@@ -1,5 +1,5 @@
 ---
-layout: page
+layout: default
 title:  "Show Images with Markdown"
 ---
 
