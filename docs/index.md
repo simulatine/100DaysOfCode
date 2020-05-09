@@ -37,3 +37,14 @@ This project was inspired by [https://100DaysOfCode.com](https://100DaysOfCode.c
 - My twitter feed: [https://twitter.com/simulatine](https://twitter.com/simulatine)
 - My GitHub repository: [https://github.com/simulatine/100DaysOfCode](https://github.com/simulatine/100DaysOfCode)
 
+Latest Posts
+------------
+
+<ul>
+  {% for post in site.posts %}
+    <li>
+      <h2><a href="{{ post.url }}">{{ post.title }}</a></h2>
+      {{ post.excerpt }}
+    </li>
+  {% endfor %}
+</ul>
