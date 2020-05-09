@@ -1,5 +1,5 @@
 ---
-layout: default
+layout: post
 title:  "Images in GitHub Blog Pages"
 ---
 
