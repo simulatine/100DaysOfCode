@@ -1,10 +1,12 @@
+title: Simulatine's 100 Days Of Code
 url: https://simulatine.github.io/100DaysOfCode
 theme: minima
 
 
 # Site author information
-site.author.name: Simulatine
-site.author.email: simulatine@gmail.com
+author:
+    name: Simulatine
+    email: simulatine@gmail.com
 
 header_pages:
     - index.md
@@ -12,8 +14,9 @@ header_pages:
     
 # Social media links. The Minima theme will automatically show
 # these at the bottom of each page.
+
 minima:
-  social:
+  social_links:
     twitter: simulatine
 
 minima:
