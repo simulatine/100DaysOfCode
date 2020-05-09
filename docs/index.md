@@ -3,13 +3,14 @@ layout: home
 title:  "Simulatine's 100 Days of Code"
 ---
 
-### Simulatine's 100 Days of Code
+Welcome
+-------
 
 *May 2020*
 
 ![Python progrmaming](https://simulatine.github.io/100DaysOfCode/assets/image1.png "Python programming")
 
-Welcome
+
 -------
 
 Welcome to my 100 Days of Code web page. This site will show my progress with the challenge. I plan to:
