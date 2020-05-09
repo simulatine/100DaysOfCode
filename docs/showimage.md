@@ -1,7 +1,15 @@
-### Testing
+### Markdown Image Testing
 
 *May 2020*
 
-![Image1](assets/image1.png "This is image 1")
+Images can be shown on GitHub pages by using the Markdown image link.
 
-Image 1 displayed above
+So
+
+```
+![Screenshot](assets/image1.png "Screenshot")
+```
+
+Displays as:
+
+![Screenshot](assets/image1.png "Screenshot")
