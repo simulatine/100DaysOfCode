@@ -2,14 +2,11 @@
 layout: home
 ---
 
-Welcome
--------
+## Welcome ##
 
 *May 2020*
 
 ![Python progrmaming](https://simulatine.github.io/100DaysOfCode/assets/image1.png "Python programming")
-
--------
 
 Welcome to my 100 Days of Code web page. This site will show my progress with the challenge. I plan to:
 
@@ -18,8 +15,7 @@ Welcome to my 100 Days of Code web page. This site will show my progress with th
 - Connecting with the community by linking my Twitter progress updates to my GitHub repository
 - Keep a daily log of progress by posting on this page.
 
-Project Goals
--------------
+## Project Goals ##
 
 My goals are to:
 
