@@ -7,17 +7,13 @@ author:
   name: Simulatine
   email: simulatine@gmail.com
 
-header_pages:
-  - about.md
-
-# Social media links. The Minima theme will automatically show
-# these at the bottom of each page.
-
 minima:
-  date_format: "%b %-d, %Y"
+  date_format: "%A, %-d %b, %Y"
 
   # List of social media links in the footer
   social_links:
     twitter: simulatine
 
-  # skin: dark
+plugins:
+  - jekyll-feed
+  - jekyll-seo-tag
