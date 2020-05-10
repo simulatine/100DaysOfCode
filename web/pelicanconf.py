@@ -2,9 +2,10 @@
 # -*- coding: utf-8 -*- #
 from __future__ import unicode_literals
 
+# Simulatine, 10 May 2020 - Set the site details
 AUTHOR = 'Simulatine'
 SITENAME = "Simulatine's 100 Days of Code Blog"
-SITEURL = ''
+SITEURL = 'https://simulatine.github.io/100DaysOfCode'
 
 PATH = 'content'
 
