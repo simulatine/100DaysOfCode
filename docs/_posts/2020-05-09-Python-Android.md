@@ -28,12 +28,15 @@ Installing Python was easy - I was up and running within 10 minutes.
 
 - I opened the Play Store app and searched for "pydroid"
 - Once I found the correct app, I tapped on Install
-- ![Pydroid3 in the Google Play Store](../../../assets/Pydroid3_Install_Step_1.png)
+
+![Pydroid3 in the Google Play Store](../../../assets/Pydroid3_Install_Step_1.png)
+
 - The app downloaded and installed
 - When I first opened it, I was asked if I wanted to also install an IDE for Java. I tapped on Not Interested
 - The app then downloaded the latest version of Python before starting
 - The app finally opened with a blank file
-- ![Pydroid3 Initial Screen](../../../assets/Pydroid3_Install_Step_2.png)
+
+![Pydroid3 Initial Screen](../../../assets/Pydroid3_Install_Step_2.png)
 
 ### Configuring the App's Appearance
 
