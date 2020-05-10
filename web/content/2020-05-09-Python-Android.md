@@ -17,7 +17,7 @@ I didn't own any Android devices, so decided to invest as cheaply as possible.  
 
 My choice quickly narrowed to 7 inch tablets, and after looking at the Lenovo Tab E7 and the Dragon Touch Y88X Pro, I settled on the Vankyo MatrixPad S7. This has 2GB of RAM and 32GB of storage, not much compared to my iPhone, but enough to experiment with. Most importantly, it was a mere £64.99, an absolute bargain.
 
-![Vankyo S7 Tablet](/images/Vankyo_S7_Tablet.jpg)
+![Vankyo S7 Tablet]({static}/images/Vankyo_S7_Tablet.jpg)
 
 Installing Python was easy - I was up and running within 10 minutes.
 
@@ -26,14 +26,14 @@ Installing Python was easy - I was up and running within 10 minutes.
 - I opened the Play Store app and searched for "pydroid"
 - Once I found the correct app, I tapped on Install
 
-![Pydroid3 in the Google Play Store](/images/Pydroid3_Install_Step_1.png)
+![Pydroid3 in the Google Play Store]({static}/images/Pydroid3_Install_Step_1.png)
 
 - The app downloaded and installed
 - When I first opened it, I was asked if I wanted to also install an IDE for Java. I tapped on Not Interested
 - The app then downloaded the latest version of Python before starting
 - The app finally opened with a blank file
 
-![Pydroid3 Initial Screen](/images/Pydroid3_Install_Step_2.png)
+![Pydroid3 Initial Screen]({static}/images/Pydroid3_Install_Step_2.png)
 
 ## Configuring the App's Appearance ##
 
@@ -42,7 +42,7 @@ After starting Pydroid, I immediately changed the editor appearance to the dark 
 - I tapped on the menu button in the top left and scroll down to Settings
 - I then tapped on Appearance and changed the Editor Theme to Dark
 
-![Pydroid3 with Dark Theme](/images/Pydroid3_Install_Step_3.png)
+![Pydroid3 with Dark Theme]({static}/images/Pydroid3_Install_Step_3.png)
 
 ## Pygame on Pydroid ##
 
@@ -50,4 +50,4 @@ Pydroid3 has some built in Pygame examples. Simply tap on the menu button in the
 
 *The fun starts now!*
 
-![Pygame Sample Program](/images/Pydroid3_Install_Step_4.png)
+![Pygame Sample Program]({static}/images/Pydroid3_Install_Step_4.png)

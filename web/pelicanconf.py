@@ -13,9 +13,10 @@ TIMEZONE = 'Europe/London'
 
 DEFAULT_LANG = 'en'
 
-# Simulatine, 10 May 2020 - Added a static folder. Files in this folder will be
-#                           copied to the output directory without modification 
-STATIC_PATHS = ['images']
+# Simulatine, 10 May 2020 - Added static folders. Files in these folders will
+#                           be copied to the output directory without
+#                           modification 
+STATIC_PATHS = ['images', 'extras']
 
 # Feed generation is usually not desired when developing
 FEED_ALL_ATOM = None
@@ -58,6 +59,15 @@ DEFAULT_DATE_FORMAT = '%A, %d %B %Y'
 SUMMARY_MAX_LENGTH = 25
 
 DEFAULT_PAGINATION = 10
+
+# Simulatine, 10 May 2020 - Added a favicon link.
+EXTRA_PATH_METADATA = {
+    'extras/favicon.ico': {'path': 'favicon.ico'},
+}
+
+# Simulatine, 10 May 2020 - Try a different theme.
+THEME = "notmyidea"
+
 
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True
