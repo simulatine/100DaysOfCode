@@ -1,131 +1,198 @@
-<!DOCTYPE html>
+﻿﻿<!DOCTYPE html>
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
 <html lang="en">
-<head>
-        <meta charset="utf-8" />
-        <title>Simulatine's 100 Days of Code Blog - Posts</title>
-        <link rel="stylesheet" href="https://simulatine.github.io/100DaysOfCode/theme/css/main.css" />
+<!--<![endif]-->
+	<head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+        <meta name="author" content="Simulatine">
 
-        <!--[if IE]>
-            <script src="http://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+
+        <title>Simulatine's 100 Days of Code Blog - Articles in Posts category</title>
+
+
+        <!-- CSS -->
+        <link rel="stylesheet" href="https://simulatine.github.io/100DaysOfCode/theme/css/style.css">
+
+        <!-- Custom CSS -->
+        	<link rel="stylesheet" href="https://simulatine.github.io/100DaysOfCode/theme/css/colors/blue.css" id="colors">
+
+        <!-- Code highlight color scheme -->
+            <link href="https://simulatine.github.io/100DaysOfCode/theme/css/code_blocks/darkly.css" rel="stylesheet">
+
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+            <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+            <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
         <![endif]-->
-</head>
 
-<body id="index" class="home">
-<a href="https://github.com/simulatine/100DaysOfCode">
-<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub" />
-</a>
-        <header id="banner" class="body">
-                <h1><a href="https://simulatine.github.io/100DaysOfCode/">Simulatine's 100 Days of Code Blog  <strong>Learning and having fun with code</strong></a></h1>
-                <nav><ul>
-                    <li class="active"><a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a></li>
-                </ul>
-                </nav>
-        </header><!-- /#banner -->
+                <meta property="og:locale" content="">
+		<meta property="og:site_name" content="Simulatine's 100 Days of Code Blog">
+	</head>
+	<body>
+		<header id="header">
+			<!-- Container -->
+			<div class="container">
+				<!-- Logo / Mobile Menu -->
+				<div class="five columns">
+					<div id="textlogo">
+						<h1><a href="https://simulatine.github.io/100DaysOfCode/">Simulatine's 100 Days of Code Blog</a></h1>
+					</div>
+				</div>
+						<!-- Navigation
+				================================================== -->
+				<div class="eleven columns">
 
-            <aside id="featured" class="body">
-                <article>
-                    <h1 class="entry-title"><a href="https://simulatine.github.io/100DaysOfCode/python-on-my-android-tablet.html">Python on my Android Tablet</a></h1>
-<footer class="post-info">
-        <span>Saturday, 09 May 2020</span>
+					<nav id="navigation" class="menu">
+						<ul id="responsive">
 
-</footer><!-- /.post-info --><h2>Mobile Python Graphics</h2>
+							<li><a href="https://simulatine.github.io/100DaysOfCode/">Home</a></li>
+
+
+						            <li class="active"><a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a></li>
+						</ul>
+					</nav>
+				</div>
+			</div>
+			<!-- Container / End -->
+		</header>
+		<!-- Header / End -->
+
+		<!-- Breadcrumbs Container-->
+		<div id="content-wrapper">
+			<section id="titlebar">
+				<!-- Container -->
+				<div class="container">
+				<div class="thirteen columns">
+					<nav id="breadcrumbs">
+						<ul>
+							<li>You are here:</li>
+							<li><a href="https://simulatine.github.io/100DaysOfCode/">Home</a></li>
+<li><a href="https://simulatine.github.io/100DaysOfCode/categories.html">Categories</a></li>
+<li>Posts</li>
+						</ul>
+					</nav>
+				</div>
+				</div>
+				<!-- Container / End -->
+			</section>
+
+			<div class="container">
+	<div class="twelve alt columns">
+		<!-- Post -->
+		<article class="post medium">
+			<div class="twelve columns">
+				<section class="post-content">
+					<header class="meta">
+						<h2><a href="https://simulatine.github.io/100DaysOfCode/python-on-my-android-tablet.html" rel="bookmark" title="Permalink to Python on my Android Tablet">Python on my Android Tablet</a></h2>
+						<ul>
+							<li>By <a href="https://simulatine.github.io/100DaysOfCode/author/simulatine.html">Simulatine</a></li>
+							<li>Saturday, 09 May 2020</li>
+							<li><a href="https://simulatine.github.io/100DaysOfCode/category/Posts">Posts</a></li>
+						</ul>
+					</header>
+					<p>
+							<h2>Mobile Python Graphics</h2>
 <p>One of my goals is to be able to code on the go ... once lockdown ends</p>
-<p>For many years I had <a href="http://omz-software.com/pythonista/">Pythonista</a> on my iPhone. This is a full implementation of Python, and is a very powerful tool, but its graphics capabilities are limited to customized <a href="http://omz-software.com/pythonista/docs/ios/scene.html">Scene</a> and <a href="http://omz-software.com/pythonista/docs/ios/ui.html">UI</a> modules. It doesn't support any desktop graphics library, which meant that any graphical programs I developed on my desktop simply would not run on the iPhone.</p>
-<p>I recently discovered that the Tkinter and Pygame run on Android devices, with <a href="https://play.google.com/store/apps/details?id=ru.iiec.pydroid3&amp;hl=en_GB">Pydroid3</a>. This has <a href="https://pygame-sdl2.readthedocs.io/en/latest/">Pygame_SDL2</a> built-in - a version of Pygame that is almost entirely compatible with the standard desktop version of Pygame.</p>
-<p>I didn't own any Android devices, so decided to invest as cheaply as possible.  I wanted something</p>
-<ul>
-<li>Cheap. I didn't want to invest a huge amount.</li>
-<li>Small. My goal is to program on the go, on a train or bus. I'd ideally like a smartphone sized or small tablet, with a screen in the 5 to 7 inch range.</li>
-</ul>
-<p>My choice quickly narrowed to 7 inch tablets, and after looking at the Lenovo Tab E7 and the Dragon Touch Y88X Pro, I settled on the Vankyo MatrixPad S7. This has 2GB of RAM and 32GB of storage, not much compared to my iPhone, but enough to experiment with. Most importantly, it was a mere £64.99, an absolute bargain.</p>
-<p><img alt="Vankyo S7 Tablet" src="https://simulatine.github.io/100DaysOfCode/images/Vankyo_S7_Tablet.jpg"></p>
-<p>Installing Python was easy - I was up and running within 10 minutes.</p>
-<h2>Installing Pydroid3</h2>
-<ul>
-<li>I opened the Play Store app and searched for "pydroid"</li>
-<li>Once I found the correct app, I tapped on Install</li>
-</ul>
-<p><img alt="Pydroid3 in the Google Play Store" src="https://simulatine.github.io/100DaysOfCode/images/Pydroid3_Install_Step_1.png"></p>
-<ul>
-<li>The app downloaded and installed</li>
-<li>When I first opened it, I was asked if I wanted to also install an IDE for Java. I tapped on Not Interested</li>
-<li>The app then downloaded the latest version of Python before starting</li>
-<li>The app finally opened with a blank file</li>
-</ul>
-<p><img alt="Pydroid3 Initial Screen" src="https://simulatine.github.io/100DaysOfCode/images/Pydroid3_Install_Step_2.png"></p>
-<h2>Configuring the App's Appearance</h2>
-<p>After starting Pydroid, I immediately changed the editor appearance to the dark theme:</p>
-<ul>
-<li>I tapped on the menu button in the top left and scroll down to Settings</li>
-<li>I then tapped on Appearance and changed the Editor Theme to Dark</li>
-</ul>
-<p><img alt="Pydroid3 with Dark Theme" src="https://simulatine.github.io/100DaysOfCode/images/Pydroid3_Install_Step_3.png"></p>
-<h2>Pygame on Pydroid</h2>
-<p>Pydroid3 has some built in Pygame examples. Simply tap on the menu button in the top left, tap on Samples and open the Pygame folder. There are also several Kivy, Tkinter and PyQt5 examples as well.</p>
-<p><em>The fun starts now!</em></p>
-<p><img alt="Pygame Sample Program" src="https://simulatine.github.io/100DaysOfCode/images/Pydroid3_Install_Step_4.png"></p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <ol id="posts-list" class="hfeed">
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://simulatine.github.io/100DaysOfCode/images-in-github-jekyll-blog-posts.html" rel="bookmark"
-                           title="Permalink to Images in GitHub Jekyll Blog Posts">Images in GitHub Jekyll Blog Posts</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <span>Friday, 08 May 2020</span>
-
-</footer><!-- /.post-info -->                <p>I spent my time today learning about GitHub Pages, and trying to get an image to display in my blog post. I am using the …</p>
-                <a class="readmore" href="https://simulatine.github.io/100DaysOfCode/images-in-github-jekyll-blog-posts.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-
-            <li><article class="hentry">
-                <header>
-                    <h1><a href="https://simulatine.github.io/100DaysOfCode/my-first-post-getting-started.html" rel="bookmark"
-                           title="Permalink to My First Post: Getting Started">My First Post: Getting Started</a></h1>
-                </header>
-
-                <div class="entry-content">
-<footer class="post-info">
-        <span>Thursday, 07 May 2020</span>
-
-</footer><!-- /.post-info -->                <p>Along with most of the world, I've been stuck in lockdown for weeks, with no end in sight.
+<p>For many years I had <a href="http://omz-software.com/pythonista/">Pythonista …</a></p>
+	        		</p>
+					<a href="https://simulatine.github.io/100DaysOfCode/python-on-my-android-tablet.html" class="button color">Read More</a>
+				</section>
+			</div>
+			<div class="clearfix"></div>
+		</article>
+		<!-- Post -->
+		<article class="post medium">
+			<div class="twelve columns">
+				<section class="post-content">
+					<header class="meta">
+						<h2><a href="https://simulatine.github.io/100DaysOfCode/images-in-github-jekyll-blog-posts.html" rel="bookmark" title="Permalink to Images in GitHub Jekyll Blog Posts">Images in GitHub Jekyll Blog Posts</a></h2>
+						<ul>
+							<li>By <a href="https://simulatine.github.io/100DaysOfCode/author/simulatine.html">Simulatine</a></li>
+							<li>Friday, 08 May 2020</li>
+							<li><a href="https://simulatine.github.io/100DaysOfCode/category/Posts">Posts</a></li>
+						</ul>
+					</header>
+					<p>
+							<p>I spent my time today learning about GitHub Pages, and trying to get an image to display in my blog post. I am using the …</p>
+	        		</p>
+					<a href="https://simulatine.github.io/100DaysOfCode/images-in-github-jekyll-blog-posts.html" class="button color">Read More</a>
+				</section>
+			</div>
+			<div class="clearfix"></div>
+		</article>
+		<!-- Post -->
+		<article class="post medium">
+			<div class="twelve columns">
+				<section class="post-content">
+					<header class="meta">
+						<h2><a href="https://simulatine.github.io/100DaysOfCode/my-first-post-getting-started.html" rel="bookmark" title="Permalink to My First Post: Getting Started">My First Post: Getting Started</a></h2>
+						<ul>
+							<li>By <a href="https://simulatine.github.io/100DaysOfCode/author/simulatine.html">Simulatine</a></li>
+							<li>Thursday, 07 May 2020</li>
+							<li><a href="https://simulatine.github.io/100DaysOfCode/category/Posts">Posts</a></li>
+						</ul>
+					</header>
+					<p>
+							<p>Along with most of the world, I've been stuck in lockdown for weeks, with no end in sight.
 So I've decided to use this time …</p>
-                <a class="readmore" href="https://simulatine.github.io/100DaysOfCode/my-first-post-getting-started.html">read more</a>
-                </div><!-- /.entry-content -->
-            </article></li>
-            </ol><!-- /#posts-list -->
-<p class="paginator">
-    Page 1 / 1
-</p>
-            </section><!-- /#content -->
-        <section id="extras" class="body">
-                <div class="blogroll">
-                        <h2>blogroll</h2>
-                        <ul>
-                            <li><a href="https://python.org/">Python</a></li>
-                            <li><a href="https://www.pygame.org/docs/">Pygame</a></li>
-                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
-                        </ul>
-                </div><!-- /.blogroll -->
-                <div class="social">
-                        <h2>social</h2>
-                        <ul>
+	        		</p>
+					<a href="https://simulatine.github.io/100DaysOfCode/my-first-post-getting-started.html" class="button color">Read More</a>
+				</section>
+			</div>
+			<div class="clearfix"></div>
+		</article>
 
-                            <li><a href="https://twitter.com/simulatine">Twitter</a></li>
-                            <li><a href="https://github.com/simulatine/100DaysOfCode">GitHub</a></li>
-                        </ul>
-                </div><!-- /.social -->
-        </section><!-- /#extras -->
+	<!-- Pagination -->
+	<nav class="pagination">
+		<ul>
+			<li>
+			</li>
+			<!-- Page 1 / 1 -->
+		</ul>
+		<div class="clearfix"></div>
+	</nav>
+	</div>
 
-        <footer id="contentinfo" class="body">
-                <p>Powered by <a href="http://getpelican.com/">Pelican</a>. Theme <a href="https://github.com/blueicefield/pelican-blueidea/">blueidea</a>, inspired by the default theme.</p>
-        </footer><!-- /#contentinfo -->
+	<!-- Sidebar -->
+	<div class="four columns">
 
-</body>
+		
+	</div>
+			</div>
+			<!-- Container / End -->
+		</div>
+		<!-- Content Wrapper / End -->
+
+		<div id="footer-bottom">
+			<!-- Container -->
+			<div class="container">
+				<div class="eight columns">&copy;  || Blog powered by <a href="http://getpelican.com">Pelican</a></div>
+					<div class="eight columns">
+						<ul class="social-icons-footer">
+								<li>
+									<a href="https://twitter.com/simulatine" class="tooltip top" title="Twitter">
+										<i class="icon-twitter"></i>
+									</a>
+								</li>
+								<li>
+									<a href="https://github.com/simulatine/100DaysOfCode" class="tooltip top" title="GitHub">
+										<i class="icon-github"></i>
+									</a>
+								</li>
+							<li><a href="https://simulatine.github.io/100DaysOfCode/None" class="tooltip top" title="RSS"><i class="icon-rss"></i></a></li>
+						</ul>
+					</div>
+			</div>
+			<!-- Container / End -->
+		</div>
+		<!-- Footer Bottom / End -->
+
+	<!-- Javascripts -->
+	<script src="https://simulatine.github.io/100DaysOfCode/theme/js/jquery.min.js"></script>
+	</body>
 </html>
