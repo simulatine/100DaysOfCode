@@ -47,3 +47,12 @@ After starting Pydroid, I immediately changed the editor appearance to the dark 
 
 ![Pydroid3 with Dark Theme](../../../assets/Pydroid3_Install_Step_3.png)
 
+
+## Pygame ##
+
+Pydroid3 has some built in Pygame examples. Simply tap on the menu button in the top left, tap on Samples and open the Pygame folder. There are also several Kivy, Tkinter and PyQt5 examples as well.
+
+*The fun starts now!*
+
+
+![Pygame Sample Program](../../../assets/Pydroid3_Install_Step_4.png)
