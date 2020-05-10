@@ -16,7 +16,7 @@ I didn't own any Android devices, so decided to invest as cheaply as possible.  
 - Cheap. I didn't want to invest a huge amount.
 - Small. My goal is to program on the go, on a train or bus. I'd ideally like a smartphone sized or small tablet, with a screen in the 5 to 7 inch range.
 
-My choice quickly narrowed to 7 inch tablets, and after looking at the Lenovo Tab E7 and the DragonTouch, I settled on the Vankyo MatrixPad S7. This has 2GB of RAM and 32GB of storage, not much compared to my iPhone, but enough to experiment with. Most importantly, it was a mere £64.99, an absolute bargain.
+My choice quickly narrowed to 7 inch tablets, and after looking at the Lenovo Tab E7 and the Dragon Touch Y88X Pro, I settled on the Vankyo MatrixPad S7. This has 2GB of RAM and 32GB of storage, not much compared to my iPhone, but enough to experiment with. Most importantly, it was a mere £64.99, an absolute bargain.
 
 ![Vankyo S7 Tablet](../../../assets/Vankyo_S7_Tablet.jpg)
 
