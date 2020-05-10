@@ -11,6 +11,7 @@
                 <h1><a href="https://simulatine.github.io/100DaysOfCode/">Simulatine's 100 Days of Code Blog </a></h1>
                 <nav><ul>
                     <li><a href="https://simulatine.github.io/100DaysOfCode/pages/about-this-site.html">About This Site</a></li>
+                    <li><a href="https://simulatine.github.io/100DaysOfCode/pages/show-image.html">Show Image</a></li>
                     <li class="active"><a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
@@ -35,39 +36,38 @@
 <p>In <a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a>.</p>
 
 </footer><!-- /.post-info -->      <h2>Broken Images</h2>
-<p>I spent my time today learning about GitHub Pages, and trying to get an image to display in my blog post.</p>
-<p>My GitHub Pages web site is contained in the <code>docs</code> folder in my repository. I create a subfolder <code>doc/assets</code> on my local drive, and added a simple screenshot 'image1.png`. After committing this change, and syncing with GitHub, I confirmed that the folder and file were present in my repository. So far, so good.</p>
+<p>I spent my time today learning about GitHub Pages, and trying to get an image to display in my blog post. I am using the default <a href="https://help.github.com/en/github/working-with-github-pages/setting-up-a-github-pages-site-with-jekyll">Jekyll</a> site generator tool with the <a href="https://github.com/jekyll/minima">Minima</a> theme, with my website contents in the <code>docs</code> folder in the master branch of my repository. I create a subfolder <code>doc/images</code> on my local drive, and added a simple screenshot 'image1.png`. After committing this change, and syncing with GitHub, I confirmed that the folder and file were present in my repository. So far, so good.</p>
 <p>I was able to display this easily enough from a <a href="https://simulatine.github.io/100DaysOfCode/showimage.html" title="Show Image">standard page</a> in the root of my website with a Markdown image link:</p>
-<div class="highlight"><pre><span></span><code><span class="err">!</span><span class="o">[</span><span class="n">Screenshot</span><span class="o">]</span><span class="p">(</span><span class="n">assets</span><span class="o">/</span><span class="n">image1</span><span class="p">.</span><span class="n">png</span><span class="w"> </span><span class="ss">&quot;Screenshot&quot;</span><span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="err">!</span><span class="o">[</span><span class="n">Screenshot</span><span class="o">]</span><span class="p">(</span><span class="n">images</span><span class="o">/</span><span class="n">image1</span><span class="p">.</span><span class="n">png</span><span class="w"> </span><span class="ss">&quot;Screenshot&quot;</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 
 <p>But the same link wasn't displaying properly in my blog post:</p>
-<p><img alt="Python code screenshot" src="assets/image1.png" title="Python code screenshot"></p>
+<p><img alt="Python code screenshot" src="images/image1.png" title="Python code screenshot"></p>
 <p>OK, so blog post files are in a different folder <code>_posts</code>.  Maybe I need to use a rooted path:</p>
-<div class="highlight"><pre><span></span><code><span class="err">!</span><span class="o">[</span><span class="n">Screenshot</span><span class="o">]</span><span class="p">(</span><span class="o">/</span><span class="n">assets</span><span class="o">/</span><span class="n">image1</span><span class="p">.</span><span class="n">png</span><span class="w"> </span><span class="ss">&quot;Screenshot&quot;</span><span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="err">!</span><span class="o">[</span><span class="n">Screenshot</span><span class="o">]</span><span class="p">(</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">image1</span><span class="p">.</span><span class="n">png</span><span class="w"> </span><span class="ss">&quot;Screenshot&quot;</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 
 <p>which displayed</p>
-<p><img alt="Screenshot" src="/assets/image1.png" title="Screenshot"></p>
-<p>Hmm, this didn't work either - it seems that the <code>/assets</code> directory that GitHub sees is not the same as the one I created. Neither did assuming the website root was one level up, at the root of the entire repository:</p>
-<div class="highlight"><pre><span></span><code><span class="err">!</span><span class="o">[</span><span class="n">Screenshot</span><span class="o">]</span><span class="p">(</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">assets</span><span class="o">/</span><span class="n">image1</span><span class="p">.</span><span class="n">png</span><span class="w"> </span><span class="ss">&quot;Screenshot&quot;</span><span class="p">)</span><span class="w"></span>
+<p><img alt="Screenshot" src="/images/image1.png" title="Screenshot"></p>
+<p>Hmm, this didn't work either - it seems that the <code>/images</code> directory that GitHub sees is not the same as the one I created. Neither did assuming the website root was one level up, at the root of the entire repository:</p>
+<div class="highlight"><pre><span></span><code><span class="err">!</span><span class="o">[</span><span class="n">Screenshot</span><span class="o">]</span><span class="p">(</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">image1</span><span class="p">.</span><span class="n">png</span><span class="w"> </span><span class="ss">&quot;Screenshot&quot;</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 
 <p>I get the same broken image link:</p>
-<p><img alt="Screenshot" src="/docs/assets/image1.png" title="Screenshot"></p>
+<p><img alt="Screenshot" src="/docs/images/image1.png" title="Screenshot"></p>
 <h2>Solved!</h2>
 <p>After some investigation, I paid attention to the blog post URL in my brower's address bar, and realised my post is buried three levels down in a virtual folder hierarchy, with the year, month and date all represented by folders:</p>
 <p>https://simulatine.github.io/100DaysOfCode/2020/05/08/Struggling-With-GitHub-Pages.html</p>
 <p>Aha! Maybe a relative path would work. I would need to go three levels up from my post's URL to get back to the root of the website, so would need <code>../</code> three times:</p>
-<div class="highlight"><pre><span></span><code><span class="err">!</span><span class="o">[</span><span class="n">Screenshot</span><span class="o">]</span><span class="p">(..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">assets</span><span class="o">/</span><span class="n">image1</span><span class="p">.</span><span class="n">png</span><span class="w"> </span><span class="ss">&quot;Screenshot&quot;</span><span class="p">)</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code><span class="err">!</span><span class="o">[</span><span class="n">Screenshot</span><span class="o">]</span><span class="p">(..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">image1</span><span class="p">.</span><span class="n">png</span><span class="w"> </span><span class="ss">&quot;Screenshot&quot;</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 
 <p>Success! I can finally see an image:</p>
-<p><img alt="Screenshot" src="../../../assets/image1.png" title="Screenshot"></p>
+<p><img alt="Screenshot" src="https://simulatine.github.io/100DaysOfCode/images/image1.png" title="Screenshot"></p>
     </div><!-- /.entry-content -->
 
   </article>
