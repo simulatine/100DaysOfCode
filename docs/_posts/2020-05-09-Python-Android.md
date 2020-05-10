@@ -20,11 +20,9 @@ My choice quickly narrowed to 7 inch tablets, and after looking at the Lenovo Ta
 
 ![Vankyo S7 Tablet](../../../assets/Vankyo_S7_Tablet.jpg)
 
-## Installing Python on an Android Device ##
-
 Installing Python was easy - I was up and running within 10 minutes.
 
-### Installing Pydroid3
+## Installing Pydroid3 ##
 
 - I opened the Play Store app and searched for "pydroid"
 - Once I found the correct app, I tapped on Install
@@ -38,7 +36,7 @@ Installing Python was easy - I was up and running within 10 minutes.
 
 ![Pydroid3 Initial Screen](../../../assets/Pydroid3_Install_Step_2.png)
 
-### Configuring the App's Appearance
+## Configuring the App's Appearance ##
 
 After starting Pydroid, I immediately changed the editor appearance to the dark theme:
 
@@ -47,12 +45,10 @@ After starting Pydroid, I immediately changed the editor appearance to the dark 
 
 ![Pydroid3 with Dark Theme](../../../assets/Pydroid3_Install_Step_3.png)
 
-
-## Pygame ##
+## Pygame on Pydroid ##
 
 Pydroid3 has some built in Pygame examples. Simply tap on the menu button in the top left, tap on Samples and open the Pygame folder. There are also several Kivy, Tkinter and PyQt5 examples as well.
 
 *The fun starts now!*
-
 
 ![Pygame Sample Program](../../../assets/Pydroid3_Install_Step_4.png)
