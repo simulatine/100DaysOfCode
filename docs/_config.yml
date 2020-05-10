@@ -14,6 +14,7 @@ minima:
   # List of social media links in the footer
   social_links:
     twitter: simulatine
+    github: simulatine
 
 header_pages:
   - index.md
