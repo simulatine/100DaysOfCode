@@ -4,8 +4,6 @@
         <meta charset="utf-8" />
         <title>Moving from Jekyll to Pelican</title>
         <link rel="stylesheet" href="https://simulatine.github.io/100DaysOfCode/theme/css/main.css" />
-      <link rel="alternate" hreflang="en" href="https://simulatine.github.io/100DaysOfCode/drafts/moving-from-jekyll-to-pelican.html">
-
 </head>
 
 <body id="index" class="home">
@@ -16,7 +14,7 @@
                 <h1><a href="https://simulatine.github.io/100DaysOfCode/">Simulatine's 100 Days of Code Blog <strong>Learning and having fun with code</strong></a></h1>
                 <nav><ul>
                     <li><a href="https://simulatine.github.io/100DaysOfCode/pages/about-this-site.html">About This Site</a></li>
-                    <li><a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a></li>
+                    <li class="active"><a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
 <section id="content" class="body">
@@ -37,21 +35,20 @@
         <address class="vcard author">
                 By                         <a class="url fn" href="https://simulatine.github.io/100DaysOfCode/author/simulatine.html">Simulatine</a>
         </address>
-<p>In <a href="https://simulatine.github.io/100DaysOfCode/category/drafts.html">Drafts</a>.</p>
-Translations:
-        <a href="https://simulatine.github.io/100DaysOfCode/drafts/moving-from-jekyll-to-pelican.html" hreflang="en">en</a>
+<p>In <a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a>.</p>
 
-</footer><!-- /.post-info -->      <h2>Updating this blog site</h2>
-<p>I am trying out <a href="https://docs.getpelican.com/en/stable/">Pelican</a> for this
-site, as a replacement to using <a href="https://jekyllrb.com/">Jekyll</a> with the
+</footer><!-- /.post-info -->      <h1>Trying Pelican</h1>
+<p>I am trying out using <a href="https://docs.getpelican.com/en/stable/">Pelican</a> to
+create this site, as a replacement for <a href="https://jekyllrb.com/">Jekyll</a> with the
 <a href="https://github.com/jekyll/minima">Minima</a> theme, provided by default with
 GitHub Pages. Pelican is a static site generator, and is conceptually very
-similar to Jekyll - it converts simple text files in Markdown format into a
+similar to Jekyll - it converts simple text files in
+<a href="https://daringfireball.net/projects/markdown/">Markdown</a> format into a
 fully fledged website. But Pelican is Python based, which feels a lot more
 natural to me.</p>
-<h2>Installing Pelican</h2>
+<h1>Installing Pelican</h1>
 <p>I started by installing the pelican and markdown libraries:</p>
-<div class="highlight"><pre><span></span><code>C:\&gt; pip install pelican markdown
+<div class="highlight"><pre><span></span><code>pip install pelican markdown
 </code></pre></div>
 
 
@@ -63,14 +60,13 @@ natural to me.</p>
 
 <p>I went to the website folder and ran <code>pelican-quickstart</code> to create the initial structure</p>
 <div class="highlight"><pre><span></span><code>C:\&gt; cd C:\Users\Simulatine\Documents\Git\100DaysOfCode\web
-C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;pelican-quickstart
+C:\&gt; pelican-quickstart
+
 Welcome to pelican-quickstart v4.2.0.
 
 This script will help you create a new Pelican-based website.
-
 Please answer the following questions so this script can generate the files
 needed by Pelican.
-
 
 &gt; Where do you want to create your new web site? [.]
 &gt; What will be the title of this web site? Simulatine&#39;s 100 Days of Code
@@ -90,13 +86,11 @@ needed by Pelican.
 &gt; Do you want to upload your website using GitHub Pages? (y/N) Y
 &gt; Is this your personal page (username.github.io)? (y/N) n
 Done. Your new project is available at C:\Users\Simulatine\Documents\Git\100DaysOfCode\web
-
-C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;
 </code></pre></div>
 
 
 <p>This created subfolders called <code>content</code> and <code>output</code>, as well as a Makefile and some default Python scripts <code>pelicanconf.py</code>, <code>publishconf.py</code> and <code>tasks.py</code>.</p>
-<div class="highlight"><pre><span></span><code>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;dir
+<div class="highlight"><pre><span></span><code>C:\&gt; dir
 Volume in drive C has no label.
 Volume Serial Number is 5C84-C174
 
@@ -117,7 +111,10 @@ C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;
 </code></pre></div>
 
 
-<p>As suggested in the <a href="https://docs.getpelican.com/en/stable/quickstart.html#installation">quickstart guide</a>, I next created a trial web source page <code>keyboard-review.md</code> in the content folder, with some markdown content:</p>
+<p>As suggested in the
+<a href="https://docs.getpelican.com/en/stable/quickstart.html#installation">quickstart guide</a>,
+I next created a trial web source page <code>keyboard-review.md</code> in the <code>content</code>
+folder, with some markdown content:</p>
 <div class="highlight"><pre><span></span><code>Title: My First Review
 Date: 2020-05-08 10:20
 Category: Review
@@ -189,6 +186,43 @@ http://localhost:8000/ on my local browser:</p>
 <p><img alt="Pelican Initial Screenshot" src="/images/Pelican_Initial_Screenshot.png"></p>
 <p>Excellent! I like how this appears, and it took maybe 20-30 minutes to get this
 up and running.</p>
+<h1>Publish to GitHub Pages</h1>
+<p>I was immediately sold on Pelican - I now wanted to publish this publicly to my
+GitHub Pages site.</p>
+<p>I followed the instructions in the
+<a href="https://docs.getpelican.com/en/4.2.0/tips.html#project-pages">Pelican docs</a></p>
+<p>First of all, I installed the Python <code>ghp-import</code> tool</p>
+<div class="highlight"><pre><span></span><code>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; pip install ghp-import
+</code></pre></div>
+
+
+<p>I created a local <code>gh-pages</code> branch with the content of the <code>output</code> folder. 
+If the branch already exists, this command updates it with the latest files in
+<code>output</code></p>
+<div class="highlight"><pre><span></span><code>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; ghp-import output
+</code></pre></div>
+
+
+<p>I then pushed the <code>gh-pages</code> branch from my local desktop to my GitHub
+repository</p>
+<div class="highlight"><pre><span></span><code>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; git push origin gh-pages
+</code></pre></div>
+
+
+<p>Finally, I went to my GitHub repository and in Settings, GitHub Pages, I
+changed the source from the Master branch docs folder (used by Jekyll) to the
+gh-pages branch.</p>
+<p>My <a href="https://simulatine.github.io/100DaysOfCode/">site</a> was now visible
+at https://simulatine.github.io/100DaysOfCode/</p>
+<p>I finally cleaned up my old Jekyll site by deleting everything in the old docs
+folder with <code>git rm</code>, and resyncing my repository:</p>
+<div class="highlight"><pre><span></span><code>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; git push origin master
+</code></pre></div>
+
+
+<h1>Conclusion</h1>
+<p>I found Pelican to be simple to use, and a lot more Pythonesque than Jekyll.
+I'll be sticking with this for a while.</p>
     </div><!-- /.entry-content -->
 
   </article>
@@ -199,7 +233,7 @@ up and running.</p>
                         <ul>
                             <li><a href="https://python.org/">Python</a></li>
                             <li><a href="https://www.pygame.org/docs/">Pygame</a></li>
-                            <li><a href="http://jinja.pocoo.org/">Jinja2</a></li>
+                            <li><a href="https://www.100daysofcode.com/">100DaysOfCode</a></li>
                         </ul>
                 </div><!-- /.blogroll -->
                 <div class="social">
