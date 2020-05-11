@@ -13,6 +13,7 @@
         <header id="banner" class="body">
                 <h1><a href="https://simulatine.github.io/100DaysOfCode/">Simulatine's 100 Days of Code Blog <strong>Learning and having fun with code</strong></a></h1>
                 <nav><ul>
+                    <li><a href="https://simulatine.github.io/100DaysOfCode/pages/about-this-site.html">About This Site</a></li>
                     <li><a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
@@ -38,7 +39,92 @@
 
 </footer><!-- /.post-info -->      <h2>Updating my website</h2>
 <p>I am now trying out Pelican for this site, as a replacement for Jekyll with the Minima theme.
-Pelican is a Python based static site generator. It feels more natural to me.</p>
+Pelican is a Python based static site generator, which feels a lot more natural to me.</p>
+<h3>Installing Pelican</h3>
+<p>I installed the pelican and markdown libraries:
+C:> pip install pelican markdown</p>
+<p>I then followed instructions at the pelican quickstart guide
+https://docs.getpelican.com/en/stable/quickstart.html#installation</p>
+<p>I first created a folder for my website:
+C:> mkdir C:\Users\Simulatine\Documents\Git\100DaysOfCode\web</p>
+<p>I went to the website folder and ran <code>pelican-quickstart</code> to create the initial structure
+C:> cd C:\Users\Simulatine\Documents\Git\100DaysOfCode\web
+C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;pelican-quickstart
+Welcome to pelican-quickstart v4.2.0.</p>
+<p>This script will help you create a new Pelican-based website.</p>
+<p>Please answer the following questions so this script can generate the files
+needed by Pelican.</p>
+<blockquote>
+<p>Where do you want to create your new web site? [.]
+What will be the title of this web site? Simulatine's 100 Days of Code
+Who will be the author of this web site? Simulatine
+What will be the default language of this web site? [English]
+Do you want to specify a URL prefix? e.g., https://example.com   (Y/n) Y
+What is your URL prefix? (see above example; no trailing slash) https://simulatine.github.io/100DaysOfCode/
+Do you want to enable article pagination? (Y/n)
+How many articles per page do you want? [10]
+What is your time zone? [Europe/Paris] Europe/London
+Do you want to generate a tasks.py/Makefile to automate generation and publishing? (Y/n)
+Do you want to upload your website using FTP? (y/N)
+Do you want to upload your website using SSH? (y/N)
+Do you want to upload your website using Dropbox? (y/N)
+Do you want to upload your website using S3? (y/N)
+Do you want to upload your website using Rackspace Cloud Files? (y/N)
+Do you want to upload your website using GitHub Pages? (y/N) Y
+Is this your personal page (username.github.io)? (y/N) n
+Done. Your new project is available at C:\Users\Simulatine\Documents\Git\100DaysOfCode\web</p>
+</blockquote>
+<p>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;</p>
+<p>This created subfolders called 'content' and 'output', as well as a Makefile and some default Python scripts pelicanconf.py, publishconf.py and tasks.py</p>
+<p>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;dir
+ Volume in drive C has no label.
+ Volume Serial Number is 5C84-C174</p>
+<p>Directory of C:\Users\Simulatine\Documents\Git\100DaysOfCode\web</p>
+<p>2020-05-10  15:34    <DIR>          .
+2020-05-10  15:34    <DIR>          ..
+2020-05-10  15:11    <DIR>          content
+2020-05-10  14:54             2,914 Makefile
+2020-05-10  15:17    <DIR>          output
+2020-05-10  15:23               878 pelicanconf.py
+2020-05-10  14:54               632 publishconf.py
+2020-05-10  14:54             3,615 tasks.py
+               4 File(s)          8,039 bytes
+               4 Dir(s)  51,526,713,344 bytes free</p>
+<p>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;</p>
+<p>As suggested at the quick start web page, I next created an initial web page keyboard-review.md in the content folder, with some markdown content.</p>
+<p>Title: My First Review
+Date: 2010-12-03 10:20
+Category: Review</p>
+<p>Following is a review of my favorite mechanical keyboard.</p>
+<p>I tried to generate the site output by going to the top website folder and running pelican against the content folder.</p>
+<p>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;pelican content</p>
+<p>I received the following notification:
+WARNING: Docutils has no localization for 'english'. Using 'en' instead.
+ERROR: Skipping C:\Users\Simulatine\Documents\Git\100DaysOfCode\web\content\keyboard-review.md: could not find information about 'title'
+Done: Processed 0 articles, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.62 seconds.</p>
+<p>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;</p>
+<p>Hmm . Two immediate errors. It turns out that the default language choice "English" in pelican-quickstart should have been "en". I had to go to pelicanconf.py, and change the line:
+DEFAULT_LANG = 'English'</p>
+<p>To 
+DEFAULT_LANG = 'en'</p>
+<p>I also realised the pelican was not fining the 'title' metadata in my initial file. I realised that when I copied and pasted the suggested initial file contents from the pelican quickstart guide into my Markdown editor Typora, it converted it to a code block by automatically adding triple backticks ``` before and after the pasted text:</p>
+<div class="highlight"><pre><span></span><code><span class="n">Title</span><span class="o">:</span> <span class="n">My</span> <span class="n">First</span> <span class="n">Review</span>
+<span class="n">Date</span><span class="o">:</span> <span class="mi">2010</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">03</span> <span class="mi">10</span><span class="o">:</span><span class="mi">20</span>
+<span class="n">Category</span><span class="o">:</span> <span class="n">Review</span>
+
+<span class="n">Following</span> <span class="k">is</span> <span class="n">a</span> <span class="n">review</span> <span class="n">of</span> <span class="n">my</span> <span class="n">favorite</span> <span class="n">mechanical</span> <span class="n">keyboard</span><span class="o">.</span>
+</code></pre></div>
+
+
+<p>I had to remove the backtick lines and resave the markdown file.</p>
+<p>I could then do:</p>
+<p>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;pelican content
+Done: Processed 1 article, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.31 seconds.</p>
+<p>This created an entire web site in the output folder. I was expecting possibly a single HTML file, but it actually created a significant amount of boilerplate output.</p>
+<p>I was able to start a local copy of the website by launching the pelican built-in web server
+pelican --listen</p>
+<p>Once this was running, I could preview the site by navigating to the URL http://localhost:8000/ on my local browser:</p>
+<p><img alt="Screenshot" src="/images/screenshot.img"></p>
     </div><!-- /.entry-content -->
 
   </article>

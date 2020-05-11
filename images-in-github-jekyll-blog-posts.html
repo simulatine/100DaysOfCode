@@ -13,6 +13,7 @@
         <header id="banner" class="body">
                 <h1><a href="https://simulatine.github.io/100DaysOfCode/">Simulatine's 100 Days of Code Blog <strong>Learning and having fun with code</strong></a></h1>
                 <nav><ul>
+                    <li><a href="https://simulatine.github.io/100DaysOfCode/pages/about-this-site.html">About This Site</a></li>
                     <li class="active"><a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a></li>
                 </ul></nav>
         </header><!-- /#banner -->
@@ -40,15 +41,15 @@
         </address>
 <p>In <a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a>.</p>
 
-</footer><!-- /.post-info -->      <p>I spent my time today learning about GitHub Pages, and trying to get an image to display in my blog post. I am using the default <a href="https://help.github.com/en/github/working-with-github-pages/setting-up-a-github-pages-site-with-jekyll">Jekyll</a> site generator tool with the <a href="https://github.com/jekyll/minima">Minima</a> theme, with my website contents in the <code>docs</code> folder in the master branch of my repository. I create a subfolder <code>doc/images</code> on my local drive, and added a simple screenshot <code>image1.png</code>. After committing this change, and syncing with GitHub, I confirmed that the folder and file were present in my repository. So far, so good.</p>
-<p><em>10 May 2020:</em> Since writing this post, I subsequently changed the tool I use to create these posts from Jekyll to a Python based site generator tool called Pelican, so the links below may display differently than they did before.</p>
+</footer><!-- /.post-info -->      <p>I spent my time today learning about GitHub Pages, and trying to get an image to display in my blog post. Yesterday I configured the default <a href="https://help.github.com/en/github/working-with-github-pages/setting-up-a-github-pages-site-with-jekyll">Jekyll</a> site generator tool with the <a href="https://github.com/jekyll/minima">Minima</a> theme. I placed my initial website contents in the <code>docs</code> folder in the master branch of my repository. I create a subfolder <code>doc/images</code> on my local drive, and added a simple screenshot <code>image1.png</code>. After committing this change, and syncing with GitHub, I confirmed that the folder and file were present in my repository. So far, so good.</p>
+<p><em>10 May 2020: Since writing this post, I have moved from Jekyll to a Python based site generator tool called Pelican, so the links below may display differently than they did before.</em></p>
 <h2>Broken Images</h2>
-<p>I was able to display this easily enough from a <a href="https://simulatine.github.io/100DaysOfCode/showimage.html" title="Show Image">standard page</a> in the root of my website with a Markdown image link:</p>
+<p>I was able to display an image easily enough from a standard page in the root of my website with a Markdown image link:</p>
 <div class="highlight"><pre><span></span><code><span class="err">!</span><span class="o">[</span><span class="n">Screenshot</span><span class="o">]</span><span class="p">(</span><span class="n">images</span><span class="o">/</span><span class="n">image1</span><span class="p">.</span><span class="n">png</span><span class="w"> </span><span class="ss">&quot;Screenshot&quot;</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 
-<p>But the same link wasn't displaying properly in my blog post:</p>
+<p>But the same link format wasn't displaying properly in my blog post:</p>
 <p><img alt="Screenshot" src="./images/image1.png" title="Screenshot"></p>
 <p>OK, so blog post files are in a different folder <code>_posts</code>.  Maybe I need to use a rooted path:</p>
 <div class="highlight"><pre><span></span><code><span class="err">!</span><span class="o">[</span><span class="n">Screenshot</span><span class="o">]</span><span class="p">(</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">image1</span><span class="p">.</span><span class="n">png</span><span class="w"> </span><span class="ss">&quot;Screenshot&quot;</span><span class="p">)</span><span class="w"></span>
