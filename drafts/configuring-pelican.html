@@ -39,11 +39,12 @@
 
 </footer><!-- /.post-info -->      <h1>Working with Pelican</h1>
 <p>Yesterday, I moved from the default Jekyll site generator tool provided by
-GitHub Pages to the Python based Pelican tool. I was able to quickly create a
-blog based site with simple configuration, test it on my Windows laptop and
-push the result to GitHub.</p>
-<p>Today, I worked through the Pelican documentation ad added some additional
-configuration. Nearly all the changes below were to the <code>pelicanconf.py</code>
+GitHub Pages to the Python based
+<a href="https://docs.getpelican.com/en/stable/">Pelican</a> tool. I was able to quickly
+create a blog based site with simple configuration, test it on my Windows
+laptop and push the result to GitHub.</p>
+<p>Today, I worked through the Pelican documentation ad added some further
+site configuration. Nearly all the changes below were to the <code>pelicanconf.py</code>
 configuration file in the Pelican root folder.</p>
 <h1>Adding Footer Links</h1>
 <p>The default template used by Pelican displays some standard links at the bottom
@@ -75,6 +76,12 @@ contain the images:</p>
 
 <p>I could then copy pictures and screenshots to the <code>images</code> folder and run 
 <code>pelican content</code> to copy these into the output folder.</p>
+<p>I can then link to these in my Markdown source using the standard Markdown link
+convention:</p>
+<div class="highlight"><pre><span></span><code>![Image Name](/path/to/image.png)
+</code></pre></div>
+
+
 <h1>Favicon</h1>
 <p>Adding a Favicon, which appears in the browser tab, was simple. I created an
 <code>extras</code> subfolder in my content folder, and copied the favicon.ico file to
@@ -88,12 +95,39 @@ that folder.</p>
 </code></pre></div>
 
 
-<p>I also included the following in pelicanconf.py, to ensure that the ICO file was copied properly to the root of the output folder.</p>
-<p>EXTRA_PATH_METADATA = {
-    'extras/favicon.ico': {'path': 'favicon.ico'},
-}</p>
-<p>Note: This only worked for .ico files. I originally tried with a PNG file called favicon.png. The file was copied to the output folder when I ran pelican content, but pelican web server didn't look for it.</p>
+<p>I also included the following in pelicanconf.py, to ensure that the ICO file
+was copied properly to the root of the output folder.</p>
+<div class="highlight"><pre><span></span><code>EXTRA_PATH_METADATA = {
+    &#39;extras/favicon.ico&#39;: {&#39;path&#39;: &#39;favicon.ico&#39;},
+}
+</code></pre></div>
+
+
+<p>Note: This only worked for .ico files. I originally tried with a PNG image file
+called favicon.png. PNG files are a valid W3C format for Favicons, but it seems
+that Pelican doesn't know that. The PNG file was copied to the output folder
+when I ran <code>pelican content</code>, but the Pelican web server didn't look for it.</p>
 <h1>Markdown Language</h1>
+<p>I initially had some problems with Pelican adding red boxes around some code
+blocks in my output. This mainly happened with copies of Windows command prompt
+output.</p>
+<p>I found that this was a
+<a href="https://github.com/getpelican/pelican/issues/1170">known issue</a> and that I
+needed to change a variable. The issue log mentions <code>MD_EXTENSIONS</code>, but in the
+current version of Pelican I need to change the <code>MARKDOWN</code> parameter in
+'pelicanconf.py<code>to include an option setting</code>guess_lang<code>to</code>False`.</p>
+<div class="highlight"><pre><span></span><code>MARKDOWN = {
+    &#39;extension_configs&#39;: {
+        &#39;markdown.extensions.codehilite&#39;: {&#39;css_class&#39;: &#39;highlight&#39;, &#39;guess_lang&#39;:False,},
+        &#39;markdown.extensions.extra&#39;: {},
+        &#39;markdown.extensions.meta&#39;: {},
+    },
+    &#39;output_format&#39;: &#39;html5&#39;,
+}
+</code></pre></div>
+
+
+<h1>Conclusion</h1>
     </div><!-- /.entry-content -->
 
   </article>
