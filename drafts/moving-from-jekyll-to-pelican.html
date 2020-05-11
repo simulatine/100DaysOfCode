@@ -4,6 +4,8 @@
         <meta charset="utf-8" />
         <title>Moving from Jekyll to Pelican</title>
         <link rel="stylesheet" href="https://simulatine.github.io/100DaysOfCode/theme/css/main.css" />
+      <link rel="alternate" hreflang="en" href="https://simulatine.github.io/100DaysOfCode/drafts/moving-from-jekyll-to-pelican.html">
+
 </head>
 
 <body id="index" class="home">
@@ -36,11 +38,18 @@
                 By                         <a class="url fn" href="https://simulatine.github.io/100DaysOfCode/author/simulatine.html">Simulatine</a>
         </address>
 <p>In <a href="https://simulatine.github.io/100DaysOfCode/category/drafts.html">Drafts</a>.</p>
+Translations:
+        <a href="https://simulatine.github.io/100DaysOfCode/drafts/moving-from-jekyll-to-pelican.html" hreflang="en">en</a>
 
-</footer><!-- /.post-info -->      <h2>Updating my website</h2>
-<p>I am now trying out <a href="https://docs.getpelican.com/en/stable/">Pelican</a> for this site, as a replacement for <a href="https://jekyllrb.com/">Jekyll</a> with the <a href="https://github.com/jekyll/minima">Minima</a> theme.
-Pelican is a static site generator, and similar to Jekyll it converts simple text files into a fully fledged website. But Pelican is Python based, which feels a lot more natural to me.</p>
-<h3>Installing Pelican</h3>
+</footer><!-- /.post-info -->      <h2>Updating this blog site</h2>
+<p>I am trying out <a href="https://docs.getpelican.com/en/stable/">Pelican</a> for this
+site, as a replacement to using <a href="https://jekyllrb.com/">Jekyll</a> with the
+<a href="https://github.com/jekyll/minima">Minima</a> theme, provided by default with
+GitHub Pages. Pelican is a static site generator, and is conceptually very
+similar to Jekyll - it converts simple text files in Markdown format into a
+fully fledged website. But Pelican is Python based, which feels a lot more
+natural to me.</p>
+<h2>Installing Pelican</h2>
 <p>I started by installing the pelican and markdown libraries:</p>
 <div class="highlight"><pre><span></span><code>C:\&gt; pip install pelican markdown
 </code></pre></div>
@@ -108,16 +117,17 @@ C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;
 </code></pre></div>
 
 
-<p>As suggested at the quick start web page, I next created a trial web page <code>keyboard-review.md</code> in the content folder, with some markdown content:</p>
+<p>As suggested in the <a href="https://docs.getpelican.com/en/stable/quickstart.html#installation">quickstart guide</a>, I next created a trial web source page <code>keyboard-review.md</code> in the content folder, with some markdown content:</p>
 <div class="highlight"><pre><span></span><code>Title: My First Review
-Date: 2010-12-03 10:20
+Date: 2020-05-08 10:20
 Category: Review
 
 Following is a review of my favorite mechanical keyboard.
 </code></pre></div>
 
 
-<p>I tried to generate the site output by going to the top website folder and running pelican against the content folder.</p>
+<p>I attempted to generate the site output by going to the top website folder and
+running pelican against the <code>content</code> folder.</p>
 <div class="highlight"><pre><span></span><code>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; pelican content
 </code></pre></div>
 
@@ -131,7 +141,9 @@ C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;
 </code></pre></div>
 
 
-<p>Hmm . Two immediate errors. It turns out that the default language choice "English" in pelican-quickstart should have been "en". I had to go to pelicanconf.py, and change the line:</p>
+<p>Hmm . Two immediate errors. It turns out that the default language choice
+"English" in pelican-quickstart should have been "en". I had to go to
+pelicanconf.py, and change the line:</p>
 <div class="highlight"><pre><span></span><code>DEFAULT_LANG = &#39;English&#39;
 </code></pre></div>
 
@@ -141,10 +153,15 @@ C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;
 </code></pre></div>
 
 
-<p>I also realised the pelican was not fining the 'title' metadata in my initial file. I realised that when I copied and pasted the suggested initial file contents from the pelican quickstart guide into my Markdown editor Typora, it converted it to a code block by automatically adding triple backticks <code>`` before and after the pasted text. So my Markdown file contents in</code>keyboard-review.md` were actually.</p>
+<p>I also realised the pelican was not finding the 'title' metadata in my initial
+file. After some investigation, I noticed that when I copied and pasted the
+suggested initial file contents from the pelican quickstart guide into my
+Markdown editor Typora, it converted it to a code block by automatically adding
+triple backticks before and after the pasted text. So my Markdown file
+contents in <code>keyboard-review.md</code> were actually:</p>
 <div class="highlight"><pre><span></span><code>```
 Title: My First Review
-Date: 2010-12-03 10:20
+Date: 2020-05-08 10:20
 Category: Review
 
 Following is a review of my favorite mechanical keyboard.
@@ -152,19 +169,26 @@ Following is a review of my favorite mechanical keyboard.
 </code></pre></div>
 
 
-<p>I had to remove the backtick lines and resave the markdown file. I could then retry generating the site output:</p>
+<p>I had to remove the leading and trailing backtick lines and resave the markdown
+file. I could then retry generating the site output:</p>
 <div class="highlight"><pre><span></span><code>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; pelican content
 Done: Processed 1 article, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.31 seconds.
 </code></pre></div>
 
 
-<p>This created an entire web site in the output folder. I was expecting possibly a single HTML file, but it actually created a significant amount of boilerplate output. I was able to view a local copy of the website by launching the pelican built-in web server</p>
+<p>This time it worked! I had an entire web site in the <code>output</code> folder. I was
+expecting possibly a single HTML file, but it actually created a significant
+amount of boilerplate output. I was able to view a local copy of the website
+by launching the pelican built-in web server</p>
 <div class="highlight"><pre><span></span><code>pelican --listen
 </code></pre></div>
 
 
-<p>Once this was running, I could preview the site by navigating to the URL http://localhost:8000/ on my local browser:</p>
+<p>Once this was running, I could preview the site by navigating to the URL
+http://localhost:8000/ on my local browser:</p>
 <p><img alt="Pelican Initial Screenshot" src="/images/Pelican_Initial_Screenshot.png"></p>
+<p>Excellent! I like how this appears, and it took maybe 20-30 minutes to get this
+up and running.</p>
     </div><!-- /.entry-content -->
 
   </article>
