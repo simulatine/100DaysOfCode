@@ -107,15 +107,16 @@ was copied properly to the root of the output folder.</p>
 called favicon.png. PNG files are a valid W3C format for Favicons, but it seems
 that Pelican doesn't know that. The PNG file was copied to the output folder
 when I ran <code>pelican content</code>, but the Pelican web server didn't look for it.</p>
-<h1>Markdown Language</h1>
+<h1>Fixing Incorrect Markdown Syntax Highlighting</h1>
 <p>I initially had some problems with Pelican adding red boxes around some code
-blocks in my output. This mainly happened with copies of Windows command prompt
-output.</p>
+blocks in my output, and in general incorrectly applying syntax highlighting.
+This mainly happened when I included Windows command prompt output text.</p>
 <p>I found that this was a
 <a href="https://github.com/getpelican/pelican/issues/1170">known issue</a> and that I
-needed to change a variable. The issue log mentions <code>MD_EXTENSIONS</code>, but in the
-current version of Pelican I need to change the <code>MARKDOWN</code> parameter in
-'pelicanconf.py<code>to include an option setting</code>guess_lang<code>to</code>False`.</p>
+needed to change another paramter in <code>pelicanconf.py</code>. The issue log mentions
+<code>MD_EXTENSIONS</code>, but that appears to be out of date. In the current 4.2.0
+version of Pelican the parameter I needed to change was <code>MARKDOWN</code>,
+setting <code>guess_lang</code> to <code>False</code>.</p>
 <div class="highlight"><pre><span></span><code>MARKDOWN = {
     &#39;extension_configs&#39;: {
         &#39;markdown.extensions.codehilite&#39;: {&#39;css_class&#39;: &#39;highlight&#39;, &#39;guess_lang&#39;:False,},
@@ -128,6 +129,10 @@ current version of Pelican I need to change the <code>MARKDOWN</code> parameter 
 
 
 <h1>Conclusion</h1>
+<p>After only two days, I have found Pelican a joy to work with. It is
+straightforward, well documented and above all simple. It works well with
+GitHub Pages, and integrates well with my personal Pythan based coding
+practices.</p>
     </div><!-- /.entry-content -->
 
   </article>
