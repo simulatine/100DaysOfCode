@@ -6,6 +6,8 @@ from __future__ import unicode_literals
 AUTHOR = 'Simulatine'
 SITENAME = "Simulatine's 100 Days of Code Blog"
 SITEURL = 'https://simulatine.github.io/100DaysOfCode'
+SITESUBTITLE = 'Learning and having fun with code'
+GITHUB_URL = 'https://github.com/simulatine/100DaysOfCode'
 
 PATH = 'content'
 
@@ -34,11 +36,14 @@ LINKS = (('Pelican', 'http://getpelican.com/'),
          ('You can modify those links in your config file', '#'),)
 '''
 
+# Simulatine, 10 May 2020 - Show static pages on the top menu.
+DISPLAY_PAGES_ON_MENU = True
+
 # Simulatine, 10 May 2020 - Added links. These will appear in the page footer
 #                           (or page header, depending on the theme layout).
 LINKS = (('Python', 'https://python.org/'),
          ('Pygame', 'https://www.pygame.org/docs/'),
-         ('Jinja2', 'http://jinja.pocoo.org/'),)
+         ('100DaysOfCode', 'https://www.100daysofcode.com/'),)
 
 # Simulatine, 10 May 2020 - Added social links. Pelican will add icons for
 #                           commonly used social media sites.
@@ -56,7 +61,12 @@ TWITTER_USERNAME = 'Simulatine'
 DEFAULT_DATE_FORMAT = '%A, %d %B %Y'
 
 # Simulatine, 10 May 2020 - Limit summaries of blog posts to 25 words.
-SUMMARY_MAX_LENGTH = 25
+SUMMARY_MAX_LENGTH = 20
+
+# Simulatine, 10 May 2020 - Display creating an Authors page.
+#                           I will be the only person creating content, so do
+#                           not need a page of Authors.
+AUTHORS_SAVE_AS = ''
 
 DEFAULT_PAGINATION = 10
 
@@ -68,6 +78,19 @@ EXTRA_PATH_METADATA = {
 # Simulatine, 10 May 2020 - Try a different theme.
 THEME = "notmyidea"
 
+# Simulatine, 11 May 2020 - Added guess_lang: False to stop Markdown trying
+# to incorrectly guess the language in code blocks.
+MARKDOWN = {
+    'extension_configs': {
+        'markdown.extensions.codehilite': {'css_class': 'highlight', 'guess_lang':False,},
+        'markdown.extensions.extra': {},
+        'markdown.extensions.meta': {},
+    },
+    'output_format': 'html5',
+}
 
+# Simulatine, 11 May 2020 - Delete old files from the output folder
+# when updating the site.
+DELETE_OUTPUT_DIRECTORY = True
 # Uncomment following line if you want document-relative URLs when developing
 #RELATIVE_URLS = True

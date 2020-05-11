@@ -5,7 +5,7 @@ Date: 2020-05-07
 
 *May 2020*
 
-![Python progrmaming](/images/image1.png "Python programming")
+![Python programming]({static}/images/image1.png "Python programming")
 
 Welcome to my 100 Days of Code web site. This site will show my progress with the challenge. I plan to:
 
@@ -23,10 +23,10 @@ My goals are to:
 - Learn about using Pygame to create cross-platform graphics
 - Create interesting programs, with a focus on simulations and cellular automata
 
-I plan to use Python3 on my Windows 10 laptop and Pydroid3 on my Android tablet, and will aim to create cross platform code.
+I plan to use Python 3 on both my Windows 10 laptop and Pydroid3 on my Android tablet, and will aim to create cross platform code.
 
 This project was inspired by [https://100DaysOfCode.com](https://100DaysOfCode.com)
 
-- My twitter feed: [https://twitter.com/simulatine](https://twitter.com/simulatine)
+- My Twitter feed: [https://twitter.com/simulatine](https://twitter.com/simulatine)
 - My GitHub repository: [https://github.com/simulatine/100DaysOfCode](https://github.com/simulatine/100DaysOfCode)
 

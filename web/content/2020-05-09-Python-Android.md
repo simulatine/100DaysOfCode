@@ -1,8 +1,9 @@
-Title: Python on my Android Tablet
+Title: Day 3: Python on my Android Tablet
 Date: 2020-05-09
 Category: Posts
 
-## Mobile Python Graphics ##
+Mobile Python Graphics
+======================
 
 One of my goals is to be able to code on the go ... once lockdown ends
 
@@ -21,7 +22,8 @@ My choice quickly narrowed to 7 inch tablets, and after looking at the Lenovo Ta
 
 Installing Python was easy - I was up and running within 10 minutes.
 
-## Installing Pydroid3 ##
+Installing Pydroid3
+===================
 
 - I opened the Play Store app and searched for "pydroid"
 - Once I found the correct app, I tapped on Install
@@ -44,7 +46,8 @@ After starting Pydroid, I immediately changed the editor appearance to the dark 
 
 ![Pydroid3 with Dark Theme]({static}/images/Pydroid3_Install_Step_3.png)
 
-## Pygame on Pydroid ##
+Pygame on Pydroid
+=================
 
 Pydroid3 has some built in Pygame examples. Simply tap on the menu button in the top left, tap on Samples and open the Pygame folder. There are also several Kivy, Tkinter and PyQt5 examples as well.
 
