@@ -42,124 +42,124 @@
 Pelican is a static site generator, and similar to Jekyll it converts simple text files into a fully fledged website. But Pelican is Python based, which feels a lot more natural to me.</p>
 <h3>Installing Pelican</h3>
 <p>I started by installing the pelican and markdown libraries:</p>
-<div class="highlight"><pre><span></span><code><span class="c">C:\&gt; pip install pelican markdown</span>
+<div class="highlight"><pre><span></span><code>C:\&gt; pip install pelican markdown
 </code></pre></div>
 
 
 <p>I then followed instructions at the <a href="https://docs.getpelican.com/en/stable/quickstart.html#installation">Pelican quickstart guide</a> to create and configure my site.</p>
 <p>I first created a folder for my website:</p>
-<div class="highlight"><pre><span></span><code><span class="c">C:\&gt; mkdir C:\Users\Simulatine\Documents\Git\100DaysOfCode\web</span>
+<div class="highlight"><pre><span></span><code>C:\&gt; mkdir C:\Users\Simulatine\Documents\Git\100DaysOfCode\web
 </code></pre></div>
 
 
 <p>I went to the website folder and ran <code>pelican-quickstart</code> to create the initial structure</p>
-<div class="highlight"><pre><span></span><code><span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="o">&gt;</span><span class="w"> </span><span class="n">cd</span><span class="w"> </span><span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">Users</span><span class="err">\</span><span class="n">Simulatine</span><span class="err">\</span><span class="n">Documents</span><span class="err">\</span><span class="n">Git</span><span class="err">\</span><span class="mi">100</span><span class="n">DaysOfCode</span><span class="err">\</span><span class="n">web</span><span class="w"></span>
-<span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">Users</span><span class="err">\</span><span class="n">Simulatine</span><span class="err">\</span><span class="n">Documents</span><span class="err">\</span><span class="n">Git</span><span class="err">\</span><span class="mi">100</span><span class="n">DaysOfCode</span><span class="err">\</span><span class="n">web</span><span class="o">&gt;</span><span class="n">pelican</span><span class="o">-</span><span class="n">quickstart</span><span class="w"></span>
-<span class="n">Welcome</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">pelican</span><span class="o">-</span><span class="n">quickstart</span><span class="w"> </span><span class="n">v4</span><span class="mf">.2.0</span><span class="p">.</span><span class="w"></span>
+<div class="highlight"><pre><span></span><code>C:\&gt; cd C:\Users\Simulatine\Documents\Git\100DaysOfCode\web
+C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;pelican-quickstart
+Welcome to pelican-quickstart v4.2.0.
 
-<span class="n">This</span><span class="w"> </span><span class="n">script</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">help</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">Pelican</span><span class="o">-</span><span class="n">based</span><span class="w"> </span><span class="n">website</span><span class="p">.</span><span class="w"></span>
+This script will help you create a new Pelican-based website.
 
-<span class="n">Please</span><span class="w"> </span><span class="n">answer</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">following</span><span class="w"> </span><span class="n">questions</span><span class="w"> </span><span class="n">so</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">script</span><span class="w"> </span><span class="n">can</span><span class="w"> </span><span class="n">generate</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">files</span><span class="w"></span>
-<span class="n">needed</span><span class="w"> </span><span class="k">by</span><span class="w"> </span><span class="n">Pelican</span><span class="p">.</span><span class="w"></span>
+Please answer the following questions so this script can generate the files
+needed by Pelican.
 
 
-<span class="o">&gt;</span><span class="w"> </span><span class="k">Where</span><span class="w"> </span><span class="n">do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="k">create</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">web</span><span class="w"> </span><span class="n">site</span><span class="vm">?</span><span class="w"> </span><span class="o">[</span><span class="n">.</span><span class="o">]</span><span class="w"></span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">What</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">title</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">web</span><span class="w"> </span><span class="n">site</span><span class="vm">?</span><span class="w"> </span><span class="n">Simulatine</span><span class="err">&#39;</span><span class="n">s</span><span class="w"> </span><span class="mi">100</span><span class="w"> </span><span class="n">Days</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">Code</span><span class="w"></span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">Who</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="n">author</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">web</span><span class="w"> </span><span class="n">site</span><span class="vm">?</span><span class="w"> </span><span class="n">Simulatine</span><span class="w"></span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">What</span><span class="w"> </span><span class="n">will</span><span class="w"> </span><span class="n">be</span><span class="w"> </span><span class="n">the</span><span class="w"> </span><span class="k">default</span><span class="w"> </span><span class="k">language</span><span class="w"> </span><span class="k">of</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">web</span><span class="w"> </span><span class="n">site</span><span class="vm">?</span><span class="w"> </span><span class="o">[</span><span class="n">English</span><span class="o">]</span><span class="w"></span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">specify</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">URL</span><span class="w"> </span><span class="k">prefix</span><span class="vm">?</span><span class="w"> </span><span class="n">e</span><span class="p">.</span><span class="n">g</span><span class="p">.,</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">example</span><span class="p">.</span><span class="n">com</span><span class="w">   </span><span class="p">(</span><span class="n">Y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="w"> </span><span class="n">Y</span><span class="w"></span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">What</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">URL</span><span class="w"> </span><span class="k">prefix</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">see</span><span class="w"> </span><span class="n">above</span><span class="w"> </span><span class="n">example</span><span class="p">;</span><span class="w"> </span><span class="k">no</span><span class="w"> </span><span class="k">trailing</span><span class="w"> </span><span class="n">slash</span><span class="p">)</span><span class="w"> </span><span class="nl">https</span><span class="p">:</span><span class="o">//</span><span class="n">simulatine</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">io</span><span class="o">/</span><span class="mi">100</span><span class="n">DaysOfCode</span><span class="o">/</span><span class="w"></span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">enable</span><span class="w"> </span><span class="n">article</span><span class="w"> </span><span class="n">pagination</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">Y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">How</span><span class="w"> </span><span class="n">many</span><span class="w"> </span><span class="n">articles</span><span class="w"> </span><span class="n">per</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="n">do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="vm">?</span><span class="w"> </span><span class="o">[</span><span class="n">10</span><span class="o">]</span><span class="w"></span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">What</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="nc">time</span><span class="w"> </span><span class="k">zone</span><span class="vm">?</span><span class="w"> </span><span class="o">[</span><span class="n">Europe/Paris</span><span class="o">]</span><span class="w"> </span><span class="n">Europe</span><span class="o">/</span><span class="n">London</span><span class="w"></span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">generate</span><span class="w"> </span><span class="n">a</span><span class="w"> </span><span class="n">tasks</span><span class="p">.</span><span class="n">py</span><span class="o">/</span><span class="n">Makefile</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">automate</span><span class="w"> </span><span class="n">generation</span><span class="w"> </span><span class="ow">and</span><span class="w"> </span><span class="n">publishing</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">Y</span><span class="o">/</span><span class="n">n</span><span class="p">)</span><span class="w"></span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">upload</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">website</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">FTP</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span><span class="w"></span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">upload</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">website</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">SSH</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span><span class="w"></span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">upload</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">website</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">Dropbox</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span><span class="w"></span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">upload</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">website</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">S3</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span><span class="w"></span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">upload</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">website</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">Rackspace</span><span class="w"> </span><span class="n">Cloud</span><span class="w"> </span><span class="n">Files</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span><span class="w"></span>
-<span class="o">&gt;</span><span class="w"> </span><span class="n">Do</span><span class="w"> </span><span class="n">you</span><span class="w"> </span><span class="n">want</span><span class="w"> </span><span class="k">to</span><span class="w"> </span><span class="n">upload</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">website</span><span class="w"> </span><span class="k">using</span><span class="w"> </span><span class="n">GitHub</span><span class="w"> </span><span class="n">Pages</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="n">Y</span><span class="w"></span>
-<span class="o">&gt;</span><span class="w"> </span><span class="k">Is</span><span class="w"> </span><span class="n">this</span><span class="w"> </span><span class="n">your</span><span class="w"> </span><span class="n">personal</span><span class="w"> </span><span class="n">page</span><span class="w"> </span><span class="p">(</span><span class="n">username</span><span class="p">.</span><span class="n">github</span><span class="p">.</span><span class="n">io</span><span class="p">)</span><span class="vm">?</span><span class="w"> </span><span class="p">(</span><span class="n">y</span><span class="o">/</span><span class="n">N</span><span class="p">)</span><span class="w"> </span><span class="n">n</span><span class="w"></span>
-<span class="n">Done</span><span class="p">.</span><span class="w"> </span><span class="n">Your</span><span class="w"> </span><span class="k">new</span><span class="w"> </span><span class="n">project</span><span class="w"> </span><span class="k">is</span><span class="w"> </span><span class="n">available</span><span class="w"> </span><span class="k">at</span><span class="w"> </span><span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">Users</span><span class="err">\</span><span class="n">Simulatine</span><span class="err">\</span><span class="n">Documents</span><span class="err">\</span><span class="n">Git</span><span class="err">\</span><span class="mi">100</span><span class="n">DaysOfCode</span><span class="err">\</span><span class="n">web</span><span class="w"></span>
+&gt; Where do you want to create your new web site? [.]
+&gt; What will be the title of this web site? Simulatine&#39;s 100 Days of Code
+&gt; Who will be the author of this web site? Simulatine
+&gt; What will be the default language of this web site? [English]
+&gt; Do you want to specify a URL prefix? e.g., https://example.com   (Y/n) Y
+&gt; What is your URL prefix? (see above example; no trailing slash) https://simulatine.github.io/100DaysOfCode/
+&gt; Do you want to enable article pagination? (Y/n)
+&gt; How many articles per page do you want? [10]
+&gt; What is your time zone? [Europe/Paris] Europe/London
+&gt; Do you want to generate a tasks.py/Makefile to automate generation and publishing? (Y/n)
+&gt; Do you want to upload your website using FTP? (y/N)
+&gt; Do you want to upload your website using SSH? (y/N)
+&gt; Do you want to upload your website using Dropbox? (y/N)
+&gt; Do you want to upload your website using S3? (y/N)
+&gt; Do you want to upload your website using Rackspace Cloud Files? (y/N)
+&gt; Do you want to upload your website using GitHub Pages? (y/N) Y
+&gt; Is this your personal page (username.github.io)? (y/N) n
+Done. Your new project is available at C:\Users\Simulatine\Documents\Git\100DaysOfCode\web
 
-<span class="nl">C</span><span class="p">:</span><span class="err">\</span><span class="n">Users</span><span class="err">\</span><span class="n">Simulatine</span><span class="err">\</span><span class="n">Documents</span><span class="err">\</span><span class="n">Git</span><span class="err">\</span><span class="mi">100</span><span class="n">DaysOfCode</span><span class="err">\</span><span class="n">web</span><span class="o">&gt;</span><span class="w"></span>
+C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;
 </code></pre></div>
 
 
 <p>This created subfolders called <code>content</code> and <code>output</code>, as well as a Makefile and some default Python scripts <code>pelicanconf.py</code>, <code>publishconf.py</code> and <code>tasks.py</code>.</p>
-<div class="highlight"><pre><span></span><code><span class="k">C</span><span class="p">:</span><span class="err">\</span><span class="n">Users</span><span class="err">\</span><span class="n">Simulatine</span><span class="err">\</span><span class="n">Documents</span><span class="err">\</span><span class="n">Git</span><span class="err">\</span><span class="mi">100</span><span class="n">DaysOfCode</span><span class="err">\</span><span class="n">web</span><span class="o">&gt;</span><span class="n">dir</span>
-<span class="n">Volume</span> <span class="k">in</span> <span class="n">drive</span> <span class="k">C</span> <span class="n">has</span> <span class="k">no</span> <span class="n">label</span><span class="p">.</span>
-<span class="n">Volume</span> <span class="nb">Serial</span> <span class="nb">Number</span> <span class="k">is</span> <span class="mi">5</span><span class="n">C84</span><span class="o">-</span><span class="n">C174</span>
+<div class="highlight"><pre><span></span><code>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;dir
+Volume in drive C has no label.
+Volume Serial Number is 5C84-C174
 
-<span class="n">Directory</span> <span class="k">of</span> <span class="k">C</span><span class="p">:</span><span class="err">\</span><span class="n">Users</span><span class="err">\</span><span class="n">Simulatine</span><span class="err">\</span><span class="n">Documents</span><span class="err">\</span><span class="n">Git</span><span class="err">\</span><span class="mi">100</span><span class="n">DaysOfCode</span><span class="err">\</span><span class="n">web</span>
+Directory of C:\Users\Simulatine\Documents\Git\100DaysOfCode\web
 
-<span class="mi">2020</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">10</span>  <span class="mi">15</span><span class="p">:</span><span class="mi">34</span>    <span class="o">&lt;</span><span class="n">DIR</span><span class="o">&gt;</span>          <span class="p">.</span>
-<span class="mi">2020</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">10</span>  <span class="mi">15</span><span class="p">:</span><span class="mi">34</span>    <span class="o">&lt;</span><span class="n">DIR</span><span class="o">&gt;</span>          <span class="p">..</span>
-<span class="mi">2020</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">10</span>  <span class="mi">15</span><span class="p">:</span><span class="mi">11</span>    <span class="o">&lt;</span><span class="n">DIR</span><span class="o">&gt;</span>          <span class="n">content</span>
-<span class="mi">2020</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">10</span>  <span class="mi">14</span><span class="p">:</span><span class="mi">54</span>             <span class="mi">2</span><span class="p">,</span><span class="mi">914</span> <span class="n">Makefile</span>
-<span class="mi">2020</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">10</span>  <span class="mi">15</span><span class="p">:</span><span class="mi">17</span>    <span class="o">&lt;</span><span class="n">DIR</span><span class="o">&gt;</span>          <span class="k">output</span>
-<span class="mi">2020</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">10</span>  <span class="mi">15</span><span class="p">:</span><span class="mi">23</span>               <span class="mi">878</span> <span class="n">pelicanconf</span><span class="p">.</span><span class="n">py</span>
-<span class="mi">2020</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">10</span>  <span class="mi">14</span><span class="p">:</span><span class="mi">54</span>               <span class="mi">632</span> <span class="n">publishconf</span><span class="p">.</span><span class="n">py</span>
-<span class="mi">2020</span><span class="o">-</span><span class="mi">05</span><span class="o">-</span><span class="mi">10</span>  <span class="mi">14</span><span class="p">:</span><span class="mi">54</span>             <span class="mi">3</span><span class="p">,</span><span class="mi">615</span> <span class="n">tasks</span><span class="p">.</span><span class="n">py</span>
-           <span class="mi">4</span> <span class="n">File</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>          <span class="mi">8</span><span class="p">,</span><span class="mi">039</span> <span class="n">bytes</span>
-           <span class="mi">4</span> <span class="n">Dir</span><span class="p">(</span><span class="n">s</span><span class="p">)</span>  <span class="mi">51</span><span class="p">,</span><span class="mi">526</span><span class="p">,</span><span class="mi">713</span><span class="p">,</span><span class="mi">344</span> <span class="n">bytes</span> <span class="k">free</span>
+2020-05-10  15:34    &lt;DIR&gt;          .
+2020-05-10  15:34    &lt;DIR&gt;          ..
+2020-05-10  15:11    &lt;DIR&gt;          content
+2020-05-10  14:54             2,914 Makefile
+2020-05-10  15:17    &lt;DIR&gt;          output
+2020-05-10  15:23               878 pelicanconf.py
+2020-05-10  14:54               632 publishconf.py
+2020-05-10  14:54             3,615 tasks.py
+           4 File(s)          8,039 bytes
+           4 Dir(s)  51,526,713,344 bytes free
 
-<span class="k">C</span><span class="p">:</span><span class="err">\</span><span class="n">Users</span><span class="err">\</span><span class="n">Simulatine</span><span class="err">\</span><span class="n">Documents</span><span class="err">\</span><span class="n">Git</span><span class="err">\</span><span class="mi">100</span><span class="n">DaysOfCode</span><span class="err">\</span><span class="n">web</span><span class="o">&gt;</span>
+C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;
 </code></pre></div>
 
 
 <p>As suggested at the quick start web page, I next created a trial web page <code>keyboard-review.md</code> in the content folder, with some markdown content:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Title</span><span class="o">:</span> <span class="n">My</span> <span class="n">First</span> <span class="n">Review</span>
-<span class="n">Date</span><span class="o">:</span> <span class="mi">2010</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">03</span> <span class="mi">10</span><span class="o">:</span><span class="mi">20</span>
-<span class="n">Category</span><span class="o">:</span> <span class="n">Review</span>
+<div class="highlight"><pre><span></span><code>Title: My First Review
+Date: 2010-12-03 10:20
+Category: Review
 
-<span class="n">Following</span> <span class="k">is</span> <span class="n">a</span> <span class="n">review</span> <span class="n">of</span> <span class="n">my</span> <span class="n">favorite</span> <span class="n">mechanical</span> <span class="n">keyboard</span><span class="o">.</span>
+Following is a review of my favorite mechanical keyboard.
 </code></pre></div>
 
 
 <p>I tried to generate the site output by going to the top website folder and running pelican against the content folder.</p>
-<div class="highlight"><pre><span></span><code><span class="c">C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; pelican content</span>
+<div class="highlight"><pre><span></span><code>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; pelican content
 </code></pre></div>
 
 
 <p>I received the following notification:</p>
-<div class="highlight"><pre><span></span><code><span class="n">WARNING</span><span class="o">:</span> <span class="n">Docutils</span> <span class="n">has</span> <span class="n">no</span> <span class="n">localization</span> <span class="k">for</span> <span class="s1">&#39;english&#39;</span><span class="o">.</span> <span class="n">Using</span> <span class="s1">&#39;en&#39;</span> <span class="n">instead</span><span class="o">.</span>
-<span class="n">ERROR</span><span class="o">:</span> <span class="n">Skipping</span> <span class="n">C</span><span class="o">:\</span><span class="n">Users</span><span class="o">\</span><span class="n">Simulatine</span><span class="o">\</span><span class="n">Documents</span><span class="o">\</span><span class="n">Git</span><span class="o">\</span><span class="mi">100</span><span class="n">DaysOfCode</span><span class="o">\</span><span class="n">web</span><span class="o">\</span><span class="n">content</span><span class="o">\</span><span class="n">keyboard</span><span class="o">-</span><span class="n">review</span><span class="o">.</span><span class="na">md</span><span class="o">:</span> <span class="n">could</span> <span class="n">not</span> <span class="n">find</span> <span class="n">information</span> <span class="n">about</span> <span class="s1">&#39;title&#39;</span>
-<span class="n">Done</span><span class="o">:</span> <span class="n">Processed</span> <span class="mi">0</span> <span class="n">articles</span><span class="o">,</span> <span class="mi">0</span> <span class="n">drafts</span><span class="o">,</span> <span class="mi">0</span> <span class="n">pages</span><span class="o">,</span> <span class="mi">0</span> <span class="n">hidden</span> <span class="n">pages</span> <span class="n">and</span> <span class="mi">0</span> <span class="n">draft</span> <span class="n">pages</span> <span class="k">in</span> <span class="mf">0.62</span> <span class="n">seconds</span><span class="o">.</span>
+<div class="highlight"><pre><span></span><code>WARNING: Docutils has no localization for &#39;english&#39;. Using &#39;en&#39; instead.
+ERROR: Skipping C:\Users\Simulatine\Documents\Git\100DaysOfCode\web\content\keyboard-review.md: could not find information about &#39;title&#39;
+Done: Processed 0 articles, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.62 seconds.
 
-<span class="n">C</span><span class="o">:\</span><span class="n">Users</span><span class="o">\</span><span class="n">Simulatine</span><span class="o">\</span><span class="n">Documents</span><span class="o">\</span><span class="n">Git</span><span class="o">\</span><span class="mi">100</span><span class="n">DaysOfCode</span><span class="o">\</span><span class="n">web</span><span class="o">&gt;</span>
+C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;
 </code></pre></div>
 
 
 <p>Hmm . Two immediate errors. It turns out that the default language choice "English" in pelican-quickstart should have been "en". I had to go to pelicanconf.py, and change the line:</p>
-<div class="highlight"><pre><span></span><code><span class="err">DEFAULT_LANG = &#39;English&#39;</span>
+<div class="highlight"><pre><span></span><code>DEFAULT_LANG = &#39;English&#39;
 </code></pre></div>
 
 
 <p>To</p>
-<div class="highlight"><pre><span></span><code><span class="err">DEFAULT_LANG = &#39;en&#39;</span>
+<div class="highlight"><pre><span></span><code>DEFAULT_LANG = &#39;en&#39;
 </code></pre></div>
 
 
 <p>I also realised the pelican was not fining the 'title' metadata in my initial file. I realised that when I copied and pasted the suggested initial file contents from the pelican quickstart guide into my Markdown editor Typora, it converted it to a code block by automatically adding triple backticks <code>`` before and after the pasted text. So my Markdown file contents in</code>keyboard-review.md` were actually.</p>
-<div class="highlight"><pre><span></span><code><span class="o">```</span>
-<span class="n">Title</span><span class="p">:</span> <span class="n">My</span> <span class="k">First</span> <span class="n">Review</span>
-<span class="nb">Date</span><span class="p">:</span> <span class="mi">2010</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">03</span> <span class="mi">10</span><span class="p">:</span><span class="mi">20</span>
-<span class="n">Category</span><span class="p">:</span> <span class="n">Review</span>
+<div class="highlight"><pre><span></span><code>```
+Title: My First Review
+Date: 2010-12-03 10:20
+Category: Review
 
-<span class="n">Following</span> <span class="k">is</span> <span class="n">a</span> <span class="n">review</span> <span class="k">of</span> <span class="n">my</span> <span class="n">favorite</span> <span class="n">mechanical</span> <span class="n">keyboard</span><span class="p">.</span>
-<span class="o">```</span>
+Following is a review of my favorite mechanical keyboard.
+```
 </code></pre></div>
 
 
 <p>I had to remove the backtick lines and resave the markdown file. I could then retry generating the site output:</p>
-<div class="highlight"><pre><span></span><code><span class="c">C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; pelican content</span>
-<span class="c">Done: Processed 1 article, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.31 seconds.</span>
+<div class="highlight"><pre><span></span><code>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; pelican content
+Done: Processed 1 article, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.31 seconds.
 </code></pre></div>
 
 
 <p>This created an entire web site in the output folder. I was expecting possibly a single HTML file, but it actually created a significant amount of boilerplate output. I was able to view a local copy of the website by launching the pelican built-in web server</p>
-<div class="highlight"><pre><span></span><code><span class="err">pelican --listen</span>
+<div class="highlight"><pre><span></span><code>pelican --listen
 </code></pre></div>
 
 
