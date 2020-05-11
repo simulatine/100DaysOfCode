@@ -41,12 +41,12 @@
 <p>I am now trying out <a href="https://docs.getpelican.com/en/stable/">Pelican</a> for this site, as a replacement for <a href="https://jekyllrb.com/">Jekyll</a> with the <a href="https://github.com/jekyll/minima">Minima</a> theme.
 Pelican is a static site generator, and similar to Jekyll it converts simple text files into a fully fledged website. But Pelican is Python based, which feels a lot more natural to me.</p>
 <h3>Installing Pelican</h3>
-<p>I installed the pelican and markdown libraries:</p>
+<p>I started by installing the pelican and markdown libraries:</p>
 <div class="highlight"><pre><span></span><code><span class="c">C:\&gt; pip install pelican markdown</span>
 </code></pre></div>
 
 
-<p>I then followed instructions at the [Pelican quickstart guide] (https://docs.getpelican.com/en/stable/quickstart.html#installation) to create and configure my site.</p>
+<p>I then followed instructions at the <a href="https://docs.getpelican.com/en/stable/quickstart.html#installation">Pelican quickstart guide</a> to create and configure my site.</p>
 <p>I first created a folder for my website:</p>
 <div class="highlight"><pre><span></span><code><span class="c">C:\&gt; mkdir C:\Users\Simulatine\Documents\Git\100DaysOfCode\web</span>
 </code></pre></div>
@@ -86,7 +86,7 @@ Pelican is a static site generator, and similar to Jekyll it converts simple tex
 </code></pre></div>
 
 
-<p>This created subfolders called 'content' and 'output', as well as a Makefile and some default Python scripts pelicanconf.py, publishconf.py and tasks.py</p>
+<p>This created subfolders called <code>content</code> and <code>output</code>, as well as a Makefile and some default Python scripts <code>pelicanconf.py</code>, <code>publishconf.py</code> and <code>tasks.py</code>.</p>
 <div class="highlight"><pre><span></span><code><span class="k">C</span><span class="p">:</span><span class="err">\</span><span class="n">Users</span><span class="err">\</span><span class="n">Simulatine</span><span class="err">\</span><span class="n">Documents</span><span class="err">\</span><span class="n">Git</span><span class="err">\</span><span class="mi">100</span><span class="n">DaysOfCode</span><span class="err">\</span><span class="n">web</span><span class="o">&gt;</span><span class="n">dir</span>
 <span class="n">Volume</span> <span class="k">in</span> <span class="n">drive</span> <span class="k">C</span> <span class="n">has</span> <span class="k">no</span> <span class="n">label</span><span class="p">.</span>
 <span class="n">Volume</span> <span class="nb">Serial</span> <span class="nb">Number</span> <span class="k">is</span> <span class="mi">5</span><span class="n">C84</span><span class="o">-</span><span class="n">C174</span>
@@ -118,7 +118,7 @@ Pelican is a static site generator, and similar to Jekyll it converts simple tex
 
 
 <p>I tried to generate the site output by going to the top website folder and running pelican against the content folder.</p>
-<div class="highlight"><pre><span></span><code><span class="c">C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;pelican content</span>
+<div class="highlight"><pre><span></span><code><span class="c">C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; pelican content</span>
 </code></pre></div>
 
 
@@ -141,24 +141,30 @@ Pelican is a static site generator, and similar to Jekyll it converts simple tex
 </code></pre></div>
 
 
-<p>I also realised the pelican was not fining the 'title' metadata in my initial file. I realised that when I copied and pasted the suggested initial file contents from the pelican quickstart guide into my Markdown editor Typora, it converted it to a code block by automatically adding triple backticks ``` before and after the pasted text:</p>
-<div class="highlight"><pre><span></span><code><span class="n">Title</span><span class="o">:</span> <span class="n">My</span> <span class="n">First</span> <span class="n">Review</span>
-<span class="n">Date</span><span class="o">:</span> <span class="mi">2010</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">03</span> <span class="mi">10</span><span class="o">:</span><span class="mi">20</span>
-<span class="n">Category</span><span class="o">:</span> <span class="n">Review</span>
+<p>I also realised the pelican was not fining the 'title' metadata in my initial file. I realised that when I copied and pasted the suggested initial file contents from the pelican quickstart guide into my Markdown editor Typora, it converted it to a code block by automatically adding triple backticks <code>`` before and after the pasted text. So my Markdown file contents in</code>keyboard-review.md` were actually.</p>
+<div class="highlight"><pre><span></span><code><span class="o">```</span>
+<span class="n">Title</span><span class="p">:</span> <span class="n">My</span> <span class="k">First</span> <span class="n">Review</span>
+<span class="nb">Date</span><span class="p">:</span> <span class="mi">2010</span><span class="o">-</span><span class="mi">12</span><span class="o">-</span><span class="mi">03</span> <span class="mi">10</span><span class="p">:</span><span class="mi">20</span>
+<span class="n">Category</span><span class="p">:</span> <span class="n">Review</span>
 
-<span class="n">Following</span> <span class="k">is</span> <span class="n">a</span> <span class="n">review</span> <span class="n">of</span> <span class="n">my</span> <span class="n">favorite</span> <span class="n">mechanical</span> <span class="n">keyboard</span><span class="o">.</span>
+<span class="n">Following</span> <span class="k">is</span> <span class="n">a</span> <span class="n">review</span> <span class="k">of</span> <span class="n">my</span> <span class="n">favorite</span> <span class="n">mechanical</span> <span class="n">keyboard</span><span class="p">.</span>
+<span class="o">```</span>
 </code></pre></div>
 
 
-<p>I had to remove the backtick lines and resave the markdown file.</p>
-<p>I could then do:</p>
-<p>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;pelican content
-Done: Processed 1 article, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.31 seconds.</p>
-<p>This created an entire web site in the output folder. I was expecting possibly a single HTML file, but it actually created a significant amount of boilerplate output.</p>
-<p>I was able to start a local copy of the website by launching the pelican built-in web server
-pelican --listen</p>
+<p>I had to remove the backtick lines and resave the markdown file. I could then retry generating the site output:</p>
+<div class="highlight"><pre><span></span><code><span class="c">C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; pelican content</span>
+<span class="c">Done: Processed 1 article, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.31 seconds.</span>
+</code></pre></div>
+
+
+<p>This created an entire web site in the output folder. I was expecting possibly a single HTML file, but it actually created a significant amount of boilerplate output. I was able to view a local copy of the website by launching the pelican built-in web server</p>
+<div class="highlight"><pre><span></span><code><span class="err">pelican --listen</span>
+</code></pre></div>
+
+
 <p>Once this was running, I could preview the site by navigating to the URL http://localhost:8000/ on my local browser:</p>
-<p><img alt="Screenshot" src="/images/screenshot.img"></p>
+<p><img alt="Pelican Initial Screenshot" src="/images/Pelican_Initial_Screenshot.png"></p>
     </div><!-- /.entry-content -->
 
   </article>
