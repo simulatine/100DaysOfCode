@@ -21,7 +21,7 @@
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="https://simulatine.github.io/100DaysOfCode/drafts/configuring-sharex.html" rel="bookmark"
+        <a href="https://simulatine.github.io/100DaysOfCode/configuring-sharex.html" rel="bookmark"
            title="Permalink to Configuring ShareX">Configuring ShareX</a></h1>
 <a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="Simulatine">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
     </header>
@@ -37,7 +37,7 @@
         </address>
 <p>In <a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a>.</p>
 
-</footer><!-- /.post-info -->      <h1>ShareX and Screenshots</h1>
+</footer><!-- /.post-info -->      <h1>A Look At ShareX</h1>
 <p>Today I decided to learn more about the screenshot utility
 <a href="https://getsharex.com/">ShareX</a>. I installed ShareX on my laptop some time
 ago, but never really bothered to explore its features and configure it in more
@@ -46,7 +46,7 @@ detail.</p>
 screenshots, it can then automatically edit, save and process them in a wide
 variety of ways.</p>
 <p>Lets look at what is possible.</p>
-<h2>A Look At ShareX</h2>
+<h1>A Look At ShareX</h1>
 <p><img alt="ShareX Main Screen" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_Main_Screen.png"></p>
 <p>ShareX allows you to configure a screen capture workflow, using tasks such as:</p>
 <ul>
@@ -65,8 +65,9 @@ a web site update.</li>
 menu.</p>
 <p>You can configure multiple workflows, each with a different combination of
 tasks. Each workflow can be easily triggered with a Hotkey.</p>
-<p>Lets create a Workflow. For this example, I will modify the existing
-"Capture Region" workflow.</p>
+<h2>Configuring ShareX</h2>
+<p>Before I used ShareX, I customised it to my liking. With any utility or
+application, there are always a few default settings that I just disagree with.</p>
 <h3>Default Settings</h3>
 <p>Lets first change some application wide defaults. These will modify all
 workflows.</p>
@@ -131,7 +132,8 @@ Close.</p>
 <h2>Configuring a Workflow</h2>
 <p>I can now bring several of these settings together into a single workflow. The
 workflow I most commonly use is Capture Region, which allows me to capture an
-entire window or application, or a portion of one.</p>
+entire window or application, or a portion of one. This is configured to use
+the <strong>Ctrl+Print Screen</strong> hotkey.</p>
 <p>I went to <strong>Hotkey settings</strong>, where there were several pre-configured
 workflows. I clicked the gear icon to the left of Capture Region to configure
 this workflow.</p>
@@ -148,7 +150,35 @@ to a target folder of my choice.</li>
 <li>Copy file path to clipboard - ready for me to paste into my Markdown document.</li>
 </ul>
 <p><img alt="ShareX Task Override Menu" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_Task_Override_Menu.png"></p>
-<p>I don't need to do any of the other tasks here.</p>
+<h2>Using the Workflow</h2>
+<p>I am now ready to go. Whenever I want to take a screenshot, I simply press
+the <strong>Ctrl+Print Screen key</strong> combination. This triggers ScreenX and displays
+an adjustable capture region on the screen. I can move and size this as I
+wish to capture the right window, dialog box or screen area.</p>
+<p>I can select the target area, and click to capture. ShareX performs my image
+effects (resizing and adding a drop shadow), and opens the image in its
+image editor.</p>
+<p>I can then add annotations, arrows (as seen in the screen shots on this page)
+or other highlights. Once I am happy, I can click the green check mark to save
+the screenshot.</p>
+<p>This opens a save dialog, where I can rename the image and save it to my
+website image folder. Finally, Sharex copies the file location to the
+clipboard, ready for me to paste into a blog Markdown document.</p>
+<div class="highlight"><pre><span></span><code>![Image]({static}C:\Users\Simulatine\Documents\web\assets\2020-05-15_test.png)
+</code></pre></div>
+
+
+<p>This contains the full path, so I will need to adjust it slightly for web use:</p>
+<div class="highlight"><pre><span></span><code>![Image]({static}\assets\2020-05-15_test.png)
+</code></pre></div>
+
+
+<h2>Conclusion</h2>
+<p>Learning more about the power of ShareX has really helped me streamline
+my screen capture and blogging workflow.</p>
+<p>Thanks to the [steemit tutorial(https://steemit.com/utopian-io/@aleister/tutorial-how-to-use-sharex-screen-capture-file-sharing-and-productivity-tool)
+and to a similar blog post on <a href="https://www.jerriepelser.com/blog/using-sharex-for-blogging-screenshots/">Jerrie Pelser.com</a>,
+both of which I found very useful.</p>
     </div><!-- /.entry-content -->
 
   </article>

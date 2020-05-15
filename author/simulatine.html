@@ -20,7 +20,172 @@
 
             <aside id="featured" class="body">
                 <article>
-                    <h1 class="entry-title"><a href="https://simulatine.github.io/100DaysOfCode/day-5-configuring-pelican.html">Day 5: Configuring Pelican</a></h1>
+                    <h1 class="entry-title"><a href="https://simulatine.github.io/100DaysOfCode/configuring-sharex.html">Configuring ShareX</a></h1>
+<footer class="post-info">
+        <abbr class="published" title="2020-05-15T00:00:00+01:00">
+                Published: Friday, 15 May 2020
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://simulatine.github.io/100DaysOfCode/author/simulatine.html">Simulatine</a>
+        </address>
+<p>In <a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a>.</p>
+
+</footer><!-- /.post-info --><h1>A Look At ShareX</h1>
+<p>Today I decided to learn more about the screenshot utility
+<a href="https://getsharex.com/">ShareX</a>. I installed ShareX on my laptop some time
+ago, but never really bothered to explore its features and configure it in more
+detail.</p>
+<p>ShareX's power lies in its customizable workflow. It not only takes
+screenshots, it can then automatically edit, save and process them in a wide
+variety of ways.</p>
+<p>Lets look at what is possible.</p>
+<h1>A Look At ShareX</h1>
+<p><img alt="ShareX Main Screen" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_Main_Screen.png"></p>
+<p>ShareX allows you to configure a screen capture workflow, using tasks such as:</p>
+<ul>
+<li>Capture: capture the full screen, a window, or a small region. You can also
+take video recordings of screen activity and even use OCR to capture text.</li>
+<li>After capture tasks: add a watermark or image effects to the captured image,
+edit it, print it or save it to the clipboard for pasting it directly into a
+document.</li>
+<li>Upload: upload the image to a wide variety of websites such as Dropbox,
+Twitter and Imgur.</li>
+<li>After upload tasks: The most useful task in this section is the ability to
+copy the image URL to the clipboard, so you can paste it into an online post or
+a web site update.</li>
+</ul>
+<p>The default configuration of each task can be configured in the Task Settings
+menu.</p>
+<p>You can configure multiple workflows, each with a different combination of
+tasks. Each workflow can be easily triggered with a Hotkey.</p>
+<h2>Configuring ShareX</h2>
+<p>Before I used ShareX, I customised it to my liking. With any utility or
+application, there are always a few default settings that I just disagree with.</p>
+<h3>Default Settings</h3>
+<p>Lets first change some application wide defaults. These will modify all
+workflows.</p>
+<h3>Screenshots folder</h3>
+<p>ShareX normally saves data to a folder <code>%UserProfile%\Documents\ShareX</code>. I
+don't mind it saving log files and workflow settings to that location, but I
+would prefer screenshots to be saved to Pictures, specifically to the
+<code>%UserProfile\Pictures\Screenshots</code> folder used by Windows itself. That makes
+screenshot images easier to find from other applications.</p>
+<p>I configured this by going to <strong>Paths</strong> tab in <strong>Application settings</strong>. I
+enabled the "Use custom screenshots folder" checkbox and entered my Picture
+folder:
+C:\Users\Simulatine\Pictures\Screenshots</p>
+<p>ScreenX also creates subfolders for each year and month. I disabled this, so
+that all screenshots are saved to the same folder, by removing the <code>%y-%mo</code>
+pattern from the Sub folder pattern box.</p>
+<p><img alt="ShareX App Settings" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_App_Settings_Paths_Dialog.png"></p>
+<h3>Filenames</h3>
+<p>I also changed the default filename pattern. ScreenX saves the screenshot with
+a random 10 character filename, such as <code>q3TYN22tO2.png</code>. I didn't want this!
+Instead, I preferred the default filename to reflect the current date and time.
+I can always override this default in individual workflows by enabling the 
+<strong>Save image to file as...</strong> task, which will allow me to specify the filename
+after each capture.</p>
+<p>To configure the filename, I went to the <strong>Upload\File naming </strong> tab in
+<strong>Task Settings</strong>. </p>
+<p>In the "Name pattern for capture or clipboard upload" box, I entered
+<code>%y-%mo-%d_%h.%mi.%s</code>. This ensured that screenshots are saved with a filename
+using the current date and time, such as <code>2020-05-15_19.15.00.png</code>.</p>
+<p>Similarly, I changed the "Name pattern for window capture" to
+<code>%pn_%y-%mo-%d_%h.%mi.%s</code>. When I capture a specific appliation window, the
+application name is now included in the filename, for example
+<code>chrome_2020-05-15_19.15.00.png</code></p>
+<p><img alt="ShareX Task Settings" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_Task_Settings_File_Naming_Dialog.png"></p>
+<h2>Image Effects</h2>
+<p>One of the powerful features of ShareX is its ability to process the image
+before saving it. I created two image effects which I can enable or disable
+in my workflows.</p>
+<h3>Image Resizing</h3>
+<p>I first wanted to include the ability to resize my screenshot captures.
+Displaying a full size screenshot in a web page is not always optimal, and
+using Markdown limits the control I have on dynamically resizing images in
+HTMl.</p>
+<p>I therefore automatically resize my screenshots to be be no larger than 750
+pixels in width.</p>
+<p>To configure this effect, I went to the <strong>Image\Effects</strong> tab in
+<strong>Task Settings</strong>, and clicked on the <strong>Image Effects configuration</strong> button.</p>
+<p>I clicked on Add, and from the Manipulations submenu, selected the Resize
+effect. I set the Width to 400, and the Height to 0.</p>
+<p><img alt="ShareX Image Effects" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_Image_Effects_Resize_Dialog.png"></p>
+<h3>Drop Shadows</h3>
+<p>I also decided to add a drop shadow effect to images. This makes them stand off
+the screen.</p>
+<p>Again, in the <strong>Image\Effects</strong> tab in <strong>Task Settings</strong>, I opened Image
+effects configuration.</p>
+<p>I clicked on Add, and from the Filter submenu, selected the Shadow effect. I
+changed the size from 10 to 30 to increase the effect, and also set the offset
+to 10 pixels in both the X and Y directions.</p>
+<p>Finally, I ensured that this was the only enabled image effect and clicked on
+Close.</p>
+<p><img alt="ShareX Image Effects" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_Image_Effects_Shadow_Dialog.png"></p>
+<h2>Configuring a Workflow</h2>
+<p>I can now bring several of these settings together into a single workflow. The
+workflow I most commonly use is Capture Region, which allows me to capture an
+entire window or application, or a portion of one. This is configured to use
+the <strong>Ctrl+Print Screen</strong> hotkey.</p>
+<p>I went to <strong>Hotkey settings</strong>, where there were several pre-configured
+workflows. I clicked the gear icon to the left of Capture Region to configure
+this workflow.</p>
+<p><img alt="ShareX Hotkey Settings" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_Hotkey_Settings_Dialog.png"></p>
+<p>I enabled Override after capture settings, and checked the following four
+tasks:</p>
+<ul>
+<li>Add image effects/watermark - this will resize the image to a maximum of 750
+pixels wide and add the drop shadow effect I configured above.</li>
+<li>Open in image editor - allowing me to annotate the image, add arrows or
+highlight specific areas of interest.</li>
+<li>Save image to file as - so that I can give the file a proper name and save it
+to a target folder of my choice.</li>
+<li>Copy file path to clipboard - ready for me to paste into my Markdown document.</li>
+</ul>
+<p><img alt="ShareX Task Override Menu" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_Task_Override_Menu.png"></p>
+<h2>Using the Workflow</h2>
+<p>I am now ready to go. Whenever I want to take a screenshot, I simply press
+the <strong>Ctrl+Print Screen key</strong> combination. This triggers ScreenX and displays
+an adjustable capture region on the screen. I can move and size this as I
+wish to capture the right window, dialog box or screen area.</p>
+<p>I can select the target area, and click to capture. ShareX performs my image
+effects (resizing and adding a drop shadow), and opens the image in its
+image editor.</p>
+<p>I can then add annotations, arrows (as seen in the screen shots on this page)
+or other highlights. Once I am happy, I can click the green check mark to save
+the screenshot.</p>
+<p>This opens a save dialog, where I can rename the image and save it to my
+website image folder. Finally, Sharex copies the file location to the
+clipboard, ready for me to paste into a blog Markdown document.</p>
+<div class="highlight"><pre><span></span><code>![Image]({static}C:\Users\Simulatine\Documents\web\assets\2020-05-15_test.png)
+</code></pre></div>
+
+
+<p>This contains the full path, so I will need to adjust it slightly for web use:</p>
+<div class="highlight"><pre><span></span><code>![Image]({static}\assets\2020-05-15_test.png)
+</code></pre></div>
+
+
+<h2>Conclusion</h2>
+<p>Learning more about the power of ShareX has really helped me streamline
+my screen capture and blogging workflow.</p>
+<p>Thanks to the [steemit tutorial(https://steemit.com/utopian-io/@aleister/tutorial-how-to-use-sharex-screen-capture-file-sharing-and-productivity-tool)
+and to a similar blog post on <a href="https://www.jerriepelser.com/blog/using-sharex-for-blogging-screenshots/">Jerrie Pelser.com</a>,
+both of which I found very useful.</p>                </article>
+            </aside><!-- /#featured -->
+                <section id="content" class="body">
+                    <h1>Other articles</h1>
+                    <hr />
+                    <ol id="posts-list" class="hfeed">
+
+            <li><article class="hentry">
+                <header>
+                    <h1><a href="https://simulatine.github.io/100DaysOfCode/day-5-configuring-pelican.html" rel="bookmark"
+                           title="Permalink to Day 5: Configuring Pelican">Day 5: Configuring Pelican</a></h1>
+                </header>
+
+                <div class="entry-content">
 <footer class="post-info">
         <abbr class="published" title="2020-05-11T00:00:00+01:00">
                 Published: Monday, 11 May 2020
@@ -31,123 +196,12 @@
         </address>
 <p>In <a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a>.</p>
 
-</footer><!-- /.post-info --><h1>Working with Pelican</h1>
+</footer><!-- /.post-info -->                <h1>Working with Pelican</h1>
 <p>Yesterday, I moved from the default Jekyll site generator tool provided by
-GitHub Pages to the Python based
-<a href="https://docs.getpelican.com/en/stable/">Pelican</a> tool. I was able to quickly
-create a blog based site with simple configuration, test it on my Windows
-laptop and push the result to GitHub.</p>
-<p>Today, I worked through the Pelican documentation ad added some further
-site configuration. Nearly all the changes below were to the <code>pelicanconf.py</code>
-configuration file in the Pelican root folder.</p>
-<h1>Adding Footer Links</h1>
-<p>The default template used by Pelican displays some standard links at the bottom
-of each page. I changed this to be a list of sites relevant to my site's theme
-using the <code>LINKS</code> parameter in the pelicanconf.py configuration file:</p>
-<div class="highlight"><pre><span></span><code>LINKS = ((&#39;Python&#39;, &#39;https://python.org/&#39;),
-         (&#39;Pygame&#39;, &#39;https://www.pygame.org/docs/&#39;),
-         (&#39;100DaysOfCode&#39;, &#39;https://www.100daysofcode.com/&#39;),)
-</code></pre></div>
-
-
-<p>I also added a short list of my social website links via the <code>SOCIAL</code> option:</p>
-<div class="highlight"><pre><span></span><code>SOCIAL = ((&#39;Twitter&#39;, &#39;https://twitter.com/simulatine&#39;),
-          (&#39;GitHub&#39;, &#39;https://github.com/simulatine/100DaysOfCode&#39;),)
-</code></pre></div>
-
-
-<h1>Adding Images</h1>
-<p>To show images in my website, I need to add a subfolder in my content folder to
-contain the images:</p>
-<div class="highlight"><pre><span></span><code>C:\&gt; mkdir C:\Users\Simulatine\Documents\Scripts\Git\100DaysOfCode\web\content\images
-</code></pre></div>
-
-
-<p>I also need to include this folder in the <code>STATIC_PATHS</code> parameter</p>
-<div class="highlight"><pre><span></span><code>STATIC_PATHS = [&#39;images&#39;]
-</code></pre></div>
-
-
-<p>I could then copy pictures and screenshots to the <code>images</code> folder and run 
-<code>pelican content</code> to copy these into the output folder.</p>
-<p>I can then link to these in my Markdown source using the standard Markdown link
-convention:</p>
-<div class="highlight"><pre><span></span><code>![Image Name]({static}/path/to/image.png)
-</code></pre></div>
-
-
-<p>Note the <em>{static}</em> tag is required before the link to the image file - this
-is non-standard Markdown and caught me out for some time before I got used to
-it. The is explained in more detail at:</p>
-<p>https://docs.getpelican.com/en/4.2.0/content.html#linking-to-static-files</p>
-<h1>Favicon</h1>
-<p>Adding a Favicon, which appears in the browser tab, was simple. I created an
-<code>extras</code> subfolder in my content folder, and copied the favicon.ico file to
-that folder.</p>
-<div class="highlight"><pre><span></span><code>C:\&gt; mkdir C:\Users\Simulatine\Documents\Scripts\Git\100DaysOfCode\web\content\extras
-</code></pre></div>
-
-
-<p>I made sure that the new extras folder was in my STATIC_PATHS parameter in <code>pelicanconf.py</code></p>
-<div class="highlight"><pre><span></span><code>STATIC_PATHS = [&#39;images&#39;, &#39;extras&#39;]
-</code></pre></div>
-
-
-<p>I also included the following in pelicanconf.py, to ensure that the ICO file
-was copied properly to the root of the output folder.</p>
-<div class="highlight"><pre><span></span><code>EXTRA_PATH_METADATA = {
-    &#39;extras/favicon.ico&#39;: {&#39;path&#39;: &#39;favicon.ico&#39;},
-}
-</code></pre></div>
-
-
-<p>Note: This only worked for ICO files. I originally tried with a PNG image file
-called favicon.png. PNG files are a valid W3C format for Favicons, but it seems
-that Pelican doesn't know that. The PNG file was copied to the output folder
-when I ran <code>pelican content</code>, but the Pelican web server didn't look for it.</p>
-<h1>Fixing Incorrect Markdown Syntax Highlighting</h1>
-<p>I initially had some problems with Pelican adding red boxes around some code
-blocks in my output, and in general incorrectly applying syntax highlighting.
-This mainly happened when I included Windows command prompt output text.</p>
-<p>I found that this was a
-<a href="https://github.com/getpelican/pelican/issues/1170">known issue</a> and that I
-needed to change another paramter in <code>pelicanconf.py</code>. The issue log mentions
-<code>MD_EXTENSIONS</code>, but that appears to be out of date. In the current 4.2.0
-version of Pelican the parameter I needed to change was <code>MARKDOWN</code>,
-setting <code>guess_lang</code> to <code>False</code>.</p>
-<div class="highlight"><pre><span></span><code>MARKDOWN = {
-    &#39;extension_configs&#39;: {
-        &#39;markdown.extensions.codehilite&#39;: {&#39;css_class&#39;: &#39;highlight&#39;, &#39;guess_lang&#39;:False,},
-        &#39;markdown.extensions.extra&#39;: {},
-        &#39;markdown.extensions.meta&#39;: {},
-    },
-    &#39;output_format&#39;: &#39;html5&#39;,
-}
-</code></pre></div>
-
-
-<h1>Batching Updates and Publishing</h1>
-<p>I found it useful to create a short three line Windows batch file <code>update.cmd</code>
-to update the website output, refresh the repository branch with the latest
-contents, and publish it to GitHub:</p>
-<div class="highlight"><pre><span></span><code>pelican content
-ghp-import output
-git push origin gh-pages
-</code></pre></div>
-
-
-<p>Running this from my Pelican root folder is all I need to do after making any
-content changes to completely refresh and publish the site.</p>
-<h1>Conclusion</h1>
-<p>After only two days, I have found Pelican a joy to work with. It is
-straightforward, well documented and above all simple. It works well with
-GitHub Pages, and integrates well with my personal Pythan based coding
-practices.</p>                </article>
-            </aside><!-- /#featured -->
-                <section id="content" class="body">
-                    <h1>Other articles</h1>
-                    <hr />
-                    <ol id="posts-list" class="hfeed">
+GitHub Pages to the Python …</p>
+                <a class="readmore" href="https://simulatine.github.io/100DaysOfCode/day-5-configuring-pelican.html">read more</a>
+                </div><!-- /.entry-content -->
+            </article></li>
 
             <li><article class="hentry">
                 <header>
