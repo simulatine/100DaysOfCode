@@ -37,7 +37,7 @@
         </address>
 <p>In <a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a>.</p>
 
-</footer><!-- /.post-info -->      <h1>Trying Pelican</h1>
+</footer><!-- /.post-info -->      <h2>Trying Pelican</h2>
 <p>I am trying out using <a href="https://docs.getpelican.com/en/stable/">Pelican</a> to
 create this site, as a replacement for <a href="https://jekyllrb.com/">Jekyll</a> with the
 <a href="https://github.com/jekyll/minima">Minima</a> theme, provided by default with
@@ -46,9 +46,9 @@ similar to Jekyll - it converts simple text files in
 <a href="https://daringfireball.net/projects/markdown/">Markdown</a> format into a
 fully fledged website. But Pelican is Python based, which feels a lot more
 natural to me.</p>
-<h1>Installing Pelican</h1>
+<h2>Installing Pelican</h2>
 <p>I started by installing the pelican and markdown libraries:</p>
-<div class="highlight"><pre><span></span><code>C:\&gt; pip install pelican markdown
+<div class="highlight"><pre><span></span><code>pip install pelican markdown
 </code></pre></div>
 
 
@@ -56,13 +56,13 @@ natural to me.</p>
 <a href="https://docs.getpelican.com/en/stable/quickstart.html#installation">Pelican quickstart guide</a> to
 create and configure my site.</p>
 <p>I first created a folder for my website:</p>
-<div class="highlight"><pre><span></span><code>C:\&gt; mkdir C:\Users\Simulatine\Documents\Git\100DaysOfCode\web
+<div class="highlight"><pre><span></span><code>mkdir C:\Users\Simulatine\Documents\Git\100DaysOfCode\web
 </code></pre></div>
 
 
 <p>I went to the website folder and ran <code>pelican-quickstart</code> to create the initial structure</p>
-<div class="highlight"><pre><span></span><code>C:\&gt; cd C:\Users\Simulatine\Documents\Git\100DaysOfCode\web
-C:\&gt; pelican-quickstart
+<div class="highlight"><pre><span></span><code>cd C:\Users\Simulatine\Documents\Git\100DaysOfCode\web
+pelican-quickstart
 
 Welcome to pelican-quickstart v4.2.0.
 
@@ -92,7 +92,8 @@ Done. Your new project is available at C:\Users\Simulatine\Documents\Git\100Days
 
 
 <p>This created subfolders called <code>content</code> and <code>output</code>, as well as a Makefile and some default Python scripts <code>pelicanconf.py</code>, <code>publishconf.py</code> and <code>tasks.py</code>.</p>
-<div class="highlight"><pre><span></span><code>C:\&gt; dir
+<div class="highlight"><pre><span></span><code>dir
+
 Volume in drive C has no label.
 Volume Serial Number is 5C84-C174
 
@@ -108,8 +109,6 @@ Directory of C:\Users\Simulatine\Documents\Git\100DaysOfCode\web
 2020-05-10  14:54             3,615 tasks.py
            4 File(s)          8,039 bytes
            4 Dir(s)  51,526,713,344 bytes free
-
-C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;
 </code></pre></div>
 
 
@@ -127,7 +126,7 @@ Following is a review of my favorite mechanical keyboard.
 
 <p>I attempted to generate the site output by going to the top website folder and
 running pelican against the <code>content</code> folder.</p>
-<div class="highlight"><pre><span></span><code>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; pelican content
+<div class="highlight"><pre><span></span><code>pelican content
 </code></pre></div>
 
 
@@ -135,8 +134,6 @@ running pelican against the <code>content</code> folder.</p>
 <div class="highlight"><pre><span></span><code>WARNING: Docutils has no localization for &#39;english&#39;. Using &#39;en&#39; instead.
 ERROR: Skipping C:\Users\Simulatine\Documents\Git\100DaysOfCode\web\content\keyboard-review.md: could not find information about &#39;title&#39;
 Done: Processed 0 articles, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.62 seconds.
-
-C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt;
 </code></pre></div>
 
 
@@ -170,7 +167,7 @@ Following is a review of my favorite mechanical keyboard.
 
 <p>I had to remove the leading and trailing backtick lines and resave the markdown
 file. I could then retry generating the site output:</p>
-<div class="highlight"><pre><span></span><code>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; pelican content
+<div class="highlight"><pre><span></span><code>pelican content
 Done: Processed 1 article, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.31 seconds.
 </code></pre></div>
 
@@ -179,7 +176,7 @@ Done: Processed 1 article, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages i
 expecting possibly a single HTML file, but it actually created a significant
 amount of boilerplate output. I was able to view a local copy of the website
 by launching the pelican built-in web server</p>
-<div class="highlight"><pre><span></span><code>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; pelican --listen
+<div class="highlight"><pre><span></span><code>pelican --listen
 </code></pre></div>
 
 
@@ -188,26 +185,26 @@ http://localhost:8000/ on my local browser:</p>
 <p><img alt="Pelican Initial Screenshot" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-10_Pelican_Initial_Screenshot.png"></p>
 <p>Excellent! I like how this appears, and it took maybe 20-30 minutes to get this
 up and running.</p>
-<h1>Publish to GitHub Pages</h1>
+<h2>Publish to GitHub Pages</h2>
 <p>I was immediately sold on Pelican - I now wanted to publish this publicly to my
 GitHub Pages site.</p>
 <p>I followed the instructions in the
 <a href="https://docs.getpelican.com/en/4.2.0/tips.html#project-pages">Pelican docs</a></p>
 <p>First of all, I installed the Python <code>ghp-import</code> tool</p>
-<div class="highlight"><pre><span></span><code>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; pip install ghp-import
+<div class="highlight"><pre><span></span><code>pip install ghp-import
 </code></pre></div>
 
 
 <p>I used ghp-import to create a local <code>gh-pages</code> branch with the content of the
 <code>output</code> folder. If the branch already exists, this command will update the
 branch with the latest files in <code>output</code>.</p>
-<div class="highlight"><pre><span></span><code>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; ghp-import output
+<div class="highlight"><pre><span></span><code>ghp-import output
 </code></pre></div>
 
 
 <p>I then pushed the <code>gh-pages</code> branch from my local desktop to my GitHub
 repository</p>
-<div class="highlight"><pre><span></span><code>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; git push origin gh-pages
+<div class="highlight"><pre><span></span><code>git push origin gh-pages
 </code></pre></div>
 
 
@@ -218,11 +215,11 @@ gh-pages branch.</p>
 at https://simulatine.github.io/100DaysOfCode/</p>
 <p>I finally cleaned up my old Jekyll site by deleting everything in the old docs
 folder with <code>git rm</code>, and resyncing my repository:</p>
-<div class="highlight"><pre><span></span><code>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; git push origin master
+<div class="highlight"><pre><span></span><code>git push origin master
 </code></pre></div>
 
 
-<h1>Conclusion</h1>
+<h2>Conclusion</h2>
 <p>I found Pelican to be simple to use, and a lot more Pythonesque than Jekyll.
 I'll be sticking with this for a while.</p>
     </div><!-- /.entry-content -->

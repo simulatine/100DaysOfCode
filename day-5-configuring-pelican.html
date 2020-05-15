@@ -37,7 +37,7 @@
         </address>
 <p>In <a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a>.</p>
 
-</footer><!-- /.post-info -->      <h1>Working with Pelican</h1>
+</footer><!-- /.post-info -->      <h2>Working with Pelican</h2>
 <p>Yesterday, I moved from the default Jekyll site generator tool provided by
 GitHub Pages to the Python based
 <a href="https://docs.getpelican.com/en/stable/">Pelican</a> tool. I was able to quickly
@@ -46,7 +46,7 @@ laptop and push the result to GitHub.</p>
 <p>Today, I worked through the Pelican documentation ad added some further
 site configuration. Nearly all the changes below were to the <code>pelicanconf.py</code>
 configuration file in the Pelican root folder.</p>
-<h1>Adding Footer Links</h1>
+<h2>Adding Footer Links</h2>
 <p>The default template used by Pelican displays some standard links at the bottom
 of each page. I changed this to be a list of sites relevant to my site's theme
 using the <code>LINKS</code> parameter in the pelicanconf.py configuration file:</p>
@@ -62,7 +62,7 @@ using the <code>LINKS</code> parameter in the pelicanconf.py configuration file:
 </code></pre></div>
 
 
-<h1>Adding Images</h1>
+<h2>Adding Images</h2>
 <p>To show images in my website, I need to add a subfolder in my content folder to
 contain the images:</p>
 <div class="highlight"><pre><span></span><code>C:\&gt; mkdir C:\Users\Simulatine\Documents\Scripts\Git\100DaysOfCode\web\content\images
@@ -86,7 +86,7 @@ convention:</p>
 this is non-standard Markdown and caught me out for some time before I got used
 to it. The is explained in more detail at:</p>
 <p>https://docs.getpelican.com/en/4.2.0/content.html#linking-to-static-files</p>
-<h1>Favicon</h1>
+<h2>Favicon</h2>
 <p>Adding a Favicon, which appears in the browser tab, was simple. I created an
 <code>extras</code> subfolder in my content folder, and copied the favicon.ico file to
 that folder.</p>
@@ -112,7 +112,10 @@ file called favicon.png. PNG files are a valid W3C format for Favicons, but it
 seems that Pelican doesn't know that. The PNG file was copied to the output
 folder when I ran <code>pelican content</code>, but the Pelican web server didn't look for
 it.</p>
-<h1>Fixing Incorrect Markdown Syntax Highlighting</h1>
+<p><strong>Another Note:</strong> I had to force my browser to refresh its cache before I could
+see the new favicon. In Chrome, I pressed Ctrl+F5 and then closed and reopened
+the browser. </p>
+<h2>Fixing Incorrect Markdown Syntax Highlighting</h2>
 <p>I initially had some problems with Pelican adding red boxes around some code
 blocks in my output, and in general incorrectly applying syntax highlighting.
 This mainly happened when I included Windows command prompt output text.</p>
@@ -133,7 +136,7 @@ setting <code>guess_lang</code> to <code>False</code>.</p>
 </code></pre></div>
 
 
-<h1>Batching Updates and Publishing</h1>
+<h2>Batching Updates and Publishing</h2>
 <p>I found it useful to create a short three line Windows batch file <code>update.cmd</code>
 to update the website output, refresh the repository branch with the latest
 contents, and publish it to GitHub:</p>
@@ -145,7 +148,7 @@ git push origin gh-pages
 
 <p>Running this from my Pelican root folder is all I need to do after making any
 content changes to completely refresh and publish the site.</p>
-<h1>Conclusion</h1>
+<h2>Conclusion</h2>
 <p>After only two days, I have found Pelican a joy to work with. It is
 straightforward, well documented and above all simple. It works well with
 GitHub Pages, and integrates well with my personal Pythan based coding
