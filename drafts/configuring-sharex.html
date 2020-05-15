@@ -71,12 +71,13 @@ tasks. Each workflow can be easily triggered with a Hotkey.</p>
 <p>Lets first change some application wide defaults. These will modify all
 workflows.</p>
 <h3>Screenshots folder</h3>
-<p>ShareX normally saves data to a <code>ShareX</code> folder under Documents. I don't mind
-it saving log files and workflow settings to that location, but I would prefer
-screenshots to be saved to Pictures, specifically to the <code>Pictures\Screenshots</code>
-folder used by Windows itself. That makes screenshot images easier to find.</p>
-<p>I configured this by going to Application settings and then to the Paths tab.
-I enabled the "Use custom screenshots folder" checkbox and entered my Picture
+<p>ShareX normally saves data to a folder <code>%UserProfile%\Documents\ShareX</code>. I
+don't mind it saving log files and workflow settings to that location, but I
+would prefer screenshots to be saved to Pictures, specifically to the
+<code>%UserProfile\Pictures\Screenshots</code> folder used by Windows itself. That makes
+screenshot images easier to find from other applications.</p>
+<p>I configured this by going to <strong>Paths</strong> tab in <strong>Application settings</strong>. I
+enabled the "Use custom screenshots folder" checkbox and entered my Picture
 folder:
 C:\Users\Simulatine\Pictures\Screenshots</p>
 <p>ScreenX also creates subfolders for each year and month. I disabled this, so
@@ -85,19 +86,20 @@ pattern from the Sub folder pattern box.</p>
 <p><img alt="ShareX App Settings" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_App_Settings_Paths_Dialog.png"></p>
 <h3>Filenames</h3>
 <p>I also changed the default filename pattern. ScreenX saves the screenshot with
-a random 10 character filename. I didn't want this! Instead, I wanted the
-default filename to reflect the current date and time. I can always override
-this default in individual workflows by enabling the Save image to file as
-task, which will allow me to specify the filename after each capture.</p>
-<p>To configure the filename, I went to Task Settings, and then to the Upload\File
-naming tab. </p>
-<p>In the "Name pattern for capture or clipboard upload, I entered
-%y-%mo-%d_%h.%mi.%s. This ensured that screenshots are saved with a filename
-using the current date and time, such as 2020-05-15_19.15.00.png.</p>
+a random 10 character filename, such as <code>q3TYN22tO2.png</code>. I didn't want this!
+Instead, I preferred the default filename to reflect the current date and time.
+I can always override this default in individual workflows by enabling the 
+<strong>Save image to file as...</strong> task, which will allow me to specify the filename
+after each capture.</p>
+<p>To configure the filename, I went to the <strong>Upload\File naming </strong> tab in
+<strong>Task Settings</strong>. </p>
+<p>In the "Name pattern for capture or clipboard upload" box, I entered
+<code>%y-%mo-%d_%h.%mi.%s</code>. This ensured that screenshots are saved with a filename
+using the current date and time, such as <code>2020-05-15_19.15.00.png</code>.</p>
 <p>Similarly, I changed the "Name pattern for window capture" to
-%pn_%y-%mo-%d_%h.%mi.%s. When I capture a specific appliation window, the
+<code>%pn_%y-%mo-%d_%h.%mi.%s</code>. When I capture a specific appliation window, the
 application name is now included in the filename, for example
-chrome_2020-05-15_19.15.00.png</p>
+<code>chrome_2020-05-15_19.15.00.png</code></p>
 <p><img alt="ShareX Task Settings" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_Task_Settings_File_Naming_Dialog.png"></p>
 <h2>Image Effects</h2>
 <p>One of the powerful features of ShareX is its ability to process the image
@@ -110,15 +112,15 @@ using Markdown limits the control I have on dynamically resizing images in
 HTMl.</p>
 <p>I therefore automatically resize my screenshots to be be no larger than 750
 pixels in width.</p>
-<p>To configure this effect, I went to Task Settings, and then to the
-Image\Effects tab, and clicked on Image Eeffects configuration.</p>
+<p>To configure this effect, I went to the <strong>Image\Effects</strong> tab in
+<strong>Task Settings</strong>, and clicked on the <strong>Image Effects configuration</strong> button.</p>
 <p>I clicked on Add, and from the Manipulations submenu, selected the Resize
 effect. I set the Width to 400, and the Height to 0.</p>
 <p><img alt="ShareX Image Effects" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_Image_Effects_Resize_Dialog.png"></p>
 <h3>Drop Shadows</h3>
 <p>I also decided to add a drop shadow effect to images. This makes them stand off
 the screen.</p>
-<p>I went to Task Settings, and then to the Image\Effects tab, and click on Image
+<p>Again, in the <strong>Image\Effects</strong> tab in <strong>Task Settings</strong>, I opened Image
 effects configuration.</p>
 <p>I clicked on Add, and from the Filter submenu, selected the Shadow effect. I
 changed the size from 10 to 30 to increase the effect, and also set the offset
@@ -127,10 +129,12 @@ to 10 pixels in both the X and Y directions.</p>
 Close.</p>
 <p><img alt="ShareX Image Effects" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_Image_Effects_Shadow_Dialog.png"></p>
 <h2>Configuring a Workflow</h2>
-<p>I can now bring several of these settings together into a single workflow.</p>
-<p>I went to Hotkey settings, where there were several pre-configured workflows.
-I clicked the gear icon to the left of Capture Region to configure this
-workflow.</p>
+<p>I can now bring several of these settings together into a single workflow. The
+workflow I most commonly use is Capture Region, which allows me to capture an
+entire window or application, or a portion of one.</p>
+<p>I went to <strong>Hotkey settings</strong>, where there were several pre-configured
+workflows. I clicked the gear icon to the left of Capture Region to configure
+this workflow.</p>
 <p><img alt="ShareX Hotkey Settings" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_Hotkey_Settings_Dialog.png"></p>
 <p>I enabled Override after capture settings, and checked the following four
 tasks:</p>
