@@ -78,10 +78,12 @@ contain the images:</p>
 <code>pelican content</code> to copy these into the output folder.</p>
 <p>I can then link to these in my Markdown source using the standard Markdown link
 convention:</p>
-<div class="highlight"><pre><span></span><code>![Image Name](/path/to/image.png)
+<div class="highlight"><pre><span></span><code>![Image Name]({static}/path/to/image.png)
 </code></pre></div>
 
 
+<p>Note the <em>{static}</em> tag is required - this is non-standard Markdown and caught
+me out for some time.</p>
 <h1>Favicon</h1>
 <p>Adding a Favicon, which appears in the browser tab, was simple. I created an
 <code>extras</code> subfolder in my content folder, and copied the favicon.ico file to
