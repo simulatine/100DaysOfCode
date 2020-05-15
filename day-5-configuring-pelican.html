@@ -82,9 +82,9 @@ convention:</p>
 </code></pre></div>
 
 
-<p>Note the <em>{static}</em> tag is required before the link to the image file - this
-is non-standard Markdown and caught me out for some time before I got used to
-it. The is explained in more detail at:</p>
+<p><strong>Note</strong>: the <em>{static}</em> tag is required before the link to the image file - 
+this is non-standard Markdown and caught me out for some time before I got used
+to it. The is explained in more detail at:</p>
 <p>https://docs.getpelican.com/en/4.2.0/content.html#linking-to-static-files</p>
 <h1>Favicon</h1>
 <p>Adding a Favicon, which appears in the browser tab, was simple. I created an
@@ -107,10 +107,11 @@ was copied properly to the root of the output folder.</p>
 </code></pre></div>
 
 
-<p>Note: This only worked for ICO files. I originally tried with a PNG image file
-called favicon.png. PNG files are a valid W3C format for Favicons, but it seems
-that Pelican doesn't know that. The PNG file was copied to the output folder
-when I ran <code>pelican content</code>, but the Pelican web server didn't look for it.</p>
+<p><strong>Note:</strong> This only worked for ICO files. I originally tried with a PNG image
+file called favicon.png. PNG files are a valid W3C format for Favicons, but it
+seems that Pelican doesn't know that. The PNG file was copied to the output
+folder when I ran <code>pelican content</code>, but the Pelican web server didn't look for
+it.</p>
 <h1>Fixing Incorrect Markdown Syntax Highlighting</h1>
 <p>I initially had some problems with Pelican adding red boxes around some code
 blocks in my output, and in general incorrectly applying syntax highlighting.
