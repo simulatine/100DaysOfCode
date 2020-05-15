@@ -43,7 +43,8 @@ Windows text editor. It is well suported, and provides good syntax highlighting
 for Python and many other languages. </p>
 <p>Notepad++ includes several different themes, each of which changes the editor
 background color and fonts. I prefer a dark style, and use the <em>Deep black</em>
-theme, which works well with plain text and most languages, such as Python:</p>
+theme, which works well with plain text and most programming languages, such as
+Python:</p>
 <p><img alt="image" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-14_NotepadPlusPlus_Python_with_Deep_black_Theme.png"></p>
 <p>However, I had a major issue with displaying and editing Markdown documents.
 The default syntax highlighting for Markdown documents is designed for light
@@ -59,7 +60,7 @@ which contained updated dark syntax highlighting themes for Notepad++,
 specifically designed for editing Markdown documents.</p>
 <p>To install these, I downloaded the latest
 <a href="https://github.com/Edditoria/markdown-plus-plus/archive/v3.1.0.zip">zip file</a>,
-and extracted the contents. The <em>UDL</em> folder in the zip file contained a number
+and extracted the contents. The <code>udl</code> folder in the zip file contained a number
 of XML files which had markdown syntax highlighting for each Notepad++ colour
 theme:</p>
 <div class="highlight"><pre><span></span><code>markdown.bespin.udl.xml
@@ -75,8 +76,14 @@ markdown.zenburn.udl.xml
 
 <p>I copied the XML files to the <code>%AppData%\Notepad++\userDefineLangs</code> folder,
 overwriting any existing XML files.</p>
-<p>I then restarted Notepad++ and open the source file for this page:</p>
-<p><img alt="image" src="https://simulatine.github.io/100DaysOfCode/images/NotepadPlusPlus_Markdown_with_Edditoria_ULDs.png"></p>
+<p>I then restarted Notepad++ and open the source file for this page. From the
+<strong>Language</strong> menu, I selected <strong>Markdown (Deep Black)</strong> and saw a properly
+formatted Markdown document:</p>
+<p><img alt="image" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-14_NotepadPlusPlus_Markdown_with_Edditoria_ULDs.png"></p>
+<h2>Conclusion</h2>
+<p>This took me a couple of days to resolve, but the results are worth it. For a
+while I was limited to editing .MD Markdown documents in plain old Notepad,
+which was a real throwback. Now I can edit them directly in Notepad++.</p>
     </div><!-- /.entry-content -->
 
   </article>
