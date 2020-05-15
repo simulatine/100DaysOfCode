@@ -44,27 +44,27 @@ configuration file in the Pelican root folder.</p>
 <p>The default template used by Pelican displays some standard links at the bottom
 of each page. I changed this to be a list of sites relevant to my site's theme
 using the <code>LINKS</code> parameter in the pelicanconf.py configuration file:</p>
-<div class="highlight"><pre><span></span><code>LINKS = ((&#39;Python&#39;, &#39;https://python.org/&#39;),
-         (&#39;Pygame&#39;, &#39;https://www.pygame.org/docs/&#39;),
-         (&#39;100DaysOfCode&#39;, &#39;https://www.100daysofcode.com/&#39;),)
+<div class="highlight"><pre><span></span><code><span class="err">LINKS = ((&#39;Python&#39;, &#39;https://python.org/&#39;),</span>
+<span class="err">         (&#39;Pygame&#39;, &#39;https://www.pygame.org/docs/&#39;),</span>
+<span class="err">         (&#39;100DaysOfCode&#39;, &#39;https://www.100daysofcode.com/&#39;),)</span>
 </code></pre></div>
 
 
 <p>I also added a short list of my social website links via the <code>SOCIAL</code> option:</p>
-<div class="highlight"><pre><span></span><code>SOCIAL = ((&#39;Twitter&#39;, &#39;https://twitter.com/simulatine&#39;),
-          (&#39;GitHub&#39;, &#39;https://github.com/simulatine/100DaysOfCode&#39;),)
+<div class="highlight"><pre><span></span><code><span class="err">SOCIAL = ((&#39;Twitter&#39;, &#39;https://twitter.com/simulatine&#39;),</span>
+<span class="err">          (&#39;GitHub&#39;, &#39;https://github.com/simulatine/100DaysOfCode&#39;),)</span>
 </code></pre></div>
 
 
 <h1>Adding Images</h1>
 <p>To show images in my website, I need to add a subfolder in my content folder to
 contain the images:</p>
-<div class="highlight"><pre><span></span><code>C:\&gt; mkdir C:\Users\Simulatine\Documents\Scripts\Git\100DaysOfCode\web\content\images
+<div class="highlight"><pre><span></span><code><span class="c">C:\&gt; mkdir C:\Users\Simulatine\Documents\Scripts\Git\100DaysOfCode\web\content\images</span>
 </code></pre></div>
 
 
 <p>I also need to include this folder in the <code>STATIC_PATHS</code> parameter</p>
-<div class="highlight"><pre><span></span><code>STATIC_PATHS = [&#39;images&#39;]
+<div class="highlight"><pre><span></span><code><span class="err">STATIC_PATHS = [&#39;images&#39;]</span>
 </code></pre></div>
 
 
@@ -72,36 +72,36 @@ contain the images:</p>
 <code>pelican content</code> to copy these into the output folder.</p>
 <p>I can then link to these in my Markdown source using the standard Markdown link
 convention:</p>
-<div class="highlight"><pre><span></span><code>![Image Name]({static}/path/to/image.png)
+<div class="highlight"><pre><span></span><code><span class="o">!</span><span class="p">[</span><span class="n">Image</span> <span class="n">Name</span><span class="p">]({</span><span class="k">static</span><span class="p">}</span><span class="o">/</span><span class="n">path</span><span class="o">/</span><span class="n">to</span><span class="o">/</span><span class="n">image</span><span class="p">.</span><span class="n">png</span><span class="p">)</span>
 </code></pre></div>
 
 
-<p><strong>Note:</strong> the <code>{static}</code> tag is required before the path to the image file.
-This is <strong>not</strong> standard Markdown and caught me out for some time before I got
-used to it. The is explained in more detail at:</p>
+<p>Note the <em>{static}</em> tag is required before the link to the image file - this
+is non-standard Markdown and caught me out for some time before I got used to
+it. The is explained in more detail at:</p>
 <p>https://docs.getpelican.com/en/4.2.0/content.html#linking-to-static-files</p>
 <h1>Favicon</h1>
 <p>Adding a Favicon, which appears in the browser tab, was simple. I created an
 <code>extras</code> subfolder in my content folder, and copied the favicon.ico file to
 that folder.</p>
-<div class="highlight"><pre><span></span><code>C:\&gt; mkdir C:\Users\Simulatine\Documents\Scripts\Git\100DaysOfCode\web\content\extras
+<div class="highlight"><pre><span></span><code><span class="c">C:\&gt; mkdir C:\Users\Simulatine\Documents\Scripts\Git\100DaysOfCode\web\content\extras</span>
 </code></pre></div>
 
 
 <p>I made sure that the new extras folder was in my STATIC_PATHS parameter in <code>pelicanconf.py</code></p>
-<div class="highlight"><pre><span></span><code>STATIC_PATHS = [&#39;images&#39;, &#39;extras&#39;]
+<div class="highlight"><pre><span></span><code><span class="err">STATIC_PATHS = [&#39;images&#39;, &#39;extras&#39;]</span>
 </code></pre></div>
 
 
 <p>I also included the following in pelicanconf.py, to ensure that the ICO file
 was copied properly to the root of the output folder.</p>
-<div class="highlight"><pre><span></span><code>EXTRA_PATH_METADATA = {
-    &#39;extras/favicon.ico&#39;: {&#39;path&#39;: &#39;favicon.ico&#39;},
-}
+<div class="highlight"><pre><span></span><code><span class="err">EXTRA_PATH_METADATA = {</span>
+<span class="err">    &#39;extras/favicon.ico&#39;: {&#39;path&#39;: &#39;favicon.ico&#39;},</span>
+<span class="err">}</span>
 </code></pre></div>
 
 
-<p>Note: This only worked for .ico files. I originally tried with a PNG image file
+<p>Note: This only worked for ICO files. I originally tried with a PNG image file
 called favicon.png. PNG files are a valid W3C format for Favicons, but it seems
 that Pelican doesn't know that. The PNG file was copied to the output folder
 when I ran <code>pelican content</code>, but the Pelican web server didn't look for it.</p>
@@ -115,14 +115,14 @@ needed to change another paramter in <code>pelicanconf.py</code>. The issue log 
 <code>MD_EXTENSIONS</code>, but that appears to be out of date. In the current 4.2.0
 version of Pelican the parameter I needed to change was <code>MARKDOWN</code>,
 setting <code>guess_lang</code> to <code>False</code>.</p>
-<div class="highlight"><pre><span></span><code>MARKDOWN = {
-    &#39;extension_configs&#39;: {
-        &#39;markdown.extensions.codehilite&#39;: {&#39;css_class&#39;: &#39;highlight&#39;, &#39;guess_lang&#39;:False,},
-        &#39;markdown.extensions.extra&#39;: {},
-        &#39;markdown.extensions.meta&#39;: {},
-    },
-    &#39;output_format&#39;: &#39;html5&#39;,
-}
+<div class="highlight"><pre><span></span><code><span class="err">MARKDOWN = {</span>
+<span class="err">    &#39;extension_configs&#39;: {</span>
+<span class="err">        &#39;markdown.extensions.codehilite&#39;: {&#39;css_class&#39;: &#39;highlight&#39;, &#39;guess_lang&#39;:False,},</span>
+<span class="err">        &#39;markdown.extensions.extra&#39;: {},</span>
+<span class="err">        &#39;markdown.extensions.meta&#39;: {},</span>
+<span class="err">    },</span>
+<span class="err">    &#39;output_format&#39;: &#39;html5&#39;,</span>
+<span class="err">}</span>
 </code></pre></div>
 
 
@@ -130,9 +130,9 @@ setting <code>guess_lang</code> to <code>False</code>.</p>
 <p>I found it useful to create a short three line Windows batch file <code>update.cmd</code>
 to update the website output, refresh the repository branch with the latest
 contents, and publish it to GitHub:</p>
-<div class="highlight"><pre><span></span><code>pelican content
-ghp-import output
-git push origin gh-pages
+<div class="highlight"><pre><span></span><code><span class="n">pelican</span> <span class="n">content</span>
+<span class="n">ghp</span><span class="o">-</span><span class="kn">import</span> <span class="nn">output</span>
+<span class="n">git</span> <span class="n">push</span> <span class="n">origin</span> <span class="n">gh</span><span class="o">-</span><span class="n">pages</span>
 </code></pre></div>
 
 
