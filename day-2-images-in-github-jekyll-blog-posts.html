@@ -45,21 +45,21 @@
 <p><em>10 May 2020: Since writing this post, I have moved from Jekyll to a Python based site generator tool called Pelican, so the links below may display differently than they did before.</em></p>
 <h1>Broken Images</h1>
 <p>I was able to display an image easily enough from a standard page in the root of my website with a Markdown image link:</p>
-<div class="highlight"><pre><span></span><code>![Screenshot](images/image1.png &quot;Screenshot&quot;)
+<div class="highlight"><pre><span></span><code><span class="err">!</span><span class="o">[</span><span class="n">Screenshot</span><span class="o">]</span><span class="p">(</span><span class="n">images</span><span class="o">/</span><span class="n">image1</span><span class="p">.</span><span class="n">png</span><span class="w"> </span><span class="ss">&quot;Screenshot&quot;</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 
 <p>But the same link format wasn't displaying properly in my blog post:</p>
 <p><img alt="Screenshot" src="immages/image1.png" title="Screenshot"></p>
 <p>OK, so blog post files are in a different folder <code>_posts</code>.  Maybe I need to use a rooted path:</p>
-<div class="highlight"><pre><span></span><code>![Screenshot](/images/image1.png &quot;Screenshot&quot;)
+<div class="highlight"><pre><span></span><code><span class="err">!</span><span class="o">[</span><span class="n">Screenshot</span><span class="o">]</span><span class="p">(</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">image1</span><span class="p">.</span><span class="n">png</span><span class="w"> </span><span class="ss">&quot;Screenshot&quot;</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 
 <p>which displayed</p>
 <p><img alt="Screenshot" src="/images/image1.png" title="Screenshot"></p>
 <p>Hmm, this didn't work either - it seems that the <code>/images</code> directory that GitHub sees is not the same as the one I created. Neither did assuming the website root was one level up, at the root of the entire repository:</p>
-<div class="highlight"><pre><span></span><code>![Screenshot](/docs/images/image1.png &quot;Screenshot&quot;)
+<div class="highlight"><pre><span></span><code><span class="err">!</span><span class="o">[</span><span class="n">Screenshot</span><span class="o">]</span><span class="p">(</span><span class="o">/</span><span class="n">docs</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">image1</span><span class="p">.</span><span class="n">png</span><span class="w"> </span><span class="ss">&quot;Screenshot&quot;</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 
@@ -69,7 +69,7 @@
 <p>After some investigation, I paid attention to the blog post URL in my brower's address bar, and realised my post is buried three levels down in a virtual folder hierarchy, with the year, month and date all represented by folders:</p>
 <p>https://simulatine.github.io/100DaysOfCode/2020/05/08/Struggling-With-GitHub-Pages.html</p>
 <p>Aha! Maybe a relative path would work. I would need to go three levels up from my post's URL to get back to the root of the website, so would need <code>../</code> three times:</p>
-<div class="highlight"><pre><span></span><code>![Screenshot](../../../images/image1.png &quot;Screenshot&quot;)
+<div class="highlight"><pre><span></span><code><span class="err">!</span><span class="o">[</span><span class="n">Screenshot</span><span class="o">]</span><span class="p">(..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="p">..</span><span class="o">/</span><span class="n">images</span><span class="o">/</span><span class="n">image1</span><span class="p">.</span><span class="n">png</span><span class="w"> </span><span class="ss">&quot;Screenshot&quot;</span><span class="p">)</span><span class="w"></span>
 </code></pre></div>
 
 
