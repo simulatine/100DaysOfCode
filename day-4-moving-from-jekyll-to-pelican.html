@@ -48,7 +48,7 @@ fully fledged website. But Pelican is Python based, which feels a lot more
 natural to me.</p>
 <h1>Installing Pelican</h1>
 <p>I started by installing the pelican and markdown libraries:</p>
-<div class="highlight"><pre><span></span><code>pip install pelican markdown
+<div class="highlight"><pre><span></span><code>C:\&gt; pip install pelican markdown
 </code></pre></div>
 
 
@@ -177,13 +177,13 @@ Done: Processed 1 article, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages i
 expecting possibly a single HTML file, but it actually created a significant
 amount of boilerplate output. I was able to view a local copy of the website
 by launching the pelican built-in web server</p>
-<div class="highlight"><pre><span></span><code>pelican --listen
+<div class="highlight"><pre><span></span><code>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; pelican --listen
 </code></pre></div>
 
 
 <p>Once this was running, I could preview the site by navigating to the URL
 http://localhost:8000/ on my local browser:</p>
-<p><img alt="Pelican Initial Screenshot" src="/images/Pelican_Initial_Screenshot.png"></p>
+<p><img alt="Pelican Initial Screenshot" src="https://simulatine.github.io/100DaysOfCode/images/Pelican_Initial_Screenshot.png"></p>
 <p>Excellent! I like how this appears, and it took maybe 20-30 minutes to get this
 up and running.</p>
 <h1>Publish to GitHub Pages</h1>
@@ -196,9 +196,9 @@ GitHub Pages site.</p>
 </code></pre></div>
 
 
-<p>I created a local <code>gh-pages</code> branch with the content of the <code>output</code> folder. 
-If the branch already exists, this command updates it with the latest files in
-<code>output</code></p>
+<p>I used ghp-import to create a local <code>gh-pages</code> branch with the content of the
+<code>output</code> folder. If the branch already exists, this command will update the
+branch with the latest files in <code>output</code>.</p>
 <div class="highlight"><pre><span></span><code>C:\Users\Simulatine\Documents\Git\100DaysOfCode\web&gt; ghp-import output
 </code></pre></div>
 
