@@ -39,72 +39,69 @@
 
 </footer><!-- /.post-info -->      <h1>A Look At ShareX</h1>
 <p>Today I decided to learn more about the screenshot utility
-<a href="https://getsharex.com/">ShareX</a>. I installed ShareX on my laptop some time
-ago, but never really bothered to explore its features and configure it in more
-detail.</p>
+<a href="https://getsharex.com/">ShareX</a>. I installed this tool on my laptop more than
+a year ago, but never really bothered to explore its features and configure it
+in more detail until now.</p>
 <p>ShareX's power lies in its customizable workflow. It not only takes
-screenshots, it can then automatically edit, save and process them in a wide
+screenshots - it can then automatically edit, save and process them in a wide
 variety of ways.</p>
-<p>Lets look at what is possible.</p>
-<h1>A Look At ShareX</h1>
+<p>Lets look at what's possible.</p>
+<h1>The Power of ShareX</h1>
 <p><img alt="ShareX Main Screen" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_Main_Screen.png"></p>
-<p>ShareX allows you to configure a screen capture workflow, using tasks such as:</p>
+<p>ShareX allows me to configure a screen capture workflow, using tasks
+including:</p>
 <ul>
 <li>Capture: capture the full screen, a window, or a small region. You can also
 take video recordings of screen activity and even use OCR to capture text.</li>
 <li>After capture tasks: add a watermark or image effects to the captured image,
 edit it, print it or save it to the clipboard for pasting it directly into a
 document.</li>
-<li>Upload: upload the image to a wide variety of websites such as Dropbox,
-Twitter and Imgur.</li>
+<li>Upload: Automatically upload the image to a wide variety of websites
+including Dropbox, Twitter and Imgur.</li>
 <li>After upload tasks: The most useful task in this section is the ability to
 copy the image URL to the clipboard, so you can paste it into an online post or
 a web site update.</li>
 </ul>
-<p>The default configuration of each task can be configured in the Task Settings
-menu.</p>
-<p>You can configure multiple workflows, each with a different combination of
-tasks. Each workflow can be easily triggered with a Hotkey.</p>
+<p>Each task can be configured in a variety of ways, and I can configure multiple
+workflows, each with a different combination of tasks. Each workflow can be
+easily triggered with a Hotkey.</p>
 <h2>Configuring ShareX</h2>
-<p>Before I used ShareX, I customised it to my liking. With any utility or
-application, there are always a few default settings that I just disagree with.</p>
-<h3>Default Settings</h3>
-<p>Lets first change some application wide defaults. These will modify all
-workflows.</p>
+<p>With any utility or application, there are always a few default settings that I
+just disagree with. After playing for a while, I ended up changing the
+following settings.</p>
 <h3>Screenshots folder</h3>
 <p>ShareX normally saves data to a folder <code>%UserProfile%\Documents\ShareX</code>. I
-don't mind it saving log files and workflow settings to that location, but I
-would prefer screenshots to be saved to Pictures, specifically to the
-<code>%UserProfile\Pictures\Screenshots</code> folder used by Windows itself. That makes
-screenshot images easier to find from other applications.</p>
+don't mind saving log files and workflow settings to that location, but I
+would prefer screenshots to be saved to the standard Pictures folder,
+specifically to the <code>%UserProfile\Pictures\Screenshots</code> folder used by Windows
+itself. That makes screenshot images easier to find from other applications.</p>
 <p>I configured this by going to <strong>Paths</strong> tab in <strong>Application settings</strong>. I
-enabled the "Use custom screenshots folder" checkbox and entered my Picture
-folder:
-C:\Users\Simulatine\Pictures\Screenshots</p>
+enabled the <em>Use custom screenshots folder</em> checkbox and entered my Picture
+folder <code>C:\Users\Simulatine\Pictures\Screenshots</code>.</p>
 <p>ScreenX also creates subfolders for each year and month. I disabled this, so
-that all screenshots are saved to the same folder, by removing the <code>%y-%mo</code>
-pattern from the Sub folder pattern box.</p>
+that all screenshots are saved directly to the Screenshots folder, by removing
+the <code>%y-%mo</code> pattern from the <em>Sub folder pattern</em> box.</p>
 <p><img alt="ShareX App Settings" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_App_Settings_Paths_Dialog.png"></p>
 <h3>Filenames</h3>
 <p>I also changed the default filename pattern. ScreenX saves the screenshot with
 a random 10 character filename, such as <code>q3TYN22tO2.png</code>. I didn't want this!
 Instead, I preferred the default filename to reflect the current date and time.
 I can always override this default in individual workflows by enabling the 
-<strong>Save image to file as...</strong> task, which will allow me to specify the filename
-after each capture.</p>
+<strong>Save image to file as...</strong> task, which will allow me to specify a unique 
+filename after each capture.</p>
 <p>To configure the filename, I went to the <strong>Upload\File naming </strong> tab in
 <strong>Task Settings</strong>. </p>
-<p>In the "Name pattern for capture or clipboard upload" box, I entered
+<p>In <em>Name pattern for capture or clipboard upload</em>, I entered
 <code>%y-%mo-%d_%h.%mi.%s</code>. This ensured that screenshots are saved with a filename
 using the current date and time, such as <code>2020-05-15_19.15.00.png</code>.</p>
-<p>Similarly, I changed the "Name pattern for window capture" to
-<code>%pn_%y-%mo-%d_%h.%mi.%s</code>. When I capture a specific appliation window, the
+<p>Similarly, I changed <em>Name pattern for window capture</em> to
+<code>%pn_%y-%mo-%d_%h.%mi.%s</code>. When I capture a specific application window, the
 application name is now included in the filename, for example
 <code>chrome_2020-05-15_19.15.00.png</code></p>
 <p><img alt="ShareX Task Settings" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_Task_Settings_File_Naming_Dialog.png"></p>
 <h2>Image Effects</h2>
-<p>One of the powerful features of ShareX is its ability to process the image
-before saving it. I created two image effects which I can enable or disable
+<p>One of the powerful features of ShareX is its ability to process the screenshot
+image before saving it. I created two image effects which I can enable or disable
 in my workflows.</p>
 <h3>Image Resizing</h3>
 <p>I first wanted to include the ability to resize my screenshot captures.
@@ -115,7 +112,8 @@ HTMl.</p>
 pixels in width.</p>
 <p>To configure this effect, I went to the <strong>Image\Effects</strong> tab in
 <strong>Task Settings</strong>, and clicked on the <strong>Image Effects configuration</strong> button.</p>
-<p>I clicked on Add, and from the Manipulations submenu, selected the Resize
+<p><img alt="ShareX Image Effects" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_Task_Settings_Effects_Dialog.png"></p>
+<p>I clicked on <em>Add</em>, and from the <em>Manipulations</em> submenu, selected the <em>Resize</em>
 effect. I set the Width to 400, and the Height to 0.</p>
 <p><img alt="ShareX Image Effects" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_Image_Effects_Resize_Dialog.png"></p>
 <h3>Drop Shadows</h3>
@@ -123,31 +121,31 @@ effect. I set the Width to 400, and the Height to 0.</p>
 the screen.</p>
 <p>Again, in the <strong>Image\Effects</strong> tab in <strong>Task Settings</strong>, I opened Image
 effects configuration.</p>
-<p>I clicked on Add, and from the Filter submenu, selected the Shadow effect. I
-changed the size from 10 to 30 to increase the effect, and also set the offset
-to 10 pixels in both the X and Y directions.</p>
-<p>Finally, I ensured that this was the only enabled image effect and clicked on
-Close.</p>
+<p>I clicked on <em>Add</em>, and this time from the <em>Filter</em> submenu, selected the
+<em>Shadow</em> effect. I changed the size from 10 to 30 to increase the effect, and
+also set the offset to 10 pixels in both the X and Y directions.</p>
 <p><img alt="ShareX Image Effects" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_Image_Effects_Shadow_Dialog.png"></p>
 <h2>Configuring a Workflow</h2>
-<p>I can now bring several of these settings together into a single workflow. The
-workflow I most commonly use is Capture Region, which allows me to capture an
-entire window or application, or a portion of one. This is configured to use
-the <strong>Ctrl+Print Screen</strong> hotkey.</p>
+<p>I could now bring several of these settings together into a single workflow.
+The workflow I most commonly use is <em>Capture Region</em>, which allows me to
+capture an entire window or application, or a portion of one. This is
+configured to use the <strong>Ctrl+Print Screen</strong> hotkey.</p>
 <p>I went to <strong>Hotkey settings</strong>, where there were several pre-configured
 workflows. I clicked the gear icon to the left of Capture Region to configure
 this workflow.</p>
 <p><img alt="ShareX Hotkey Settings" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_Hotkey_Settings_Dialog.png"></p>
-<p>I enabled Override after capture settings, and checked the following four
-tasks:</p>
+<p>In the <em>Task tab</em>, I enabled <em>Override after capture settings</em>, and checked the
+following four tasks:</p>
 <ul>
-<li>Add image effects/watermark - this will resize the image to a maximum of 750
-pixels wide and add the drop shadow effect I configured above.</li>
-<li>Open in image editor - allowing me to annotate the image, add arrows or
+<li><em>Add image effects/watermark</em> - this will resize the capture screenshot image
+to a maximum of 750 pixels wide and add the drop shadow effect - the two
+image effects I configured above.</li>
+<li><em>Open in image editor</em> - allowing me to annotate the image, add arrows or
 highlight specific areas of interest.</li>
-<li>Save image to file as - so that I can give the file a proper name and save it
-to a target folder of my choice.</li>
-<li>Copy file path to clipboard - ready for me to paste into my Markdown document.</li>
+<li><em>Save image to file as ...</em> - so that I can give the file a proper name and
+save it to a target folder of my choice.</li>
+<li><em>Copy file path to clipboard</em> - ready for me to paste into my Markdown
+blog post document.</li>
 </ul>
 <p><img alt="ShareX Task Override Menu" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-15_ShareX_Task_Override_Menu.png"></p>
 <h2>Using the Workflow</h2>
@@ -163,21 +161,24 @@ or other highlights. Once I am happy, I can click the green check mark to save
 the screenshot.</p>
 <p>This opens a save dialog, where I can rename the image and save it to my
 website image folder. Finally, Sharex copies the file location to the
-clipboard, ready for me to paste into a blog Markdown document.</p>
+clipboard, ready for me to paste directly into an image link in my blog
+Markdown document:</p>
 <div class="highlight"><pre><span></span><code>![Image]({static}C:\Users\Simulatine\Documents\web\assets\2020-05-15_test.png)
 </code></pre></div>
 
 
-<p>This contains the full path, so I will need to adjust it slightly for web use:</p>
+<p>The file location contains the full path, so I will need to adjust it slightly
+for web use:</p>
 <div class="highlight"><pre><span></span><code>![Image]({static}\assets\2020-05-15_test.png)
 </code></pre></div>
 
 
 <h2>Conclusion</h2>
-<p>Learning more about the power of ShareX has really helped me streamline
-my screen capture and blogging workflow.</p>
-<p>Thanks to the [steemit tutorial(https://steemit.com/utopian-io/@aleister/tutorial-how-to-use-sharex-screen-capture-file-sharing-and-productivity-tool)
-and to a similar blog post on <a href="https://www.jerriepelser.com/blog/using-sharex-for-blogging-screenshots/">Jerrie Pelser.com</a>,
+<p>Learning more about the power of ShareX has really helped me streamline my
+screen capture and blogging workflow.</p>
+<p>Thanks to a <a href="https://steemit.com/utopian-io/@aleister/tutorial-how-to-use-sharex-screen-capture-file-sharing-and-productivity-tool">ScreenX tutorial</a>
+on Steemit.com and to a similar blog post on
+<a href="https://www.jerriepelser.com/blog/using-sharex-for-blogging-screenshots/">Jerrie Pelser.com</a>,
 both of which I found very useful.</p>
     </div><!-- /.entry-content -->
 
