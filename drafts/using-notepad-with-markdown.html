@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Using Notepad++ with Markdown</title>
+        <link rel="stylesheet" href="https://simulatine.github.io/100DaysOfCode/theme/css/main.css" />
+</head>
+
+<body id="index" class="home">
+<a href="https://github.com/simulatine/100DaysOfCode">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+</a>
+        <header id="banner" class="body">
+                <h1><a href="https://simulatine.github.io/100DaysOfCode/">Simulatine's 100 Days of Code Blog <strong>Learning and having fun with code</strong></a></h1>
+                <nav><ul>
+                    <li><a href="https://simulatine.github.io/100DaysOfCode/pages/about-this-site.html">About This Site</a></li>
+                    <li class="active"><a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://simulatine.github.io/100DaysOfCode/drafts/using-notepad-with-markdown.html" rel="bookmark"
+           title="Permalink to Using Notepad++ with Markdown">Using Notepad++ with Markdown</a></h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="Simulatine">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2020-05-15T00:00:00+01:00">
+                Published: Friday, 15 May 2020
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://simulatine.github.io/100DaysOfCode/author/simulatine.html">Simulatine</a>
+        </address>
+<p>In <a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a>.</p>
+
+</footer><!-- /.post-info -->      <h1>Notepad++ and Markdown</h1>
+<p>For years, I have used <a href="">Notepad++</a> as my primary Windows text editor. It is
+well suported, and provides good syntax highlighting for Python and many other
+languages. </p>
+<p>Notepad++ provides a variety of themes, which change the default colour and
+fonts. I prefer a dark style, and use the "Deep black" theme, which works well
+with plain text and most languages, such as Python:</p>
+<p><img alt="image" src="https://simulatine.github.io/100DaysOfCode/images/NotepadPlusPlus_Python_with_deep_black_theme.png"></p>
+<p>The default syntax highlighting for Markdown documents is designed for
+light background themes:</p>
+<p><img alt="image" src="https://simulatine.github.io/100DaysOfCode/images/NotepadPlusPlus-Markdown_with_light_theme.png"></p>
+<p>But with a dark theme, it looks terrible and is impossible to edit:</p>
+<p><img alt="image" src="https://simulatine.github.io/100DaysOfCode/images/NotepadPlusPlus_Markdown_with_dark_theme.png"></p>
+<h1>Solution</h1>
+<p>After some research, I found a Github repository that contained updated dark
+themes specifically designed for editing Markdown documents.
+https://github.com/Edditoria/markdown-plus-plus</p>
+<p>To install this, I downloaded the latest
+<a href="https://github.com/Edditoria/markdown-plus-plus/archive/v3.1.0.zip">zip file</a>,
+and extracted the contents. The zip file UDL folder contained a number of .XML
+files, providing markdown syntax highlighting for each Notepad++ colour
+theme.</p>
+<div class="highlight"><pre><span></span><code>markdown.bespin.udl.xml
+markdown.blackboard.udl.xml
+markdown.deep-black.udl.xml
+markdown.default.udl.xml
+markdown.obsidian.udl.xml
+markdown.solarized-light.udl.xml
+markdown.solarized.udl.xml
+markdown.zenburn.udl.xml
+</code></pre></div>
+
+
+<p>I copied the XML files to the <code>%AppData%\Notepad++\userDefineLangs</code> folder,
+overwriting any existing XML files.</p>
+<p>I then restarted Notepad++ and open the source file for this page:</p>
+<p><img alt="image" src="https://simulatine.github.io/100DaysOfCode/images/NotepadPlusPlus_Markdown_with_Edditoria_ULDs.png"></p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="https://python.org/">Python</a></li>
+                            <li><a href="https://www.pygame.org/docs/">Pygame</a></li>
+                            <li><a href="https://www.100daysofcode.com/">100DaysOfCode</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://twitter.com/simulatine">Twitter</a></li>
+                            <li><a href="https://github.com/simulatine/100DaysOfCode">GitHub</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
