@@ -73,26 +73,29 @@ Amazon. I used my browser's save function (Ctrl+S) to save the page.</p>
 bottom and click <em>Show More</em> to get the second page of results. I also saved
 this second page, so I now had two HTML files on my local disk:</p>
 <ul>
-<li>Amazon_Content_Page_1.html</li>
-<li>Amazon_Content_Page_2.html</li>
+<li><code>Amazon_Content_Page_1.html</code></li>
+<li><code>Amazon_Content_Page_2.html</code></li>
 </ul>
 <h2>Beautifulsoup</h2>
 <p>To parse the HTML files I used a popular Python library called
 <a href="https://www.crummy.com/software/BeautifulSoup/">beautifulsoup</a>.</p>
-<p>Beautful Soup has the ability to turn <a href="https://en.wikipedia.org/wiki/Tag_soup">tag soup</a>
-into beautiful Python objects. OK, so it has a weird name, but it is very powerful. Like all powerful software
-tools, it takes some learning and experimentation to get the most out of it.</p>
-<p>First of all, lets install the library</p>
+<p>I assume it was given that name as it has the ability to turn
+<a href="https://en.wikipedia.org/wiki/Tag_soup">tag soup</a>
+into a beautiful Python object based tree structure. OK, so it has a weird
+name, but it is very powerful. Like all powerful software tools, it takes some
+learning and experimentation to get the most out of it.</p>
+<p>First of all, I installed the library</p>
 <div class="highlight"><pre><span></span><code>pip install beautifulsoup4
 </code></pre></div>
 
 
-<p>Then, at the start of our script, we will need to import items</p>
-<div class="highlight"><pre><span></span><code>pip install bs4
+<p>Then, at the start of my script, I had to import it</p>
+<div class="highlight"><pre><span></span><code>install bs4
 </code></pre></div>
 
 
 <h2>Writing the code</h2>
+<p>First, I created a function and initiated a number of variables</p>
 <div class="highlight"><pre><span></span><code>def get_amazon_books():
     &quot;&quot;&quot;Get the list of books and authors from my Amazon content library.&quot;&quot;&quot;
     titles = []
@@ -101,8 +104,12 @@ tools, it takes some learning and experimentation to get the most out of it.</p>
     num_books = 0
     num_authors = 0
     num_purchase_dates = 0
+</code></pre></div>
 
-    # List of Amazon My Kindle Content pages which have been saved to local disk
+
+<p>I then created a loop to go through each of the "My Content" pages which I had
+previously downloaded to my local disk.</p>
+<div class="highlight"><pre><span></span><code>    # List of Amazon My Kindle Content HTML files
     AMAZON_CONTENT_PAGES = [
     &quot;Amazon_Content_Page_1.html&quot;,
     &quot;Amazon_Content_Page_2.html&quot;,
@@ -110,13 +117,31 @@ tools, it takes some learning and experimentation to get the most out of it.</p>
 
     print(&quot;Getting Amazon data&quot;)
     for source in ebooksconf.AMAZON_CONTENT_PAGES:
-        # I found it necessary to force the encoding to &#39;utf-8&#39;
-        # Leaving this out caused issues with some book titles
-        with open(source, encoding=&quot;utf-8&quot;) as html_file:
+</code></pre></div>
+
+
+<p>Inside the loop, I opened each HTML file and used BeautifulSoup to parse it.
+When opening the HTML file, I found it necessary to force the encoding to
+Unicode. Otherwise, I had issues reading some book titles and author names
+with Unicode characters.</p>
+<div class="highlight"><pre><span></span><code>        with open(source, encoding=&quot;utf-8&quot;) as html_file:
             html_content = html_file.read()
             soup = bs4.BeautifulSoup(html_content, &quot;html.parser&quot;)
+</code></pre></div>
 
-            # Get the list of books
+
+<p>Now came the hard part. I had to experiment quite a bit to determine how best
+to extract the data I wanted. After reviewing the source HTML data, I noticed
+that it used the identifier <code>bo-text</code> inside <code>&lt;div&gt;</code> statements to identify the
+title, author and purchase date:</p>
+<div class="highlight"><pre><span></span><code>&lt;div class=&quot;myx-column&quot; bo-text=&quot;tab.title&quot; title=&quot;1984&quot;&gt;1984&lt;/div&gt;
+&lt;div class=&quot;myx-column&quot; bo-text=&quot;tab.author&quot; title=&quot;George Orwell&quot;&gt;George Orwell&lt;/div&gt;
+</code></pre></div>
+
+
+<p><em>(I removed extraneous CSS from the above text to show the key attributes)</em></p>
+<p>This allowed me to search for that attribute, and extract the data I needed:</p>
+<div class="highlight"><pre><span></span><code>            # Get the list of books
             for div in soup.find_all(&quot;div&quot;, attrs={&quot;bo-text&quot;: &quot;tab.title&quot;}):
                 titles.append(str(div.string))
                 num_books += 1
@@ -127,21 +152,21 @@ tools, it takes some learning and experimentation to get the most out of it.</p>
                 num_authors += 1
 
             # Get the list of purchase dates
-            for div in soup.find_all(
-                &quot;div&quot;, attrs={&quot;bo-text&quot;: &quot;tab.purchaseDate&quot;}
-            ):
+            for div in soup.find_all(&quot;div&quot;, attrs={&quot;bo-text&quot;: &quot;tab.purchaseDate&quot;}):
                 purchase_dates.append(div.string)
                 num_purchase_dates += 1
+</code></pre></div>
 
-    # Create a dictionary keyed on the book title
-    counter = 0
+
+<p>As I did for my Calibre and Airtable functions, I created a dictionary keyed
+off the ebook title to store the data:</p>
+<div class="highlight"><pre><span></span><code>    # Create a dictionary keyed on the book title
     books = {}
     for title in titles:
         # The dictionary value is a list containing the author&#39;s name
         books[title] = {}
         books[title][&quot;Authors&quot;] = authors[counter]
         books[title][&quot;Purchase Date&quot;] = purchase_dates[counter]
-        counter += 1
     print(&quot;Got {} books from Amazon&quot;.format(len(books)))
     return books
 </code></pre></div>
