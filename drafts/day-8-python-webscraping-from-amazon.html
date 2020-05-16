@@ -68,6 +68,7 @@ hassle of Amazon's login API.</p>
 <a href="https://www.amazon.com/mycd/myx">Manage your Content and Devices</a>
 link. This gives me a list of all the digital books I had ever bought from
 Amazon. I used my browser's save function (Ctrl+S) to save the page.</p>
+<p><img alt="Amazon Manage Your Contents" src="https://simulatine.github.io/100DaysOfCode/2020-05-14_Amazon_Manage_Your_Contents_Screenshot"></p>
 <p>I found that the page was limited to 200 items, so I had to scroll down to the
 bottom and click <em>Show More</em> to get the second page of results. I also saved
 this second page, so I now had two HTML files on my local disk:</p>
@@ -75,6 +76,22 @@ this second page, so I now had two HTML files on my local disk:</p>
 <li>Amazon_Content_Page_1.html</li>
 <li>Amazon_Content_Page_2.html</li>
 </ul>
+<h2>Beautifulsoup</h2>
+<p>To parse the HTML files I used a popular Python library called
+<a href="https://www.crummy.com/software/BeautifulSoup/">beautifulsoup</a>.</p>
+<p>Beautful Soup has the ability to turn <a href="https://en.wikipedia.org/wiki/Tag_soup">tag soup</a>
+into beautiful Python objects. OK, so it has a weird name, but it is very powerful. Like all powerful software
+tools, it takes some learning and experimentation to get the most out of it.</p>
+<p>First of all, lets install the library</p>
+<div class="highlight"><pre><span></span><code>pip install beautifulsoup4
+</code></pre></div>
+
+
+<p>Then, at the start of our script, we will need to import items</p>
+<div class="highlight"><pre><span></span><code>pip install bs4
+</code></pre></div>
+
+
 <h2>Writing the code</h2>
 <div class="highlight"><pre><span></span><code>def get_amazon_books():
     &quot;&quot;&quot;Get the list of books and authors from my Amazon content library.&quot;&quot;&quot;
@@ -84,6 +101,12 @@ this second page, so I now had two HTML files on my local disk:</p>
     num_books = 0
     num_authors = 0
     num_purchase_dates = 0
+
+    # List of Amazon My Kindle Content pages which have been saved to local disk
+    AMAZON_CONTENT_PAGES = [
+    &quot;Amazon_Content_Page_1.html&quot;,
+    &quot;Amazon_Content_Page_2.html&quot;,
+    ]
 
     print(&quot;Getting Amazon data&quot;)
     for source in ebooksconf.AMAZON_CONTENT_PAGES:
