@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Day 6: Calibre and Python</title>
+        <title>Day 6: Python and Calibre</title>
         <link rel="stylesheet" href="https://simulatine.github.io/100DaysOfCode/theme/css/main.css" />
 </head>
 
@@ -21,8 +21,8 @@
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="https://simulatine.github.io/100DaysOfCode/day-6-calibre-and-python.html" rel="bookmark"
-           title="Permalink to Day 6: Calibre and Python">Day 6: Calibre and Python</a></h1>
+        <a href="https://simulatine.github.io/100DaysOfCode/day-6-python-and-calibre.html" rel="bookmark"
+           title="Permalink to Day 6: Python and Calibre">Day 6: Python and Calibre</a></h1>
 <a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="Simulatine">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
     </header>
 
@@ -46,37 +46,43 @@ simplest form </em>ebook<em>, which is similar to email.</em></p>
 <h2>Calibre</h2>
 <p><img alt="Calibre" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-12_Calibre_eBook_Screenshot.jpg"></p>
 <p><a href="https://calibre-ebook.com/">Calibre</a> is a powerful open source ebook
-manager. It provides the ability to read, stoire and convert ebooks in many
+manager. It provides the ability to read, store and convert ebooks in many
 formats.</p>
 <p>I had most of my ebooks in Calibre, but was missing a few which were scattered
 elsewhere on my laptop's hard disk. I also wanted to check my Calibre library
 against my Amazon purchase history, but didn't want to do this manually.</p>
-<p>I help me achieve this, I wrote a Python function to extract the details of my
+<p>To help me achieve this, I wrote a Python function to extract the details of my
 Calibre library allowing me to easily manipulate and search the data.</p>
 <h2>Calibre and Python</h2>
 <p>Interestingly, Calibre is developed in Python, and actually includes an entire
 embedded copy of the Python interpreter. To access the Calibre library, I
-had to call my program with 
+had to call my script with 
 <a href="https://manual.calibre-ebook.com/generated/en/calibre-debug.html">Calibre in debug mode</a>
-rather than directly with Python:</p>
+:</p>
 <div class="highlight"><pre><span></span><code>calibre-debug &lt;python-script&gt;
 </code></pre></div>
 
 
-<p>The embedded interpreter had access to the standard Python libraries, but not
-to any other modules I had installed wih <code>pip</code>. This meant that my program
+<p>This causes a number of challenges:</p>
+<ol>
+<li>
+<p>The embedded interpreter had access to the standard Python libraries, but
+not to any other modules I had installed wih <code>pip</code>. This meant that my script
 was limited to using standard Python library functions.</p>
+</li>
+<li>
 <p>A further complexity was that the Python interpreter embedded in Calibre,
 at least as of Calibre version 4.15 in May 2020, is the older Python 2,
-specifically Python 2.7.16.</p>
-<p>This meant I couldn't use any Python 3 code, which clashes with most of my
-other Python programs, which I write in the latest version, currently Python
-3.8.3.
-(I actually discovered this when trying to use the Pathlib module to
-manage the path to my Calibre library - Pathlib is Python 3 only!)</p>
-<p>For these two reasons, I decided to create a standalone program to extract
-the Calibre library and save it to disk. I will leave the searching and
-comparison with Amazon to a separate Python 3 program.</p>
+specifically Python 2.7.16. This meant I couldn't use any Python 3 code, which
+clashes with most of my other Python scripts, where I make considerable use of
+Python 3 features (I actually discovered this problem when trying to use the
+<code>Pathlib</code> module to manage the path to my Calibre library - Pathlib is Python
+3 only!)</p>
+</li>
+</ol>
+<p>For these two reasons, I decided to create a standalone Python 2 script to
+extract the Calibre library and save it to disk. I will leave the searching and
+comparison with Amazon to a separate Python 3 script.</p>
 <h2>Writing the code</h2>
 <p>First, I imported the Calibre API <code>calibre.library</code> and also the Python pretty
 printer module <code>pprint</code>:</p>
@@ -109,11 +115,11 @@ with exactly the same title.</p>
 <p><em>Note: as an exercise for the future, I could improve the error handling here
 using try/except, and using the Python <code>logging</code> module to improve the error
 logging.</em></p>
-<div class="highlight"><pre><span></span><code>    books = {}
-    for book in book_ids:
-        title = calibre_db.field_for(&quot;title&quot;, book)
-        if title in books:
-            print(&quot;ERROR: Duplicate book found for title {}&quot;.format(title))
+<div class="highlight"><pre><span></span><code>books = {}
+for book in book_ids:
+    title = calibre_db.field_for(&quot;title&quot;, book)
+    if title in books:
+        print(&quot;ERROR: Duplicate book found for title {}&quot;.format(title))
 </code></pre></div>
 
 
@@ -135,16 +141,16 @@ print(metadata.standard_field_keys())
 has a lot more details.</p>
 <p>After adding the authors data as a dictionary value, I completed the function
 by returning the entire <code>books</code> dictionary to the caller.</p>
-<div class="highlight"><pre><span></span><code>    books = {}
-    for book in book_ids:
-        title = calibre_db.field_for(&quot;title&quot;, book)
-        if title in books:
-            print(&quot;ERROR: Duplicate book found for title {}&quot;.format(title))
-        else:
-            # The authors field contains a list of zero or more author names
-            authors = calibre_db.field_for(&quot;authors&quot;, book)
-            books[title] = authors
-    return books
+<div class="highlight"><pre><span></span><code>books = {}
+for book in book_ids:
+    title = calibre_db.field_for(&quot;title&quot;, book)
+    if title in books:
+        print(&quot;ERROR: Duplicate book found for title {}&quot;.format(title))
+    else:
+        # The authors field contains a list of zero or more author names
+        authors = calibre_db.field_for(&quot;authors&quot;, book)
+        books[title] = authors
+return books
 </code></pre></div>
 
 
@@ -173,7 +179,7 @@ with open(ebooksconf.JSON_FILE, &quot;w&quot;) as output:
 it to a JSON file. In a later blog post, I will show I can use this data
 to search and compare with other sources. The full source code is in my
 Github repository here:</p>
-<p>https://github.com/simulatine/100DaysOfCode/blob/master/eBooks/get_calibre_library.py</p>
+<p><a href="https://github.com/simulatine/100DaysOfCode/blob/master/eBooks/get_calibre_library.py">https://github.com/simulatine/100DaysOfCode/blob/master/eBooks/get_calibre_library.py</a></p>
 <p>Creating this script taught me about the Calibre API, how to restructure
 data with a Python dictionary, and how to save data with JSON.</p>
     </div><!-- /.entry-content -->
