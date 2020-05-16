@@ -37,23 +37,22 @@
         </address>
 <p>In <a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a>.</p>
 
-</footer><!-- /.post-info -->      <h2>eBooks Library functions</h2>
-<p>I have a growing library of more than 350 digital ebooks. I bought most of them
-from Amazon (particulary from its Kindle Deal of the Day page, which has some
-excellent choices among the dross)</p>
+</footer><!-- /.post-info -->      <h2>Using Python to manage an ebook library</h2>
+<p>I have a growing library of more than 350 digital ebooks. Today I started
+to write some Python code to help me track and search my ebook library.</p>
 <p><em>A short aside on nomenclature: ebook, e-book, eBook or e-Book? It seems there
-is no standard form for the term to describe a digital book. In this article
-I will use the simplest form ebook, whic aligns with email.</em></p>
+is no standard term to describe a digital book. In this article I will use the
+simplest form </em>ebook<em>, which is similar to email.</em></p>
 <h2>Calibre</h2>
 <p><a href="https://calibre-ebook.com/">Calibre</a> is a powerful open source ebook
 manager. It provides the ability to read, stoire and convert ebooks in many
 formats.</p>
-<p><img alt="Calibre" src="https://simulatine.github.io/100DaysOfCode/assets/2020-05-12_Calibre_eBook_Screenshot.jpg"></p>
+<p><img alt="Calibre" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-12_Calibre_eBook_Screenshot.jpg"></p>
 <p>I had most of my ebooks in Calibre, but were missing a few which were scattered
 elsewhere on my laptop's hard disk. I also wanted to check my Calibre library
 against my Amazon purchase history, but didn't want to do this manually.</p>
-<p>I therefore wrote some Python code to extract the details of my Calibre library
-allowing me to easily manipulate and search the data.</p>
+<p>I therefore wrote a Python function to extract the details of my Calibre
+library allowing me to easily manipulate and search the data.</p>
 <h2>Calibre and Python</h2>
 <p>Interestingly, Calibre is developed in Python, and actually includes an entire
 embedded copy of the Python interpreter. To access the Calibre library, I
