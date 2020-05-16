@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Day 8: Python Webscraping from Amazon</title>
+        <link rel="stylesheet" href="https://simulatine.github.io/100DaysOfCode/theme/css/main.css" />
+</head>
+
+<body id="index" class="home">
+<a href="https://github.com/simulatine/100DaysOfCode">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+</a>
+        <header id="banner" class="body">
+                <h1><a href="https://simulatine.github.io/100DaysOfCode/">Simulatine's 100 Days of Code Blog <strong>Learning and having fun with code</strong></a></h1>
+                <nav><ul>
+                    <li><a href="https://simulatine.github.io/100DaysOfCode/pages/about-this-site.html">About This Site</a></li>
+                    <li class="active"><a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://simulatine.github.io/100DaysOfCode/drafts/day-8-python-webscraping-from-amazon.html" rel="bookmark"
+           title="Permalink to Day 8: Python Webscraping from Amazon">Day 8: Python Webscraping from Amazon</a></h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="Simulatine">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2020-05-14T00:00:00+01:00">
+                Published: Thursday, 14 May 2020
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://simulatine.github.io/100DaysOfCode/author/simulatine.html">Simulatine</a>
+        </address>
+<p>In <a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a>.</p>
+
+</footer><!-- /.post-info -->      <h2>Continuing my ebook library management with Python</h2>
+<p>Over the last two days, I worked on some Python functions to extract data
+from the 
+<a href="https://simulatine.github.io/100DaysOfCode/day-6-python-and-calibre.html">Calibre ebook library manager</a>
+and from my
+<a href="https://simulatine.github.io/100DaysOfCode/day-7-python-and-airtable.html">Airtable database</a></p>
+<p>Today I continued to expand my library functions by getting the list
+of my Amazon ebook purchases. This involved learning about webscraping and the
+Python <code>beautifulsoup</code> library.</p>
+<h2>Amazon and Webscraping</h2>
+<p>Webscraping involves reading the content of a web page and extracting useful
+information from it. Amazon deliberately makes this hard as they don't want
+competitors and price comparison sites easily getting information. They do this
+by:</p>
+<ul>
+<li>Using A/B testing (where they randomly present different versions of the same
+page on repeated reads).</li>
+<li>Continuously making small changes to the layout and site contents</li>
+<li>Moving content inside iFrames.</li>
+<li>Using Captcha and similar login related hurdles</li>
+</ul>
+<h3>Downloading my Amazon digital content list</h3>
+<p>With that caveat in mind, I found it easier to download the pages I wanted
+from Amazon's website, and do the page scraping and data extraction on my local
+disk. This meant that I was dealing with fixed web pages, and could repeatedly
+modify and test my code without the page constantly changing, and without the
+hassle of Amazon's login API.</p>
+<p>From the Account link in the top right of the page, I went to the
+<a href="https://www.amazon.com/mycd/myx">Manage your Content and Devices</a>
+link. This gives me a list of all the digital books I had ever bought from
+Amazon. I used my browser's save function (Ctrl+S) to save the page.</p>
+<p>I found that the page was limited to 200 items, so I had to scroll down to the
+bottom and click <em>Show More</em> to get the second page of results. I also saved
+this second page, so I now had two HTML files on my local disk:</p>
+<ul>
+<li>Amazon_Content_Page_1.html</li>
+<li>Amazon_Content_Page_2.html</li>
+</ul>
+<h2>Writing the code</h2>
+<div class="highlight"><pre><span></span><code>def get_amazon_books():
+    &quot;&quot;&quot;Get the list of books and authors from my Amazon content library.&quot;&quot;&quot;
+    titles = []
+    authors = []
+    purchase_dates = []
+    num_books = 0
+    num_authors = 0
+    num_purchase_dates = 0
+
+    print(&quot;Getting Amazon data&quot;)
+    for source in ebooksconf.AMAZON_CONTENT_PAGES:
+        # I found it necessary to force the encoding to &#39;utf-8&#39;
+        # Leaving this out caused issues with some book titles
+        with open(source, encoding=&quot;utf-8&quot;) as html_file:
+            html_content = html_file.read()
+            soup = bs4.BeautifulSoup(html_content, &quot;html.parser&quot;)
+
+            # Get the list of books
+            for div in soup.find_all(&quot;div&quot;, attrs={&quot;bo-text&quot;: &quot;tab.title&quot;}):
+                titles.append(str(div.string))
+                num_books += 1
+
+            # Get the list of authors
+            for div in soup.find_all(&quot;div&quot;, attrs={&quot;bo-text&quot;: &quot;tab.author&quot;}):
+                authors.append(div.string)
+                num_authors += 1
+
+            # Get the list of purchase dates
+            for div in soup.find_all(
+                &quot;div&quot;, attrs={&quot;bo-text&quot;: &quot;tab.purchaseDate&quot;}
+            ):
+                purchase_dates.append(div.string)
+                num_purchase_dates += 1
+
+    # Create a dictionary keyed on the book title
+    counter = 0
+    books = {}
+    for title in titles:
+        # The dictionary value is a list containing the author&#39;s name
+        books[title] = {}
+        books[title][&quot;Authors&quot;] = authors[counter]
+        books[title][&quot;Purchase Date&quot;] = purchase_dates[counter]
+        counter += 1
+    print(&quot;Got {} books from Amazon&quot;.format(len(books)))
+    return books
+</code></pre></div>
+
+
+<p>I can now call this function and display the results with pprint.</p>
+<div class="highlight"><pre><span></span><code>if __name__ == &quot;__main__&quot;:
+    calibre_books = get_airtable_books()
+    pprint.pprint(calibre_books)
+</code></pre></div>
+
+
+<h2>Conclusion</h2>
+<p>Combining
+<a href="https://simulatine.github.io/100DaysOfCode/day-6-python-and-calibre.html">yesterday's</a>
+and today's work, I now have two functions which get data from  Calibre and
+Airtable, and restructures that data into two similar Python dictionaries.</p>
+<p>Today's work taught me about the Airtable API, and how to get data from a
+remote cloud source.</p>
+<p>The full source code for today's work is in my Github repository here:</p>
+<p><a href="https://github.com/simulatine/100DaysOfCode/blob/master/eBooks/ebooks.py">https://github.com/simulatine/100DaysOfCode/blob/master/eBooks/ebooks.py</a></p>
+<p>I will do something similar with Amazon data tomorrow - this will involve
+webscraping, which is an entirely new challenge!</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="https://python.org/">Python</a></li>
+                            <li><a href="https://www.pygame.org/docs/">Pygame</a></li>
+                            <li><a href="https://www.100daysofcode.com/">100DaysOfCode</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://twitter.com/simulatine">Twitter</a></li>
+                            <li><a href="https://github.com/simulatine/100DaysOfCode">GitHub</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
