@@ -63,7 +63,7 @@ had to call my script with
 </code></pre></div>
 
 
-<p>This causes a number of challenges:</p>
+<p>This caused a number of challenges:</p>
 <ol>
 <li>
 <p>The embedded interpreter had access to the standard Python libraries, but
@@ -75,9 +75,9 @@ was limited to using standard Python library functions.</p>
 at least as of Calibre version 4.15 in May 2020, is the older Python 2,
 specifically Python 2.7.16. This meant I couldn't use any Python 3 code, which
 clashes with most of my other Python scripts, where I make considerable use of
-Python 3 features (I actually discovered this problem when trying to use the
-<code>Pathlib</code> module to manage the path to my Calibre library - Pathlib is Python
-3 only!)</p>
+newer Python 3 features (I actually discovered this problem when trying to use
+the <code>Pathlib</code> module to manage the path to my Calibre library - Pathlib is
+Python 3 only!)</p>
 </li>
 </ol>
 <p>For these two reasons, I decided to create a standalone Python 2 script to
@@ -182,6 +182,8 @@ Github repository here:</p>
 <p><a href="https://github.com/simulatine/100DaysOfCode/blob/master/eBooks/get_calibre_library.py">https://github.com/simulatine/100DaysOfCode/blob/master/eBooks/get_calibre_library.py</a></p>
 <p>Creating this script taught me about the Calibre API, how to restructure
 data with a Python dictionary, and how to save data with JSON.</p>
+<p>Tomorrow I will look at doing something similar with ebook data that ID
+maintain in Airtable.</p>
     </div><!-- /.entry-content -->
 
   </article>

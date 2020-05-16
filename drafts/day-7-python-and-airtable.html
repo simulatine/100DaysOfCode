@@ -74,7 +74,7 @@ EBOOKS_DATABASE_ID = &quot;********&quot;
 
 
 <h2>Writing the code</h2>
-<p>I first needed to install the Airtable library:</p>
+<p>I first needed to install the Airtable wrapper library:</p>
 <div class="highlight"><pre><span></span><code>pip install airtable-python-wrapper
 </code></pre></div>
 
@@ -108,15 +108,16 @@ Airtable key is not relevant for my needs. I took a similar approach to the way
 I dealt with Calibre data yesterday, creating a new Python dictionary, keyed
 off the book title rather than the record ID.</p>
 <p>I read in a number of different fields into the dictionary, including the
-Purchase Date and the original source (mostly <a href="https://www.amazon.com">Amazon</a>,
+Purchase Date and the original Source (mostly <a href="https://www.amazon.com">Amazon</a>,
 but I also bought some of my ebooks from
 <a href="http://shop.oreilly.com/">OReilly.com</a>,
 <a href="https://www.humblebundle.com/">humblebundle.com</a> and other sources).</p>
 <p><em>Note: the loop below took some time to to through each of my Airtable
 records. I added the <code>tqdm</code> progress bar to visually show activity. Otherwise
 not much seemed to happen for a minute or more. I had this already installed
-in my system (<code>pip install tqdm</code>) and imported (<code>import tqdm</code>) at the start
-of my script. I probably should optimize this at some future stage.</em></p>
+<code>tqdm</code> on my system (<code>pip install tqdm</code>) and imported (<code>import tqdm</code>) at the
+start of my script. I probably should optimize this loop at some future stage
+so that the progress bar is not required.</em></p>
 <div class="highlight"><pre><span></span><code>    books = {}
     # Iterate through the table and generate a list of file names
     print(&quot;Getting AirTable data&quot;)
@@ -125,15 +126,8 @@ of my script. I probably should optimize this at some future stage.</em></p>
         title = book[&quot;fields&quot;][&quot;Title&quot;]
         books[title] = {}
         books[title][&quot;id&quot;] = book[&quot;id&quot;]
-        books[title][&quot;Amazon Title&quot;] = book[&quot;fields&quot;][&quot;Amazon Title&quot;]
         books[title][&quot;Purchase Date&quot;] = book[&quot;fields&quot;][&quot;Purchase Date&quot;]
         books[title][&quot;Source&quot;] = book[&quot;fields&quot;][&quot;Source&quot;]
-        try:
-            books[title][&quot;Copied to Calibre&quot;] = book[&quot;fields&quot;][
-                &quot;Copied to Calibre&quot;
-            ]
-        except KeyError:
-            books[title][&quot;Copied to Calibre&quot;] = False
 
         # The Authors field contains a list of zero or more links to records in
         # the separate Authors table.
@@ -150,14 +144,24 @@ of my script. I probably should optimize this at some future stage.</em></p>
 </code></pre></div>
 
 
+<p>I can now call this function and display the results with pprint.</p>
+<div class="highlight"><pre><span></span><code>if __name__ == &quot;__main__&quot;:
+    calibre_books = get_airtable_books()
+    pprint.pprint(calibre_books)
+</code></pre></div>
+
+
 <h2>Conclusion</h2>
-<p>I now have a short script that extracts my Calibre library contents and saves
-it to a JSON file. In a later blog post, I will show I can use this data
-to search and compare with other sources. The full source code is in my
-Github repository here:</p>
-<p><a href="https://github.com/simulatine/100DaysOfCode/blob/master/eBooks/get_calibre_library.py">https://github.com/simulatine/100DaysOfCode/blob/master/eBooks/get_calibre_library.py</a></p>
-<p>Creating this script taught me about the Calibre API, how to restructure
-data with a Python dictionary, and how to save data with JSON.</p>
+<p>Combining
+<a href="https://simulatine.github.io/100DaysOfCode/day-6-python-and-calibre.html">yesterday's</a>
+and today's work, I now have two functions which get data from  Calibre and
+Airtable, and restructures that data into two similar Python dictionaries.</p>
+<p>Today's work taught me about the Airtable API, and how to get data from a
+remote cloud source.</p>
+<p>The full source code for today's work is in my Github repository here:</p>
+<p><a href="https://github.com/simulatine/100DaysOfCode/blob/master/eBooks/ebooks.py">https://github.com/simulatine/100DaysOfCode/blob/master/eBooks/ebooks.py</a></p>
+<p>I will do something similar with Amazon data tomorrow - this will involve
+webscraping, which is an entirely new challenge!</p>
     </div><!-- /.entry-content -->
 
   </article>
