@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
         <meta charset="utf-8" />
-        <title>Day 9: Incorrect Markdown Highlighting</title>
+        <title>Calibre and Python</title>
         <link rel="stylesheet" href="https://simulatine.github.io/100DaysOfCode/theme/css/main.css" />
 </head>
 
@@ -21,15 +21,15 @@
   <article>
     <header>
       <h1 class="entry-title">
-        <a href="https://simulatine.github.io/100DaysOfCode/drafts/day-9-incorrect-markdown-highlighting.html" rel="bookmark"
-           title="Permalink to Day 9: Incorrect Markdown Highlighting">Day 9: Incorrect Markdown Highlighting</a></h1>
+        <a href="https://simulatine.github.io/100DaysOfCode/drafts/calibre-and-python.html" rel="bookmark"
+           title="Permalink to Calibre and Python">Calibre and Python</a></h1>
 <a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="Simulatine">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
     </header>
 
     <div class="entry-content">
 <footer class="post-info">
-        <abbr class="published" title="2020-05-16T00:00:00+01:00">
-                Published: Saturday, 16 May 2020
+        <abbr class="published" title="2020-05-12T00:00:00+01:00">
+                Published: Tuesday, 12 May 2020
         </abbr>
 
         <address class="vcard author">
@@ -54,10 +54,12 @@ elsewhere on my laptop's hard disk. I also wanted to check my Calibre library
 against my Amazon purchase history, but didn't want to do this manually.</p>
 <p>I therefore wrote some Python code to extract the details of my Calibre library
 allowing me to easily manipulate and search the data.</p>
+<h2>Calibre and Python</h2>
 <p>Interestingly, Calibre is developed in Python, and actually includes an entire
 embedded copy of the Python interpreter. To access the Calibre database, I
-had to call my program with Calibre in debug mode rather than directly with
-Python:</p>
+had to call my program with 
+<a href="https://manual.calibre-ebook.com/generated/en/calibre-debug.html">Calibre in debug mode</a>
+rather than directly with Python:</p>
 <div class="highlight"><pre><span></span><code>calibre-debug &lt;python-script&gt;
 </code></pre></div>
 
@@ -66,19 +68,26 @@ Python:</p>
 to any other libraries I had installed wih <code>pip</code>. This meant that my program
 was limited to using standard Python library functions.</p>
 <p>A further complexity was that the Python interpreter embedded in Calibre,
-at least as of Calibre version 4.15 in May 2020, is Python 2, specifically
-Python 2.7.23.</p>
+at least as of Calibre version 4.15 in May 2020, is the older Python 2,
+specifically Python 2.7.16.</p>
 <p>This meant I couldn't use any Python 3 code, which clashes with most of my
-other Python programs.</p>
+other Python programs, which I write in the latest version, currently Python
+3.8.3.
+(I actually discovered this when trying to use the Pathlib library to
+manage the path to my Calibre database - Pathlib is Python 3 only!)</p>
 <p>For these two reasons, I decided to create a standalone program to extract
 the Calibre database and save it to disk. I will leave the searching and
 comparison with Amazon to a separate Python 3 program.</p>
-<p>First, I will import Calibre and also the Python pretty printer module
+<h2>Writing the code</h2>
+<p>First, I will import the Calibre API and also the Python pretty printer module
 <code>pprint</code>.</p>
 <div class="highlight"><pre><span></span><code>import calibre.library
 import pprint
+</code></pre></div>
 
-def get_calibre_books():
+
+<p>Next, I create a function to open the Calibre database and get the data</p>
+<div class="highlight"><pre><span></span><code>def get_calibre_books():
     &quot;&quot;&quot;Get the list of books and authors from my Calibre eBook library.&quot;&quot;&quot;
     # First open the Calibre library database and get a list of the book IDs
     calibre_db = calibre.library.db(
@@ -86,8 +95,13 @@ def get_calibre_books():
     ).new_api
     book_ids = calibre_db.all_book_ids()
     print(&quot;Got {} book IDs from Calibre database&quot;.format(len(book_ids)))
+</code></pre></div>
 
-    # Create a dictionary with the book contents
+
+<p>Calibre returns its data in a specific format. I want to change that to a
+generic Python dictionary, keyed off the ebook title.  This could cause some
+issues if I had two ebooks with exactly the same title, but I don't.</p>
+<div class="highlight"><pre><span></span><code>    # Create a dictionary with the book contents
     # The dictionary key is the book title
     # The dictionary value is a list of zero or more authors for the book
     books = {}
@@ -103,7 +117,7 @@ def get_calibre_books():
 </code></pre></div>
 
 
-<p>I can now wrap this in a main ()function </p>
+<p>I can now wrap this in a main ()function, get the data and save it.</p>
 <div class="highlight"><pre><span></span><code>if __name__ == &quot;__main__&quot;:
     calibre_books = get_calibre_books()
     pprint.pprint(calibre_books)
