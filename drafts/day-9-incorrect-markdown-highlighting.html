@@ -37,7 +37,77 @@
         </address>
 <p>In <a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a>.</p>
 
-</footer><!-- /.post-info -->      <h2>A Look At ShareX</h2>
+</footer><!-- /.post-info -->      <h2>eBooks Library functions</h2>
+<p>I have a growing library of more than 350 digital ebooks. I bought most of them
+from Amazon (particulary from its Kindle Deal of the Day page, which has some
+excellent choices among the dross)</p>
+<p><em>A short aside on nomenclature: ebook, e-book, eBook or e-Book? It seems there
+is no standard form for the term to describe a digital book. In this article
+I will use the simplest form ebook, whic aligns with email.</em></p>
+<h2>Calibre</h2>
+<p><a href="https://calibre-ebook.com/">Calibre</a> is a powerful open source ebook
+manager. It provides the ability to read, stoire and convert ebooks in many
+formats.</p>
+<p><img alt="Calibre" src="https://simulatine.github.io/100DaysOfCode/assets/2020-05-16_Calibre_eBook_Screenshot.jpg"></p>
+<p>I had most of my ebooks in Calibre, but were missing a few which were scattered
+elsewhere on my laptop's hard disk. I also wanted to check my Calibre library
+against my Amazon purchase history, but didn't want to do this manually.</p>
+<p>I therefore wrote some Python code to extract the details of my Calibre library
+allowing me to easily manipulate and search the data.</p>
+<p>Interestingly, Calibre is developed in Python, and actually includes an entire
+embedded copy of the Python interpreter. To access the Calibre database, I
+had to call my program with Calibre in debug mode rather than directly with
+Python:</p>
+<div class="highlight"><pre><span></span><code>calibre-debug &lt;python-script&gt;
+</code></pre></div>
+
+
+<p>The embedded interpreter had access to the standard Python libraries, but not
+to any other libraries I had installed wih <code>pip</code>. This meant that my program
+was limited to using standard Python library functions.</p>
+<p>A further complexity was that the Python interpreter embedded in Calibre,
+at least as of Calibre version 4.15 in May 2020, is Python 2, specifically
+Python 2.7.23.</p>
+<p>This meant I couldn't use any Python 3 code, which clashes with most of my
+other Python programs.</p>
+<p>For these two reasons, I decided to create a standalone program to extract
+the Calibre database and save it to disk. I will leave the searching and
+comparison with Amazon to a separate Python 3 program.</p>
+<p>First, I will import Calibre and also the Python pretty printer module
+<code>pprint</code>.</p>
+<div class="highlight"><pre><span></span><code>import calibre.library
+import pprint
+
+def get_calibre_books():
+    &quot;&quot;&quot;Get the list of books and authors from my Calibre eBook library.&quot;&quot;&quot;
+    # First open the Calibre library database and get a list of the book IDs
+    calibre_db = calibre.library.db(
+        ebooksconf.CALIBRE_LIBRARY_LOCATION
+    ).new_api
+    book_ids = calibre_db.all_book_ids()
+    print(&quot;Got {} book IDs from Calibre database&quot;.format(len(book_ids)))
+
+    # Create a dictionary with the book contents
+    # The dictionary key is the book title
+    # The dictionary value is a list of zero or more authors for the book
+    books = {}
+    for book in book_ids:
+        title = calibre_db.field_for(&quot;title&quot;, book)
+        if title in books:
+            print(&quot;Duplicate book found for title {}&quot;.format(title))
+        else:
+            # The authors field contains a list of zero or more author names
+            authors = calibre_db.field_for(&quot;authors&quot;, book)
+            books[title] = authors
+    return books
+</code></pre></div>
+
+
+<p>I can now wrap this in a main ()function </p>
+<div class="highlight"><pre><span></span><code>if __name__ == &quot;__main__&quot;:
+    calibre_books = get_calibre_books()
+    pprint.pprint(calibre_books)
+</code></pre></div>
     </div><!-- /.entry-content -->
 
   </article>
