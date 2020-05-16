@@ -41,15 +41,15 @@
 <p>Yesterday, I developed a
 <a href="https://simulatine.github.io/100DaysOfCode/day-6-python-and-calibre.html">Python function</a>
 to extract data from the Calibre ebook manager.</p>
-<p>Today I want to extend this to extracting similar data from Airtable.</p>
+<p>Today I wanted to extend this to extracting similar data from Airtable.</p>
 <h2>Airtable</h2>
 <p><a href="https://https://airtable.com/">Airtable</a> is an online database/spreadsheet
 tool that allows me to save and manage data online. The basic interface is
 very much like an online spreadsheet, such as the 
-<a href="https://docs.google.com/spreadsheets/u/0/">Google Sheets</a>.
+<a href="https://docs.google.com/spreadsheets/u/0/">Google Sheets</a>
 component of Google Docs.</p>
 <p><img alt="Airtable screenshot" src="https://simulatine.github.io/100DaysOfCode/images/2020_05_13_Airtable_Screenshot.png">
-*Image by Kvysyar from <a href="https://commons.wikimedia.org/w/index.php?curid=46824078">Wikipedia</a></p>
+<em>Image by Kvysyar from <a href="https://commons.wikimedia.org/w/index.php?curid=46824078">Wikipedia</a></em></p>
 <p>Airtable's power comes from its API, which provides remote access to the data,
 giving me the ability to search, edit and update the data from a Python script.</p>
 <p>I had actually played with Airtable previously, and started to create a
@@ -57,20 +57,36 @@ database (called a "base" by Airtable) to store a list of my ebooks, by
 directly typing in the ebook details on screen. Rather than trying to manually
 complete this database, I decided to use the power of Python!</p>
 <h2>Using Python with Airtable</h2>
-<p>Airtable has a useful
+<p>Airtable has a simple
 <a href="https://airtable-python-wrapper.readthedocs.io/en/master/">Python API wrapper</a>
-which I can use to access my data.</p>
-<p>Two key fields are my Personal API Key, which is unique to me and is required
-to access my data, and the Database ID, which uniquely identifies my database.</p>
+which I used to access my data.</p>
+<p>Two key IDs I needed were my Personal API Key, which is unique to me and is
+required to access my data via the API, and the Database ID, which uniquely
+identifies my database.</p>
 <p>The Personal API Key is visible by going to to my <strong>Account Overview</strong> on the
 Airtable website. The Database ID is visible by opening the base on the
 Airtable website, and then clicking on <strong>Help</strong> and <strong>API Documentation</strong>.</p>
 <p>Both of these are unique to me, and I saved them in a separate Python module
-which i called ebooksconf.py</p>
-<p>AIRTABLE_API_KEY = "<strong><em>*</em></strong><em>"
-EBOOKS_DATABASE_ID = "</em><strong><em>*</em></strong>"</p>
+which i called <code>ebooksconf.py</code>.</p>
+<div class="highlight"><pre><span></span><code>AIRTABLE_API_KEY = &quot;********&quot;
+EBOOKS_DATABASE_ID = &quot;********&quot;
+</code></pre></div>
+
+
 <h2>Writing the code</h2>
-<p>I wrote a function <code>get_airtable_books()</code> to read my ebooks and authors.</p>
+<p>I first needed to install the Airtable library:</p>
+<div class="highlight"><pre><span></span><code>pip install airtable-python-wrapper
+</code></pre></div>
+
+
+<p>Then in my Python script, I imported the library:</p>
+<div class="highlight"><pre><span></span><code>import airtable
+</code></pre></div>
+
+
+<p>I next wrote a function <code>get_airtable_books()</code> to read my ebooks and authors.
+I have two separate tables <em>Books</em> and <em>Authors</em> in my ebooks database, so
+I read both of them.</p>
 <div class="highlight"><pre><span></span><code>def get_airtable_books():
     &quot;&quot;&quot;Get the list of books and authors from my AirTable ebooks database.&quot;&quot;&quot;
     my_books = airtable.Airtable(
@@ -86,13 +102,21 @@ EBOOKS_DATABASE_ID = "</em><strong><em>*</em></strong>"</p>
 </code></pre></div>
 
 
-<p>Airtable returns its data with a unique ID for each record. I wanted to compare
-this data with other sources, such as my Calibre library.</p>
-<p>compare the Calibre data with a list of ebooks from Amazon, so needed a
-different key common to both data sources. I decided to use the ebook title as
-the unique key. This could cause some issues if I had two ebooks with <em>exactly</em>
-the same title, but so far that hasn't been a problem for me.
-Once I had the data, I </p>
+<p>Airtable returns its data with a unique ID key for each record. I wanted to
+compare this data with other sources, such as my Calibre library, so the
+Airtable key is not relevant for my needs. I took a similar approach to the way
+I dealt with Calibre data yesterday, creating a new Python dictionary, keyed
+off the book title rather than the record ID.</p>
+<p>I read in a number of different fields into the dictionary, including the
+Purchase Date and the original source (mostly <a href="https://www.amazon.com">Amazon</a>,
+but I also bought some of my ebooks from
+<a href="http://shop.oreilly.com/">OReilly.com</a>,
+<a href="https://www.humblebundle.com/">humblebundle.com</a> and other sources).</p>
+<p><em>Note: the loop below took some time to to through each of my Airtable
+records. I added the <code>tqdm</code> progress bar to visually show activity. Otherwise
+not much seemed to happen for a minute or more. I had this already installed
+in my system (<code>pip install tqdm</code>) and imported (<code>import tqdm</code>) at the start
+of my script. I probably should optimize this at some future stage.</em></p>
 <div class="highlight"><pre><span></span><code>    books = {}
     # Iterate through the table and generate a list of file names
     print(&quot;Getting AirTable data&quot;)
