@@ -78,8 +78,8 @@ manage the path to my Calibre library - Pathlib is Python 3 only!)</p>
 the Calibre library and save it to disk. I will leave the searching and
 comparison with Amazon to a separate Python 3 program.</p>
 <h2>Writing the code</h2>
-<p>First, I imported the Calibre API and also the Python pretty printer module
-<code>pprint</code>:</p>
+<p>First, I imported the Calibre API <code>calibre.library</code> and also the Python pretty
+printer module <code>pprint</code>:</p>
 <div class="highlight"><pre><span></span><code>import calibre.library
 import pprint
 </code></pre></div>
@@ -98,16 +98,17 @@ and get the data:</p>
 </code></pre></div>
 
 
-<p>Calibre returns its data with each ebook given a unique numeric ID. I wanted to
+<p>Calibre returns its data with a unique numeric ID for each ebook. I wanted to
 compare the Calibre data with a list of ebooks from Amazon, so needed a
 different key common to both data sources. I decided to use the ebook title as
 the unique key. This could cause some issues if I had two ebooks with <em>exactly</em>
 the same title, but so far that hasn't been a problem for me.</p>
-<p>So I created a new dictionary, to store the data in the format I want. The
-dictionary key is the book title. I displayed an error if I found two books
+<p>So I created a new dictionary, to store the data in the format I want, with the
+dictionary key set to the book title. I displayed an error if I found two books
 with exactly the same title.</p>
 <p><em>Note: as an exercise for the future, I could improve the error handling here
-using try/except, and the logging module to improve the error logging.</em></p>
+using try/except, and using the Python <code>logging</code> module to improve the error
+logging.</em></p>
 <div class="highlight"><pre><span></span><code>    books = {}
     for book in book_ids:
         title = calibre_db.field_for(&quot;title&quot;, book)
@@ -116,11 +117,11 @@ using try/except, and the logging module to improve the error logging.</em></p>
 </code></pre></div>
 
 
-<p>My dictionary values were the ebook author, or authors. As some ebooks have
-more than one author, Calibre returns a list rather than a single string. The
-list could potentially have had zero elements if I didn't have any author
-listed for the ebook in Calibre, but in practice that has not been the case for
-my library.</p>
+<p>My dictionary values were the ebook author, or to be precise, authors. As some
+ebooks have more than one author, Calibre returns a list rather than a single
+string. The list could potentially have had zero elements if I didn't have any
+author listed for the ebook in Calibre, but in practice that has not been the
+case for my library.</p>
 <p>For the moment, I am not interested in the many other fields in the Calibre
 library. If I wanted, I could have extracted the ebook format, cover picture,
 publisher, date etc. I can get a full list of fields for a book with the
@@ -130,8 +131,10 @@ print(metadata.standard_field_keys())
 </code></pre></div>
 
 
-<p>Once I commpleted creating the dictionary, I completed the function by
-returning it to the caller.</p>
+<p>The <a href="https://manual.calibre-ebook.com/develop.html#api-documentation-for-various-parts-of-calibre">Calibre API documentation</a>
+has a lot more details.</p>
+<p>After adding the authors data as a dictionary value, I completed the function
+by returning the entire <code>books</code> dictionary to the caller.</p>
 <div class="highlight"><pre><span></span><code>    books = {}
     for book in book_ids:
         title = calibre_db.field_for(&quot;title&quot;, book)
@@ -145,7 +148,8 @@ returning it to the caller.</p>
 </code></pre></div>
 
 
-<p>I can now create the main part of my script, calling my get_ain ()function, get the data and save it.</p>
+<p>I can now create the main part of my script, calling my get_calibre_books()
+function, and displaying the results with pprint.</p>
 <div class="highlight"><pre><span></span><code>if __name__ == &quot;__main__&quot;:
     calibre_books = get_calibre_books()
     pprint.pprint(calibre_books)
