@@ -146,22 +146,31 @@ so that the progress bar is not required.</em></p>
 
 <p>I can now call this function and display the results with pprint.</p>
 <div class="highlight"><pre><span></span><code>if __name__ == &quot;__main__&quot;:
-    calibre_books = get_airtable_books()
-    pprint.pprint(calibre_books)
+    airtable_books = get_airtable_books()
+    pprint.pprint(airtable_books)
 </code></pre></div>
 
 
 <h2>Conclusion</h2>
-<p>Combining
-<a href="https://simulatine.github.io/100DaysOfCode/day-6-python-and-calibre.html">yesterday's</a>
-and today's work, I now have two functions which get data from  Calibre and
-Airtable, and restructures that data into two similar Python dictionaries.</p>
-<p>Today's work taught me about the Airtable API, and how to get data from a
-remote cloud source.</p>
+<p>Over the
+<a href="https://simulatine.github.io/100DaysOfCode/day-6-python-and-calibre.html">last</a>
+<a href="https://simulatine.github.io/100DaysOfCode/day-7-python-and-airtable.html">three</a>
+<a href="https://simulatine.github.io/100DaysOfCode/day-8-python-webscraping-from-amazon.html">days</a>
+I created three similar functions:</p>
+<ul>
+<li>get_calibre_books()</li>
+<li>get_airtable_books()</li>
+<li>get_amazon_books()</li>
+</ul>
+<p>Each function gets a list of ebooks from a specific source, and creates a
+dictionary using the book's title as the key.</p>
+<p>I can now compare and search on the results of these three functions,
+allowing me to identify, for example, books that I bought from Amazon that
+were not listed in my Airtable database.</p>
+<p>Today's work taught me a lot about webscraping, BeautifulSoup, and the
+many blockers that Amazon place in the way of webscraping their data.</p>
 <p>The full source code for today's work is in my Github repository here:</p>
 <p><a href="https://github.com/simulatine/100DaysOfCode/blob/master/eBooks/ebooks.py">https://github.com/simulatine/100DaysOfCode/blob/master/eBooks/ebooks.py</a></p>
-<p>I will do something similar with Amazon data tomorrow - this will involve
-webscraping, which is an entirely new challenge!</p>
     </div><!-- /.entry-content -->
 
   </article>

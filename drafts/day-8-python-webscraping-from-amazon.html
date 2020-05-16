@@ -38,35 +38,36 @@
 <p>In <a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a>.</p>
 
 </footer><!-- /.post-info -->      <h2>Continuing my ebook library management with Python</h2>
-<p>Over the last two days, I worked on some Python functions to extract data
-from the 
-<a href="https://simulatine.github.io/100DaysOfCode/day-6-python-and-calibre.html">Calibre ebook library manager</a>
-and from my
-<a href="https://simulatine.github.io/100DaysOfCode/day-7-python-and-airtable.html">Airtable database</a></p>
-<p>Today I continued to expand my library functions by getting the list
-of my Amazon ebook purchases. This involved learning about webscraping and the
-Python <code>beautifulsoup</code> library.</p>
+<p>Over the last two days, I worked on two Python functions to extract data
+from my 
+<a href="https://simulatine.github.io/100DaysOfCode/day-6-python-and-calibre.html">Calibre ebook library</a>
+and from an 
+<a href="https://simulatine.github.io/100DaysOfCode/day-7-python-and-airtable.html">Airtable database</a>
+I had created to track my ebooks.</p>
+<p>Today I continued to expand my library functions by getting my Amazon digital
+content. This involved learning about webscraping and the Python
+<code>beautifulsoup</code> library.</p>
 <h2>Amazon and Webscraping</h2>
 <p>Webscraping involves reading the content of a web page and extracting useful
 information from it. Amazon deliberately makes this hard as they don't want
-competitors and price comparison sites easily getting information. They do this
-by:</p>
+competitors and price comparison sites easily getting page content. They do
+this by:</p>
 <ul>
 <li>Using A/B testing (where they randomly present different versions of the same
-page on repeated reads).</li>
+page on repeated visits).</li>
 <li>Continuously making small changes to the layout and site contents</li>
-<li>Moving content inside iFrames.</li>
+<li>Moving content inside iFrames</li>
 <li>Using Captcha and similar login related hurdles</li>
 </ul>
 <h3>Downloading my Amazon digital content list</h3>
 <p>With that caveat in mind, I found it easier to download the pages I wanted
 from Amazon's website, and do the page scraping and data extraction on my local
 disk. This meant that I was dealing with fixed web pages, and could repeatedly
-modify and test my code without the page constantly changing, and without the
-hassle of Amazon's login API.</p>
-<p>From the Account link in the top right of the page, I went to the
+modify and test my code against a local file, without the page constantly
+changing, and without the hassle of Amazon's login API.</p>
+<p>From the Account link in the top right of the Amazon home page, I went to the
 <a href="https://www.amazon.com/mycd/myx">Manage your Content and Devices</a>
-link. This gives me a list of all the digital books I had ever bought from
+link. This gave me a list of all the digital books I had ever bought from
 Amazon. I used my browser's save function (Ctrl+S) to save the page.</p>
 <p><img alt="Amazon Manage Your Contents" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-14_Amazon_Manage_Your_Contents_Screenshot.png"></p>
 <p>I found that the page was limited to 200 items, so I had to scroll down to the
@@ -82,7 +83,7 @@ this second page, so I now had two HTML files on my local disk:</p>
 <p>I assume it was given that name as it has the ability to turn
 <a href="https://en.wikipedia.org/wiki/Tag_soup">tag soup</a>
 into a beautiful Python object based tree structure. OK, so it has a weird
-name, but it is very powerful. Like all powerful software tools, it takes some
+name, but it is very powerful. Like all powerful software tools, it took some
 learning and experimentation to get the most out of it.</p>
 <p>First of all, I installed the library</p>
 <div class="highlight"><pre><span></span><code>pip install beautifulsoup4
@@ -107,23 +108,23 @@ learning and experimentation to get the most out of it.</p>
 </code></pre></div>
 
 
-<p>I then created a loop to go through each of the "My Content" pages which I had
-previously downloaded to my local disk.</p>
-<div class="highlight"><pre><span></span><code>    # List of Amazon My Kindle Content HTML files
+<p>I then created a loop to go through each of the "My Content" HTML files which I
+had previously downloaded to my local disk.</p>
+<div class="highlight"><pre><span></span><code>    # List of Amazon &quot;Manage Your Content and Devices&quot; HTML files
     AMAZON_CONTENT_PAGES = [
     &quot;Amazon_Content_Page_1.html&quot;,
     &quot;Amazon_Content_Page_2.html&quot;,
     ]
 
     print(&quot;Getting Amazon data&quot;)
-    for source in ebooksconf.AMAZON_CONTENT_PAGES:
+    for source in AMAZON_CONTENT_PAGES:
 </code></pre></div>
 
 
 <p>Inside the loop, I opened each HTML file and used BeautifulSoup to parse it.
 When opening the HTML file, I found it necessary to force the encoding to
-Unicode. Otherwise, I had issues reading some book titles and author names
-with Unicode characters.</p>
+Unicode with <code>encoding="utf-8"</code>. Otherwise, I had issues reading some book
+titles and author names containing Unicode characters.</p>
 <div class="highlight"><pre><span></span><code>        with open(source, encoding=&quot;utf-8&quot;) as html_file:
             html_content = html_file.read()
             soup = bs4.BeautifulSoup(html_content, &quot;html.parser&quot;)
@@ -132,15 +133,18 @@ with Unicode characters.</p>
 
 <p>Now came the hard part. I had to experiment quite a bit to determine how best
 to extract the data I wanted. After reviewing the source HTML data, I noticed
-that it used the identifier <code>bo-text</code> inside <code>&lt;div&gt;</code> statements to identify the
-title, author and purchase date:</p>
+that Amazon used the identifier <code>bo-text</code> inside <code>&lt;div&gt;</code> statements to identify
+the title, author and purchase date:</p>
 <div class="highlight"><pre><span></span><code>&lt;div class=&quot;myx-column&quot; bo-text=&quot;tab.title&quot; title=&quot;1984&quot;&gt;1984&lt;/div&gt;
+...
 &lt;div class=&quot;myx-column&quot; bo-text=&quot;tab.author&quot; title=&quot;George Orwell&quot;&gt;George Orwell&lt;/div&gt;
 </code></pre></div>
 
 
-<p><em>(I removed extraneous CSS from the above text to show the key attributes)</em></p>
-<p>This allowed me to search for that attribute, and extract the data I needed:</p>
+<p><em>(I removed a lot of extraneous CSS from the above div statements to show the
+key attributes)</em></p>
+<p>This allowed me to search for the <code>bo-text</code> attribute, and extract the data I
+needed:</p>
 <div class="highlight"><pre><span></span><code>            # Get the list of books
             for div in soup.find_all(&quot;div&quot;, attrs={&quot;bo-text&quot;: &quot;tab.title&quot;}):
                 titles.append(str(div.string))
@@ -159,11 +163,10 @@ title, author and purchase date:</p>
 
 
 <p>As I did for my Calibre and Airtable functions, I created a dictionary keyed
-off the ebook title to store the data:</p>
-<div class="highlight"><pre><span></span><code>    # Create a dictionary keyed on the book title
-    books = {}
+off the title to store the data for each ebook, in this case, the Authors and
+Purchase Date.</p>
+<div class="highlight"><pre><span></span><code>    books = {}
     for title in titles:
-        # The dictionary value is a list containing the author&#39;s name
         books[title] = {}
         books[title][&quot;Authors&quot;] = authors[counter]
         books[title][&quot;Purchase Date&quot;] = purchase_dates[counter]
@@ -174,8 +177,8 @@ off the ebook title to store the data:</p>
 
 <p>I can now call this function and display the results with pprint.</p>
 <div class="highlight"><pre><span></span><code>if __name__ == &quot;__main__&quot;:
-    calibre_books = get_airtable_books()
-    pprint.pprint(calibre_books)
+    amazon_books = get_amazon_books()
+    pprint.pprint(amazon_books)
 </code></pre></div>
 
 
@@ -188,8 +191,6 @@ Airtable, and restructures that data into two similar Python dictionaries.</p>
 remote cloud source.</p>
 <p>The full source code for today's work is in my Github repository here:</p>
 <p><a href="https://github.com/simulatine/100DaysOfCode/blob/master/eBooks/ebooks.py">https://github.com/simulatine/100DaysOfCode/blob/master/eBooks/ebooks.py</a></p>
-<p>I will do something similar with Amazon data tomorrow - this will involve
-webscraping, which is an entirely new challenge!</p>
     </div><!-- /.entry-content -->
 
   </article>
