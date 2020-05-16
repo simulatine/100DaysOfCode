@@ -48,7 +48,7 @@ I will use the simplest form ebook, whic aligns with email.</em></p>
 <p><a href="https://calibre-ebook.com/">Calibre</a> is a powerful open source ebook
 manager. It provides the ability to read, stoire and convert ebooks in many
 formats.</p>
-<p><img alt="Calibre" src="https://simulatine.github.io/100DaysOfCode/assets/2020-05-16_Calibre_eBook_Screenshot.jpg"></p>
+<p><img alt="Calibre" src="https://simulatine.github.io/100DaysOfCode/assets/2020-05-12_Calibre_eBook_Screenshot.jpg"></p>
 <p>I had most of my ebooks in Calibre, but were missing a few which were scattered
 elsewhere on my laptop's hard disk. I also wanted to check my Calibre library
 against my Amazon purchase history, but didn't want to do this manually.</p>
@@ -56,7 +56,7 @@ against my Amazon purchase history, but didn't want to do this manually.</p>
 allowing me to easily manipulate and search the data.</p>
 <h2>Calibre and Python</h2>
 <p>Interestingly, Calibre is developed in Python, and actually includes an entire
-embedded copy of the Python interpreter. To access the Calibre database, I
+embedded copy of the Python interpreter. To access the Calibre library, I
 had to call my program with 
 <a href="https://manual.calibre-ebook.com/generated/en/calibre-debug.html">Calibre in debug mode</a>
 rather than directly with Python:</p>
@@ -65,7 +65,7 @@ rather than directly with Python:</p>
 
 
 <p>The embedded interpreter had access to the standard Python libraries, but not
-to any other libraries I had installed wih <code>pip</code>. This meant that my program
+to any other modules I had installed wih <code>pip</code>. This meant that my program
 was limited to using standard Python library functions.</p>
 <p>A further complexity was that the Python interpreter embedded in Calibre,
 at least as of Calibre version 4.15 in May 2020, is the older Python 2,
@@ -73,42 +73,71 @@ specifically Python 2.7.16.</p>
 <p>This meant I couldn't use any Python 3 code, which clashes with most of my
 other Python programs, which I write in the latest version, currently Python
 3.8.3.
-(I actually discovered this when trying to use the Pathlib library to
-manage the path to my Calibre database - Pathlib is Python 3 only!)</p>
+(I actually discovered this when trying to use the Pathlib module to
+manage the path to my Calibre library - Pathlib is Python 3 only!)</p>
 <p>For these two reasons, I decided to create a standalone program to extract
-the Calibre database and save it to disk. I will leave the searching and
+the Calibre library and save it to disk. I will leave the searching and
 comparison with Amazon to a separate Python 3 program.</p>
 <h2>Writing the code</h2>
-<p>First, I will import the Calibre API and also the Python pretty printer module
-<code>pprint</code>.</p>
+<p>First, I imported the Calibre API and also the Python pretty printer module
+<code>pprint</code>:</p>
 <div class="highlight"><pre><span></span><code>import calibre.library
 import pprint
 </code></pre></div>
 
 
-<p>Next, I create a function to open the Calibre database and get the data</p>
+<p>Next, I created a function <code>get_calibre_books()</code> to open the Calibre library
+and get the data:</p>
 <div class="highlight"><pre><span></span><code>def get_calibre_books():
     &quot;&quot;&quot;Get the list of books and authors from my Calibre eBook library.&quot;&quot;&quot;
-    # First open the Calibre library database and get a list of the book IDs
+    # First open the Calibre library and get a list of the book IDs
     calibre_db = calibre.library.db(
         ebooksconf.CALIBRE_LIBRARY_LOCATION
     ).new_api
     book_ids = calibre_db.all_book_ids()
-    print(&quot;Got {} book IDs from Calibre database&quot;.format(len(book_ids)))
+    print(&quot;Got {} book IDs from Calibre library&quot;.format(len(book_ids)))
 </code></pre></div>
 
 
-<p>Calibre returns its data in a specific format. I want to change that to a
-generic Python dictionary, keyed off the ebook title.  This could cause some
-issues if I had two ebooks with exactly the same title, but I don't.</p>
-<div class="highlight"><pre><span></span><code>    # Create a dictionary with the book contents
-    # The dictionary key is the book title
-    # The dictionary value is a list of zero or more authors for the book
-    books = {}
+<p>Calibre returns its data with each ebook given a unique numeric ID. I wanted to
+compare the Calibre data with a list of ebooks from Amazon, so needed a
+different key common to both data sources. I decided to use the ebook title as
+the unique key. This could cause some issues if I had two ebooks with <em>exactly</em>
+the same title, but so far that hasn't been a problem for me.</p>
+<p>So I created a new dictionary, to store the data in the format I want. The
+dictionary key is the book title. I displayed an error if I found two books
+with exactly the same title.</p>
+<p><em>Note: as an exercise for the future, I could improve the error handling here
+using try/except, and the logging module to improve the error logging.</em></p>
+<div class="highlight"><pre><span></span><code>    books = {}
     for book in book_ids:
         title = calibre_db.field_for(&quot;title&quot;, book)
         if title in books:
-            print(&quot;Duplicate book found for title {}&quot;.format(title))
+            print(&quot;ERROR: Duplicate book found for title {}&quot;.format(title))
+</code></pre></div>
+
+
+<p>My dictionary values were the ebook author, or authors. As some ebooks have
+more than one author, Calibre returns a list rather than a single string. The
+list could potentially have had zero elements if I didn't have any author
+listed for the ebook in Calibre, but in practice that has not been the case for
+my library.</p>
+<p>For the moment, I am not interested in the many other fields in the Calibre
+library. If I wanted, I could have extracted the ebook format, cover picture,
+publisher, date etc. I can get a full list of fields for a book with the
+following code:</p>
+<div class="highlight"><pre><span></span><code>metadata = calibre_db.get_metadata(book_id)
+print(metadata.standard_field_keys())
+</code></pre></div>
+
+
+<p>Once I commpleted creating the dictionary, I completed the function by
+returning it to the caller.</p>
+<div class="highlight"><pre><span></span><code>    books = {}
+    for book in book_ids:
+        title = calibre_db.field_for(&quot;title&quot;, book)
+        if title in books:
+            print(&quot;ERROR: Duplicate book found for title {}&quot;.format(title))
         else:
             # The authors field contains a list of zero or more author names
             authors = calibre_db.field_for(&quot;authors&quot;, book)
@@ -117,11 +146,33 @@ issues if I had two ebooks with exactly the same title, but I don't.</p>
 </code></pre></div>
 
 
-<p>I can now wrap this in a main ()function, get the data and save it.</p>
+<p>I can now create the main part of my script, calling my get_ain ()function, get the data and save it.</p>
 <div class="highlight"><pre><span></span><code>if __name__ == &quot;__main__&quot;:
     calibre_books = get_calibre_books()
     pprint.pprint(calibre_books)
 </code></pre></div>
+
+
+<h2>Exporting the data</h2>
+<p>Now that I have the data in a Python dictionary, I want to save it to disk
+so I can access it from other Python 3 scripts. There are several ways to do
+this. Python has a built in <code>pickle</code> module that saves any Python object to a
+file. I could also simply write my dictionary contents in plain text to a text
+file. I decided to save to a JSON file format:</p>
+<div class="highlight"><pre><span></span><code>print(&quot;Writing {} books to JSON&quot;.format(len(calibre_books)))
+with open(ebooksconf.JSON_FILE, &quot;w&quot;) as output:
+    json.dump(calibre_books, output)
+</code></pre></div>
+
+
+<h2>Conclusion</h2>
+<p>I now have a short script that extracts my Calibre library contents and saves
+it to a JSON file. In a later blog post, I will show I can use this data
+to search and compare with other sources. The full source code is in my
+Github repository here:</p>
+<p>https://github.com/simulatine/100DaysOfCode/blob/master/eBooks/get_calibre_library.py</p>
+<p>Creating this script taught me about the Calibre API, how to restructure
+data with a Python dictionary, and how to save data with JSON.</p>
     </div><!-- /.entry-content -->
 
   </article>
