@@ -1,0 +1,219 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Day 6: Python and Calibre</title>
+        <link rel="stylesheet" href="https://simulatine.github.io/100DaysOfCode/theme/css/main.css" />
+</head>
+
+<body id="index" class="home">
+<a href="https://github.com/simulatine/100DaysOfCode">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+</a>
+        <header id="banner" class="body">
+                <h1><a href="https://simulatine.github.io/100DaysOfCode/">Simulatine's 100 Days of Code Blog <strong>Learning and having fun with code</strong></a></h1>
+                <nav><ul>
+                    <li><a href="https://simulatine.github.io/100DaysOfCode/pages/about-this-site.html">About This Site</a></li>
+                    <li class="active"><a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://simulatine.github.io/100DaysOfCode/day-6-python-and-calibre.html" rel="bookmark"
+           title="Permalink to Day 6: Python and Calibre">Day 6: Python and Calibre</a></h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="Simulatine">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2020-05-12T00:00:00+01:00">
+                Published: Tuesday, 12 May 2020
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://simulatine.github.io/100DaysOfCode/author/simulatine.html">Simulatine</a>
+        </address>
+<p>In <a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a>.</p>
+
+</footer><!-- /.post-info -->      <h2>Using Python to manage an ebook library</h2>
+<p>I have a growing library of more than 350 digital ebooks. Today I started
+to write some Python code to help me track and search my ebook library.</p>
+<p><em>A short aside on nomenclature: ebook, e-book, eBook or e-Book? It seems there
+is no standard term to describe a digital book. In this article I will use the
+simplest form </em>ebook<em>, which is similar to email.</em></p>
+<h2>Calibre</h2>
+<p><img alt="Calibre" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-12_Calibre_eBook_Screenshot.jpg"></p>
+<p><a href="https://calibre-ebook.com/">Calibre</a> is a powerful open source ebook
+manager. It provides the ability to read, store and convert ebooks in many
+formats.</p>
+<p>I had most of my ebooks in Calibre, but was missing a few which were scattered
+elsewhere on my laptop's hard disk. I also wanted to check my Calibre library
+against my Amazon purchase history, but didn't want to do this manually.</p>
+<p>To help me achieve this, I wrote a Python function to extract the details of my
+Calibre library allowing me to easily manipulate and search the data.</p>
+<h2>Python and Calibre</h2>
+<p>Interestingly, Calibre is developed in Python, and actually includes an entire
+embedded copy of the Python interpreter. To access the Calibre library, I
+had to call my script with 
+<a href="https://manual.calibre-ebook.com/generated/en/calibre-debug.html">Calibre in debug mode</a>
+:</p>
+<div class="highlight"><pre><span></span><code>calibre-debug &lt;python-script&gt;
+</code></pre></div>
+
+
+<p>This caused a number of challenges:</p>
+<ol>
+<li>
+<p>The embedded interpreter had access to the standard Python libraries, but
+not to any other modules I had installed wih <code>pip</code>. This meant that my script
+was limited to using standard Python library functions.</p>
+</li>
+<li>
+<p>A further complexity was that the Python interpreter embedded in Calibre,
+at least as of Calibre version 4.15 in May 2020, is the older Python 2,
+specifically Python 2.7.16. This meant I couldn't use any Python 3 code, which
+clashes with most of my other Python scripts, where I make considerable use of
+newer Python 3 features (I actually discovered this problem when trying to use
+the <code>Pathlib</code> module to manage the path to my Calibre library - Pathlib is
+Python 3 only!)</p>
+</li>
+</ol>
+<p>For these two reasons, I decided to create a standalone Python 2 script to
+extract the Calibre library and save it to disk. I will leave the searching and
+comparison with Amazon to a separate Python 3 script.</p>
+<h2>Writing the code</h2>
+<p>First, I imported the Calibre API <code>calibre.library</code> and also the Python pretty
+printer module <code>pprint</code>:</p>
+<div class="highlight"><pre><span></span><code>import calibre.library
+import pprint
+</code></pre></div>
+
+
+<p>Next, I created a function <code>get_calibre_books()</code> to open the Calibre library
+and get the data:</p>
+<div class="highlight"><pre><span></span><code>def get_calibre_books():
+    &quot;&quot;&quot;Get the list of books and authors from my Calibre eBook library.&quot;&quot;&quot;
+    # First open the Calibre library and get a list of the book IDs
+    calibre_db = calibre.library.db(
+        ebooksconf.CALIBRE_LIBRARY_LOCATION
+    ).new_api
+    book_ids = calibre_db.all_book_ids()
+    print(&quot;Got {} book IDs from Calibre library&quot;.format(len(book_ids)))
+</code></pre></div>
+
+
+<p>Calibre returns its data with a unique numeric ID for each ebook. I wanted to
+compare the Calibre data with a list of ebooks from Amazon, so needed a
+different key common to both data sources. I decided to use the ebook title as
+the unique key. This could cause some issues if I had two ebooks with <em>exactly</em>
+the same title, but so far that hasn't been a problem for me.</p>
+<p>So I created a new dictionary, to store the data in the format I want, with the
+dictionary key set to the book title. I displayed an error if I found two books
+with exactly the same title.</p>
+<p><em>Note: as an exercise for the future, I could improve the error handling here
+using try/except, and using the Python <code>logging</code> module to improve the error
+logging.</em></p>
+<div class="highlight"><pre><span></span><code>books = {}
+for book in book_ids:
+    title = calibre_db.field_for(&quot;title&quot;, book)
+    if title in books:
+        print(&quot;ERROR: Duplicate book found for title {}&quot;.format(title))
+</code></pre></div>
+
+
+<p>My dictionary values were the ebook author, or to be precise, authors. As some
+ebooks have more than one author, Calibre returns a list rather than a single
+string. The list could potentially have had zero elements if I didn't have any
+author listed for the ebook in Calibre, but in practice that has not been the
+case for my library.</p>
+<p>For the moment, I am not interested in the many other fields in the Calibre
+library. If I wanted, I could have extracted the ebook format, cover picture,
+publisher, date etc. I can get a full list of fields for a book with the
+following code:</p>
+<div class="highlight"><pre><span></span><code>metadata = calibre_db.get_metadata(book_id)
+print(metadata.standard_field_keys())
+</code></pre></div>
+
+
+<p>The <a href="https://manual.calibre-ebook.com/develop.html#api-documentation-for-various-parts-of-calibre">Calibre API documentation</a>
+has a lot more details.</p>
+<p>After adding the authors data as a dictionary value, I completed the function
+by returning the entire <code>books</code> dictionary to the caller.</p>
+<div class="highlight"><pre><span></span><code>books = {}
+for book in book_ids:
+    title = calibre_db.field_for(&quot;title&quot;, book)
+    if title in books:
+        print(&quot;ERROR: Duplicate book found for title {}&quot;.format(title))
+    else:
+        # The authors field contains a list of zero or more author names
+        authors = calibre_db.field_for(&quot;authors&quot;, book)
+        books[title] = authors
+return books
+</code></pre></div>
+
+
+<p>I can now create the main part of my script, calling my get_calibre_books()
+function, and displaying the results with pprint.</p>
+<div class="highlight"><pre><span></span><code>if __name__ == &quot;__main__&quot;:
+    calibre_books = get_calibre_books()
+    pprint.pprint(calibre_books)
+</code></pre></div>
+
+
+<h2>Exporting the data</h2>
+<p>Now that I have the data in a Python dictionary, I want to save it to disk
+so I can access it from other Python 3 scripts. There are several ways to do
+this. Python has a built in <code>pickle</code> module that saves any Python object to a
+file. I could also simply write my dictionary contents in plain text to a text
+file. I decided to save to a JSON file format:</p>
+<div class="highlight"><pre><span></span><code>print(&quot;Writing {} books to JSON&quot;.format(len(calibre_books)))
+with open(ebooksconf.JSON_FILE, &quot;w&quot;) as output:
+    json.dump(calibre_books, output)
+</code></pre></div>
+
+
+<h2>Conclusion</h2>
+<p>I now have a short script that extracts my Calibre library contents and saves
+it to a JSON file. In a later blog post, I will show I can use this data
+to search and compare with other sources. The full source code is in my
+Github repository here:</p>
+<p><a href="https://github.com/simulatine/100DaysOfCode/blob/master/eBooks/get_calibre_library.py">https://github.com/simulatine/100DaysOfCode/blob/master/eBooks/get_calibre_library.py</a></p>
+<p>Creating this script taught me about the Calibre API, how to restructure
+data with a Python dictionary, and how to save data with JSON.</p>
+<p>Tomorrow I will look at doing something similar with ebook data that I
+maintain online in <a href="https://https://airtable.com/">Airtable</a>.</p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="https://python.org/">Python</a></li>
+                            <li><a href="https://www.pygame.org/docs/">Pygame</a></li>
+                            <li><a href="https://www.100daysofcode.com/">100DaysOfCode</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://twitter.com/simulatine">Twitter</a></li>
+                            <li><a href="https://github.com/simulatine/100DaysOfCode">GitHub</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

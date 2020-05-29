@@ -1,0 +1,195 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Day 7: Python and Airtable</title>
+        <link rel="stylesheet" href="https://simulatine.github.io/100DaysOfCode/theme/css/main.css" />
+</head>
+
+<body id="index" class="home">
+<a href="https://github.com/simulatine/100DaysOfCode">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+</a>
+        <header id="banner" class="body">
+                <h1><a href="https://simulatine.github.io/100DaysOfCode/">Simulatine's 100 Days of Code Blog <strong>Learning and having fun with code</strong></a></h1>
+                <nav><ul>
+                    <li><a href="https://simulatine.github.io/100DaysOfCode/pages/about-this-site.html">About This Site</a></li>
+                    <li class="active"><a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://simulatine.github.io/100DaysOfCode/day-7-python-and-airtable.html" rel="bookmark"
+           title="Permalink to Day 7: Python and Airtable">Day 7: Python and Airtable</a></h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="Simulatine">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2020-05-13T00:00:00+01:00">
+                Published: Wednesday, 13 May 2020
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://simulatine.github.io/100DaysOfCode/author/simulatine.html">Simulatine</a>
+        </address>
+<p>In <a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a>.</p>
+
+</footer><!-- /.post-info -->      <h2>Continuing my ebook library management with Python</h2>
+<p>Yesterday, I developed a
+<a href="https://simulatine.github.io/100DaysOfCode/day-6-python-and-calibre.html">Python function</a>
+to extract data from the Calibre ebook manager.</p>
+<p>Today I wanted to extend this to extracting similar data from Airtable.</p>
+<h2>Airtable</h2>
+<p><a href="https://https://airtable.com/">Airtable</a> is an online database/spreadsheet
+tool that allows me to save and manage data online. The basic interface is
+very much like an online spreadsheet, such as the 
+<a href="https://docs.google.com/spreadsheets/u/0/">Google Sheets</a>
+component of Google Docs.</p>
+<p><img alt="Airtable screenshot" src="https://simulatine.github.io/100DaysOfCode/images/2020-05-13_Airtable_Screenshot.png">
+<em>Image by Kvysyar from <a href="https://commons.wikimedia.org/w/index.php?curid=46824078">Wikipedia</a></em></p>
+<p>Airtable's power comes from its API, which provides remote access to the data,
+giving me the ability to search, edit and update the data from a Python script.</p>
+<p>I had actually played with Airtable previously, and started to create a
+database (called a "base" by Airtable) to store a list of my ebooks, by
+directly typing in the ebook details on screen. Rather than trying to manually
+complete this database, I decided to use the power of Python!</p>
+<h2>Using Python with Airtable</h2>
+<p>Airtable has a simple
+<a href="https://airtable-python-wrapper.readthedocs.io/en/master/">Python API wrapper</a>
+which I used to access my data.</p>
+<p>Two key IDs I needed were my Personal API Key, which is unique to me and is
+required to access my data via the API, and the Database ID, which uniquely
+identifies my database.</p>
+<p>The Personal API Key is visible by going to to my <strong>Account Overview</strong> on the
+Airtable website. The Database ID is visible by opening the base on the
+Airtable website, and then clicking on <strong>Help</strong> and <strong>API Documentation</strong>.</p>
+<p>Both of these are unique to me, and I saved them in a separate Python module
+which i called <code>ebooksconf.py</code>.</p>
+<div class="highlight"><pre><span></span><code>AIRTABLE_API_KEY = &quot;********&quot;
+EBOOKS_DATABASE_ID = &quot;********&quot;
+</code></pre></div>
+
+
+<h2>Writing the code</h2>
+<p>I first needed to install the Airtable wrapper library:</p>
+<div class="highlight"><pre><span></span><code>pip install airtable-python-wrapper
+</code></pre></div>
+
+
+<p>Then in my Python script, I imported the library:</p>
+<div class="highlight"><pre><span></span><code>import airtable
+</code></pre></div>
+
+
+<p>I next wrote a function <code>get_airtable_books()</code> to read my ebooks and authors.
+I have two separate tables <em>Books</em> and <em>Authors</em> in my ebooks database, so
+I read both of them.</p>
+<div class="highlight"><pre><span></span><code>def get_airtable_books():
+    &quot;&quot;&quot;Get the list of books and authors from my AirTable ebooks database.&quot;&quot;&quot;
+    my_books = airtable.Airtable(
+        ebooksconf.EBOOKS_DATABASE_ID,
+        &quot;Books&quot;,
+        api_key=ebooksconf.AIRTABLE_API_KEY,
+    )
+    my_authors = airtable.Airtable(
+        ebooksconf.EBOOKS_DATABASE_ID,
+        &quot;Authors&quot;,
+        api_key=ebooksconf.AIRTABLE_API_KEY,
+    )
+</code></pre></div>
+
+
+<p>Airtable returns its data with a unique ID key for each record. I wanted to
+compare this data with other sources, such as my Calibre library, so the
+Airtable key is not relevant for my needs. I took a similar approach to the way
+I dealt with Calibre data yesterday, creating a new Python dictionary, keyed
+off the book title rather than the record ID.</p>
+<p>I read in a number of different fields into the dictionary, including the
+Purchase Date and the original Source (mostly <a href="https://www.amazon.com">Amazon</a>,
+but I also bought some of my ebooks from
+<a href="http://shop.oreilly.com/">OReilly.com</a>,
+<a href="https://www.humblebundle.com/">humblebundle.com</a> and other sources).</p>
+<p><em>Note: the loop below took some time to to through each of my Airtable
+records. I added the <code>tqdm</code> progress bar to visually show activity. Otherwise
+not much seemed to happen for a minute or more. I had this already installed
+<code>tqdm</code> on my system (<code>pip install tqdm</code>) and imported (<code>import tqdm</code>) at the
+start of my script. I probably should optimize this loop at some future stage
+so that the progress bar is not required.</em></p>
+<div class="highlight"><pre><span></span><code>    books = {}
+    # Iterate through the table and generate a list of file names
+    print(&quot;Getting AirTable data&quot;)
+    for book in tqdm.tqdm(my_books.get_all()):
+
+        title = book[&quot;fields&quot;][&quot;Title&quot;]
+        books[title] = {}
+        books[title][&quot;id&quot;] = book[&quot;id&quot;]
+        books[title][&quot;Purchase Date&quot;] = book[&quot;fields&quot;][&quot;Purchase Date&quot;]
+        books[title][&quot;Source&quot;] = book[&quot;fields&quot;][&quot;Source&quot;]
+
+        # The Authors field contains a list of zero or more links to records in
+        # the separate Authors table.
+        author_ids = book[&quot;fields&quot;][&quot;Authors&quot;]
+        authors = []
+        for author_id in author_ids:
+            # Open each linked Author record, and get the author&#39;s name
+            author = my_authors.get(author_id)
+            author_name = author[&quot;fields&quot;][&quot;Name&quot;]
+            authors.append(author_name)
+        books[title][&quot;Authors&quot;] = authors
+    print(&quot;Got {} books from Airtable&quot;.format(len(books)))
+    return books
+</code></pre></div>
+
+
+<p>I can now call this function and display the results with pprint.</p>
+<div class="highlight"><pre><span></span><code>if __name__ == &quot;__main__&quot;:
+    airtable_books = get_airtable_books()
+    pprint.pprint(airtable_books)
+</code></pre></div>
+
+
+<h2>Conclusion</h2>
+<p>Combining
+<a href="https://simulatine.github.io/100DaysOfCode/day-6-python-and-calibre.html">yesterday's</a>
+and today's work, I now have two functions which get data from  Calibre and
+Airtable, and restructures that data into two similar Python dictionaries.</p>
+<p>Today's work taught me about the Airtable API, and how to get data from a
+remote cloud source.</p>
+<p>The full source code for today's work is in my Github repository here:</p>
+<p><a href="https://github.com/simulatine/100DaysOfCode/blob/master/eBooks/ebooks.py">https://github.com/simulatine/100DaysOfCode/blob/master/eBooks/ebooks.py</a></p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="https://python.org/">Python</a></li>
+                            <li><a href="https://www.pygame.org/docs/">Pygame</a></li>
+                            <li><a href="https://www.100daysofcode.com/">100DaysOfCode</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://twitter.com/simulatine">Twitter</a></li>
+                            <li><a href="https://github.com/simulatine/100DaysOfCode">GitHub</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>

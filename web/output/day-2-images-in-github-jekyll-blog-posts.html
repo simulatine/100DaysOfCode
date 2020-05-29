@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+        <meta charset="utf-8" />
+        <title>Day 2: Images in GitHub Jekyll Blog Posts</title>
+        <link rel="stylesheet" href="https://simulatine.github.io/100DaysOfCode/theme/css/main.css" />
+</head>
+
+<body id="index" class="home">
+<a href="https://github.com/simulatine/100DaysOfCode">
+<img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_red_aa0000.png" alt="Fork me on GitHub" />
+</a>
+        <header id="banner" class="body">
+                <h1><a href="https://simulatine.github.io/100DaysOfCode/">Simulatine's 100 Days of Code Blog <strong>Learning and having fun with code</strong></a></h1>
+                <nav><ul>
+                    <li><a href="https://simulatine.github.io/100DaysOfCode/pages/about-this-site.html">About This Site</a></li>
+                    <li class="active"><a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a></li>
+                </ul></nav>
+        </header><!-- /#banner -->
+<section id="content" class="body">
+  <article>
+    <header>
+      <h1 class="entry-title">
+        <a href="https://simulatine.github.io/100DaysOfCode/day-2-images-in-github-jekyll-blog-posts.html" rel="bookmark"
+           title="Permalink to Day 2: Images in GitHub Jekyll Blog Posts">Day 2: Images in GitHub Jekyll Blog Posts</a></h1>
+<a href="https://twitter.com/share" class="twitter-share-button" data-count="horizontal" data-via="Simulatine">Tweet</a><script type="text/javascript" src="https://platform.twitter.com/widgets.js"></script>
+    </header>
+
+    <div class="entry-content">
+<footer class="post-info">
+        <abbr class="published" title="2020-05-08T00:00:00+01:00">
+                Published: Friday, 08 May 2020
+        </abbr>
+		<br />
+        <abbr class="modified" title="2020-05-10T00:00:00+01:00">
+                Updated: Sunday, 10 May 2020
+        </abbr>
+
+        <address class="vcard author">
+                By                         <a class="url fn" href="https://simulatine.github.io/100DaysOfCode/author/simulatine.html">Simulatine</a>
+        </address>
+<p>In <a href="https://simulatine.github.io/100DaysOfCode/category/posts.html">Posts</a>.</p>
+
+</footer><!-- /.post-info -->      <p>I spent my time today learning about GitHub Pages, and trying to get an image to display in my blog post. Yesterday I configured the default <a href="https://help.github.com/en/github/working-with-github-pages/setting-up-a-github-pages-site-with-jekyll">Jekyll</a> site generator tool with the <a href="https://github.com/jekyll/minima">Minima</a> theme. I placed my initial website contents in the <code>docs</code> folder in the master branch of my repository. I create a subfolder <code>doc/images</code> on my local drive, and added a simple screenshot <code>image1.png</code>. After committing this change, and syncing with GitHub, I confirmed that the folder and file were present in my repository. So far, so good.</p>
+<p><em>10 May 2020: Since writing this post, I have moved from Jekyll to a Python based site generator tool called Pelican, so the links below may display differently than they did before.</em></p>
+<h2>Broken Images</h2>
+<p>I was able to display an image easily enough from a standard page in the root of my website with a Markdown image link:</p>
+<div class="highlight"><pre><span></span><code>![Screenshot](images/image1.png &quot;Screenshot&quot;)
+</code></pre></div>
+
+
+<p>But the same link format wasn't displaying properly in my blog post:</p>
+<p><img alt="Screenshot" src="immages/image1.png" title="Screenshot"></p>
+<p>OK, so blog post files are in a different folder <code>_posts</code>.  Maybe I need to use a rooted path:</p>
+<div class="highlight"><pre><span></span><code>![Screenshot](/images/image1.png &quot;Screenshot&quot;)
+</code></pre></div>
+
+
+<p>which displayed</p>
+<p><img alt="Screenshot" src="/images/image1.png" title="Screenshot"></p>
+<p>Hmm, this didn't work either - it seems that the <code>/images</code> directory that GitHub sees is not the same as the one I created. Neither did assuming the website root was one level up, at the root of the entire repository:</p>
+<div class="highlight"><pre><span></span><code>![Screenshot](/docs/images/image1.png &quot;Screenshot&quot;)
+</code></pre></div>
+
+
+<p>I get the same broken image link:</p>
+<p><img alt="Screenshot" src="/docs/images/image1.png" title="Screenshot"></p>
+<h2>Solved!</h2>
+<p>After some investigation, I paid attention to the blog post URL in my brower's address bar, and realised my post is buried three levels down in a virtual folder hierarchy, with the year, month and date all represented by folders:</p>
+<p>https://simulatine.github.io/100DaysOfCode/2020/05/08/Struggling-With-GitHub-Pages.html</p>
+<p>Aha! Maybe a relative path would work. I would need to go three levels up from my post's URL to get back to the root of the website, so would need <code>../</code> three times:</p>
+<div class="highlight"><pre><span></span><code>![Screenshot](../../../images/image1.png &quot;Screenshot&quot;)
+</code></pre></div>
+
+
+<p>Success! I can finally see an image:</p>
+<p><img alt="Screenshot" src="https://simulatine.github.io/100DaysOfCode/images/image1.png" title="Screenshot"></p>
+    </div><!-- /.entry-content -->
+
+  </article>
+</section>
+        <section id="extras" class="body">
+                <div class="blogroll">
+                        <h2>links</h2>
+                        <ul>
+                            <li><a href="https://python.org/">Python</a></li>
+                            <li><a href="https://www.pygame.org/docs/">Pygame</a></li>
+                            <li><a href="https://www.100daysofcode.com/">100DaysOfCode</a></li>
+                        </ul>
+                </div><!-- /.blogroll -->
+                <div class="social">
+                        <h2>social</h2>
+                        <ul>
+
+                            <li><a href="https://twitter.com/simulatine">Twitter</a></li>
+                            <li><a href="https://github.com/simulatine/100DaysOfCode">GitHub</a></li>
+                        </ul>
+                </div><!-- /.social -->
+        </section><!-- /#extras -->
+
+        <footer id="contentinfo" class="body">
+                <address id="about" class="vcard body">
+                Proudly powered by <a href="http://getpelican.com/">Pelican</a>, which takes great advantage of <a href="http://python.org">Python</a>.
+                </address><!-- /#about -->
+
+                <p>The theme is by <a href="http://coding.smashingmagazine.com/2009/08/04/designing-a-html-5-layout-from-scratch/">Smashing Magazine</a>, thanks!</p>
+        </footer><!-- /#contentinfo -->
+
+</body>
+</html>
