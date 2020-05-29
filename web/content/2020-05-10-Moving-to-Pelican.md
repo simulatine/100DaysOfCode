@@ -2,8 +2,7 @@ Title: Day 4: Moving from Jekyll to Pelican
 Date: 2020-05-10
 Category: Posts
 
-Trying Pelican
-==============
+## Trying Pelican ##
 
 I am trying out using [Pelican](https://docs.getpelican.com/en/stable/) to
 create this site, as a replacement for [Jekyll](https://jekyllrb.com/) with the
@@ -14,23 +13,24 @@ similar to Jekyll - it converts simple text files in
 fully fledged website. But Pelican is Python based, which feels a lot more
 natural to me.
 
-Installing Pelican
-==================
+## Installing Pelican ##
 
 I started by installing the pelican and markdown libraries:
 
     pip install pelican markdown
 
-I then followed instructions at the [Pelican quickstart guide](https://docs.getpelican.com/en/stable/quickstart.html#installation) to create and configure my site.
+I then followed instructions at the
+[Pelican quickstart guide](https://docs.getpelican.com/en/stable/quickstart.html#installation) to
+create and configure my site.
 
 I first created a folder for my website:
 
-    C:\> mkdir C:\Users\Simulatine\Documents\Git\100DaysOfCode\web
+    mkdir C:\Users\Simulatine\Documents\Git\100DaysOfCode\web
 
 I went to the website folder and ran `pelican-quickstart` to create the initial structure
 
-    C:\> cd C:\Users\Simulatine\Documents\Git\100DaysOfCode\web
-    C:\> pelican-quickstart
+    cd C:\Users\Simulatine\Documents\Git\100DaysOfCode\web
+    pelican-quickstart
     
     Welcome to pelican-quickstart v4.2.0.
 
@@ -59,7 +59,8 @@ I went to the website folder and ran `pelican-quickstart` to create the initial 
 
 This created subfolders called `content` and `output`, as well as a Makefile and some default Python scripts `pelicanconf.py`, `publishconf.py` and `tasks.py`.
 
-    C:\> dir
+    dir
+    
     Volume in drive C has no label.
     Volume Serial Number is 5C84-C174
 
@@ -76,8 +77,6 @@ This created subfolders called `content` and `output`, as well as a Makefile and
                4 File(s)          8,039 bytes
                4 Dir(s)  51,526,713,344 bytes free
 
-    C:\Users\Simulatine\Documents\Git\100DaysOfCode\web>
-
 As suggested in the
 [quickstart guide](https://docs.getpelican.com/en/stable/quickstart.html#installation),
 I next created a trial web source page `keyboard-review.md` in the `content`
@@ -92,15 +91,13 @@ folder, with some markdown content:
 I attempted to generate the site output by going to the top website folder and
 running pelican against the `content` folder.
 
-    C:\Users\Simulatine\Documents\Git\100DaysOfCode\web> pelican content
+    pelican content
 
 I received the following notification:
 
     WARNING: Docutils has no localization for 'english'. Using 'en' instead.
     ERROR: Skipping C:\Users\Simulatine\Documents\Git\100DaysOfCode\web\content\keyboard-review.md: could not find information about 'title'
     Done: Processed 0 articles, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.62 seconds.
-
-    C:\Users\Simulatine\Documents\Git\100DaysOfCode\web>
 
 Hmm . Two immediate errors. It turns out that the default language choice
 "English" in pelican-quickstart should have been "en". I had to go to
@@ -130,7 +127,7 @@ contents in `keyboard-review.md` were actually:
 I had to remove the leading and trailing backtick lines and resave the markdown
 file. I could then retry generating the site output:
 
-    C:\Users\Simulatine\Documents\Git\100DaysOfCode\web> pelican content
+    pelican content
     Done: Processed 1 article, 0 drafts, 0 pages, 0 hidden pages and 0 draft pages in 0.31 seconds.
 
 This time it worked! I had an entire web site in the `output` folder. I was
@@ -143,13 +140,12 @@ by launching the pelican built-in web server
 Once this was running, I could preview the site by navigating to the URL
 http://localhost:8000/ on my local browser:
 
-![Pelican Initial Screenshot](/images/Pelican_Initial_Screenshot.png)
+![Pelican Initial Screenshot]({static}/images/2020-05-10_Pelican_Initial_Screenshot.png)
 
 Excellent! I like how this appears, and it took maybe 20-30 minutes to get this
 up and running.
 
-Publish to GitHub Pages
-=======================
+## Publish to GitHub Pages ##
 
 I was immediately sold on Pelican - I now wanted to publish this publicly to my
 GitHub Pages site.
@@ -159,18 +155,18 @@ I followed the instructions in the
 
 First of all, I installed the Python `ghp-import` tool
 
-    C:\Users\Simulatine\Documents\Git\100DaysOfCode\web> pip install ghp-import
+    pip install ghp-import
 
-I created a local `gh-pages` branch with the content of the `output` folder. 
-If the branch already exists, this command updates it with the latest files in
-`output`
+I used ghp-import to create a local `gh-pages` branch with the content of the
+`output` folder. If the branch already exists, this command will update the
+branch with the latest files in `output`.
 
-    C:\Users\Simulatine\Documents\Git\100DaysOfCode\web> ghp-import output
+    ghp-import output
 
 I then pushed the `gh-pages` branch from my local desktop to my GitHub
 repository
 
-    C:\Users\Simulatine\Documents\Git\100DaysOfCode\web> git push origin gh-pages
+    git push origin gh-pages
 
 Finally, I went to my GitHub repository and in Settings, GitHub Pages, I
 changed the source from the Master branch docs folder (used by Jekyll) to the
@@ -182,11 +178,9 @@ at https://simulatine.github.io/100DaysOfCode/
 I finally cleaned up my old Jekyll site by deleting everything in the old docs
 folder with `git rm`, and resyncing my repository:
 
-    C:\Users\Simulatine\Documents\Git\100DaysOfCode\web> git push origin master
+    git push origin master
 
-
-Conclusion
-==========
+## Conclusion ##
 
 I found Pelican to be simple to use, and a lot more Pythonesque than Jekyll.
 I'll be sticking with this for a while.
