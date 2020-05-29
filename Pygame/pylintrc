@@ -1,0 +1,18 @@
+# pylintrc
+#
+# pylint configuration file
+# Ensure the location of this file is defined by the PYLINTRC environment
+# variable.
+#
+# C.R., 19 May, 2020 - Initial version
+#
+[FORMAT]
+# C.R., 19 May, 2020
+# Added short variable names which should always be accepted
+good-names=i,x,y,dx,dy
+
+[TYPECHECK]
+# C.R., 29 May, 2020
+# Ignore any errors from Pygame, in particular errors of the form:
+# Module 'pygame' has no 'init' member (no-member)
+ignored-modules = pygame
