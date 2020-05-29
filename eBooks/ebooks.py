@@ -93,7 +93,7 @@ def get_amazon_books():
 
             # Get the list of books
             for div in soup.find_all("div", attrs={"bo-text": "tab.title"}):
-                titles.append(str(div.string))
+                titles.append(div.string)
                 num_books += 1
 
             # Get the list of authors
