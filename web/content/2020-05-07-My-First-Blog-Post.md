@@ -2,8 +2,7 @@ Title: Day 1: My First Post - Getting Started
 Date: 2020-05-07
 Category: Posts
 
-A New Challenge
-===============
+## A New Challenge ##
 
 Along with most of the world, I've been stuck in lockdown for weeks, with no end in sight.
 So I've decided to use this time to learn some new skills.
