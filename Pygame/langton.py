@@ -1,12 +1,23 @@
 #!python3
 # -*- coding: utf-8 -*-
 """
-Langton's Ant - simulation of
-                https://en.wikipedia.org/wiki/Langton%27s_ant
+Langton's Ant Simulation.
+
+See https://en.wikipedia.org/wiki/Langton%27s_ant
 
 Simulatine, 28 May, 2020 - Initial version.
+Simulatine, 29 May, 2020 - Updates:
+                         - Used Pygame rect objects to reduce the number of
+                           class attributes within Grid()
+                         - Added clock.get_fps() to the dashboard to show the
+                           actual frame rate.
+                         - Moved initial drawing functions out of main game
+                           loop.
+                         - Create a subclass of the generic Grid() class to
+                           separate out the methods specific to the Langton's
+                           Ant simulation. This will allow Grid() to be reused
+                           in the future.
 """
-
 import datetime
 import logging
 import os
@@ -15,7 +26,7 @@ import sys
 # Import Pygame, either standard version or SDL2 version depending on the
 # platform.
 try:
-    import pygame_sdl2 # pylint: disable=import-error
+    import pygame_sdl2  # pylint: disable=import-error
 
     pygame_sdl2.import_as_pygame()
     PYGAME_SDL2 = True
@@ -25,9 +36,10 @@ import pygame
 
 # Create the core Pygame objects
 WIN = None
-FPSCLOCK = None
+CLOCK = None
 GAME_TITLE = "Langton's Ant"
 FONT = None
+BOLD_FONT = None
 
 # Game variables
 WINDOW_WIDTH = 640
@@ -72,95 +84,216 @@ class Grid:
 
     def __init__(self):
         """Initialise the grid."""
+        # Grid position on screen
+        self.grid = None
 
-        # Grid position
-        self.grid_left = 0
-        self.grid_right = 0
-        self.grid_top = 0
-        self.grid_bottom = 0
+        # Dashboard position on screen
+        self.dashboard = None
 
-        # Dashboard position
-        self.dashboard_left = 0
-        self.dashboard_right = 0
-        self.dashboard_top = 0
-        self.dashboard_bottom = 0
-
-        # Game parameters
         self.generation = 1
-        self.ant_x = 0
-        self.ant_y = 0
-        self.ant_init_x = self.ant_x
-        self.ant_init_y = self.ant_y
-        self.ant_direction = LEFT
 
         self.buttons = {}
         self.cells = []
         self.set_display_parameters()
-        self.set_game_parameters()
         self.create_grid()
+        self.create_dashboard()
+        self.create_cells()
+        self.create_quit_button()
+        # self.draw_title()
 
     def set_display_parameters(self):
         """Set the overall display parameters based on the window size."""
         self.window_width = WINDOW_WIDTH
         self.window_height = WINDOW_HEIGHT
-        if (self.window_width, self.window_height) == (640, 480):
-            # Landscape layout
+        self.margin_x = 10
+        self.margin_y = 10
+        self.cell_size = 10
+        if self.window_width >= self.window_height:
             self.layout = LANDSCAPE
-            self.cell_size = 10
-            self.grid_width = 48
-            self.grid_height = 42
-            self.margin_x = 10
-            self.margin_y = 40
-            self.frames_per_second = 15
-        if (self.window_width, self.window_height) == (1000, 800):
-            # Landscape layout
-            self.layout = LANDSCAPE
-            self.cell_size = 10
-            self.grid_width = 80
-            self.grid_height = 75
-            self.margin_x = 10
-            self.margin_y = 40
-            self.frames_per_second = 15
-        elif (self.window_width, self.window_height) == (600, 960):
-            # Portrait layout - for use on Android tablet
+            # Make the main grid 70% of the window width
+            self.cell_cols = int((self.window_width * 0.7) / self.cell_size)
+            # Make the main grid fill the entire window height, allowing for
+            # top and bottom margins
+            self.cell_rows = int(
+                (self.window_height - self.margin_y * 2) / self.cell_size
+            )
+        elif self.window_height > self.window_width:
             self.layout = PORTRAIT
-            self.cell_size = 10
-            self.grid_width = 56
-            self.grid_height = 72
-            self.margin_x = 10
-            self.margin_y = 40
-            self.frames_per_second = 15
-
-    def set_game_parameters(self):
-        """Set the initial game parameters."""
-        self.generation = 1
-        self.ant_x = int(self.grid_width / 2)
-        self.ant_y = int(self.grid_height / 2)
-        self.ant_init_x = self.ant_x
-        self.ant_init_y = self.ant_y
-        self.ant_direction = LEFT
+            # Make the main grid fill the entire window width, allowing for
+            # left and right margins
+            self.cell_cols = int(
+                (self.window_width - self.margin_x * 2) / self.cell_size
+            )
+            # Make the main grid 80% of the window height
+            self.cell_rows = int((self.window_height * 0.8) / self.cell_size)
 
     def create_grid(self):
+        """Draw the main grid."""
+        left = self.margin_x
+        width = self.cell_cols * self.cell_size
+        top = self.margin_y
+        height = self.cell_rows * self.cell_size
+
+        self.grid = pygame.Rect(left, top, width, height)
+
+        # Draw a border around the entire grid
+        pygame.draw.rect(
+            WIN, BLUE, (left - 1, top - 1, width + 1, height + 1), 2,
+        )
+
+        # Draw vertical lines
+        for x in range(left, left + width, self.cell_size):
+            pygame.draw.line(WIN, LIGHTBLUE, (x, top), (x, top + height))
+        # Draw horizontal lines
+        for y in range(top, top + height, self.cell_size):
+            pygame.draw.line(WIN, LIGHTBLUE, (left, y), (left + width, y))
+
+    def create_dashboard(self):
+        """Create a dashboard to the side of, or below, the main grid."""
+        if self.layout == LANDSCAPE:
+            # Place the dashboard to the right of the main grid
+            left = self.grid.right + self.margin_x
+            width = self.window_width - self.margin_x - left
+            top = self.margin_y
+            height = self.grid.bottom - self.margin_y
+        else:
+            # Place the dashboard below the main grid
+            left = self.margin_x
+            width = self.grid.right - self.margin_x
+            top = self.grid.bottom + self.margin_y
+            height = self.window_height - self.margin_y - top
+
+        self.dashboard = pygame.Rect(left, top, width, height)
+        # Draw a border around the entire dashboard
+        pygame.draw.rect(WIN, BLUE, self.dashboard, 2)
+
+        # Draw the game title at the top of the dashboard
+        text_surface = BOLD_FONT.render(GAME_TITLE, True, TEXTCOLOR)
+        WIN.blit(
+            text_surface, (self.dashboard.left + 5, self.dashboard.top + 5)
+        )
+
+    def create_cells(self):
         """Create the initial game grid."""
         # Stop pylint complaining about unused x and y variables:
         # pylint: disable=unused-variable
 
-        for x in range(self.grid_width):
+        for x in range(self.cell_cols):
             column = []
-            for y in range(self.grid_height):
+            for y in range(self.cell_rows):
                 column.append(False)
             self.cells.append(column)
 
+    def create_quit_button(self):
+        """Create control button surfaces and their locations."""
+        size = (width, height) = (100, 50)
+
+        if self.layout == LANDSCAPE:
+            # Place the button at the bottom middle of the dashboard
+            x = self.dashboard.left + int(
+                (self.dashboard.right - self.dashboard.left) / 2
+            )
+        else:
+            # Place the button at the bottom right of the dashboard
+            x = self.dashboard.right - 10 - int(width) / 2
+        y = self.dashboard.bottom - 10 - int(height / 2)
+
+        pos = (x, y)
+        surface, rect = create_button(QUIT, TEXTCOLOR, DARKGRAY, pos, size)
+        self.buttons[QUIT] = [surface, rect]
+
+    def draw_buttons(self):
+        """Draw control buttons on the screen."""
+        for button in self.buttons:
+            surface, rect = self.buttons[button][0], self.buttons[button][1]
+            WIN.blit(surface, rect)
+
     def update(self):
         """Update the simulation by one generation."""
+        self.update_simulation()
+        self.update_grid()
+        self.update_dashboard()
+        self.generation += 1
+
+    def update_simulation(self):
+        """Update the simulation by one generation.
+
+        This is the default class method and just refreshes the generation
+        count. A more detailed update method should be created in each child
+        function.
+        """
+        self.generation += 1
+
+    def update_grid(self):
+        """Draw the current state of the main grid."""
+        for x in range(self.cell_cols):
+            for y in range(self.cell_rows):
+                # Make the cell_rect one pixel smaller than the actual grid
+                # size in all directions, to prevent drawing over the grid
+                # lines.
+                cell_x = self.margin_x + x * self.cell_size + 1
+                cell_y = self.margin_y + y * self.cell_size + 1
+                cell_rect = pygame.Rect(
+                    cell_x, cell_y, self.cell_size - 1, self.cell_size - 1
+                )
+                if self.cells[x][y]:
+                    # Cell is On (True).
+                    # Fill the cell.
+                    pygame.draw.rect(WIN, WHITE, cell_rect)
+                else:
+                    # Cell is Off (False).
+                    # Leave the cell unfilled.
+                    pygame.draw.rect(WIN, BGCOLOR, cell_rect)
+
+    def update_dashboard(self):
+        """Update the dashboard display.
+
+        This is the default class method and just refreshes the generation
+        count. A more detailed update method should be created in each child
+        function.
+        """
+        x = 10
+        y = 40
+        draw_text(
+            "Gen:   {}".format(self.generation),
+            TEXTCOLOR,
+            BGCOLOR,
+            self.dashboard.left + x,
+            self.dashboard.top + y,
+        )
+
+
+class Langton(Grid):
+    """Langton's Ant simulation."""
+
+    def __init__(self):
+        """Initialise the simulation."""
+        # First, call the parent class __init__() method.
+        super().__init__()
+
+        # Game parameters
+        self.updated_cells = []
+        self.ant_x = int(self.cell_cols / 2)
+        self.ant_y = int(self.cell_rows / 2)
+        self.ant_init_x = self.ant_x
+        self.ant_init_y = self.ant_y
+        self.ant_direction = LEFT
+
+    def update(self):
+        """Update the simulation by one generation."""
+        self.updated_cells = []
         self.move_ant()
         self.update_grid()
-        self.draw_ant()
+        self.update_ant()
         self.update_dashboard()
         self.generation += 1
 
     def move_ant(self):
         """Update the ant's position."""
+        # Record the current position and its value
+        self.updated_cells.append(
+            [self.ant_x, self.ant_y, self.cells[self.ant_x][self.ant_y]]
+        )
         if self.ant_direction == LEFT:
             self.ant_x -= 1
         elif self.ant_direction == RIGHT:
@@ -184,34 +317,49 @@ class Grid:
             index = (index + 1) % len(DIRECTIONS)
             self.ant_direction = DIRECTIONS[index]
 
-        # Flip the value of the current cell
+        # Flip the value of the new cell
         cell_value = self.cells[self.ant_x][self.ant_y]
         self.cells[self.ant_x][self.ant_y] = not cell_value
+        # Record the new position and its value
+        self.updated_cells.append(
+            [self.ant_x, self.ant_y, self.cells[self.ant_x][self.ant_y]]
+        )
+
+    def update_ant(self):
+        """Draw the ant on the main grid."""
+        # Make the cell_rect one pixel smaller than the actual grid size in all
+        # directions, to prevent drawing over the grid lines.
+        cell_x = self.margin_x + self.ant_x * self.cell_size + 1
+        cell_y = self.margin_y + self.ant_y * self.cell_size + 1
+        cell_rect = pygame.Rect(
+            cell_x, cell_y, self.cell_size - 1, self.cell_size - 1
+        )
+        pygame.draw.rect(WIN, RED, cell_rect)
 
     def update_grid(self):
-        """Update the main grid."""
-        for x in range(self.grid_width):
-            for y in range(self.grid_height):
-                if self.cells[x][y]:
-                    # Cell is On (True).
-                    # Fill the cell.
-                    cell_x = self.margin_x + x * self.cell_size
-                    cell_y = self.margin_y + y * self.cell_size
-                    cell_rect = pygame.Rect(
-                        cell_x, cell_y, self.cell_size, self.cell_size
-                    )
-                    pygame.draw.rect(WIN, WHITE, cell_rect)
-                else:
-                    # Cell is Off (False).
-                    # Leave the cell unfilled.
-                    pass
-
-    def draw_ant(self):
-        """Draw the ant on the main grid."""
-        cell_x = self.margin_x + self.ant_x * self.cell_size
-        cell_y = self.margin_y + self.ant_y * self.cell_size
-        cell_rect = pygame.Rect(cell_x, cell_y, self.cell_size, self.cell_size)
-        pygame.draw.rect(WIN, RED, cell_rect)
+        """Draw the current state of the main grid."""
+        # This version only draws the two changed cells, so is much faster
+        # than iterating across the entire grid.
+        for cell in self.updated_cells:
+            x = cell[0]
+            y = cell[1]
+            value = cell[2]
+            # Make the cell_rect one pixel smaller than the actual grid
+            # size in all directions, to prevent drawing over the grid
+            # lines.
+            cell_x = self.margin_x + x * self.cell_size + 1
+            cell_y = self.margin_y + y * self.cell_size + 1
+            cell_rect = pygame.Rect(
+                cell_x, cell_y, self.cell_size - 1, self.cell_size - 1
+            )
+            if value:
+                # Cell is On (True).
+                # Fill the cell.
+                pygame.draw.rect(WIN, WHITE, cell_rect)
+            else:
+                # Cell is Off (False).
+                # Leave the cell unfilled.
+                pygame.draw.rect(WIN, BGCOLOR, cell_rect)
 
     def update_dashboard(self):
         """Update the dashboard display."""
@@ -223,135 +371,66 @@ class Grid:
             dy = 20
 
         x = 10
-        y = 10
+        y = 40
+
         draw_text(
-            "Gen:   {}".format(self.generation),
+            "Gen:  {0:>5}".format(self.generation),
             TEXTCOLOR,
-            self.dashboard_left + x,
-            self.dashboard_top + y,
-        )
-        draw_text(
-            "Ant X: {}".format(self.ant_x - self.ant_init_x),
-            TEXTCOLOR,
-            self.dashboard_left + x + dx,
-            self.dashboard_top + y + dy,
+            BGCOLOR,
+            self.dashboard.left + x,
+            self.dashboard.top + y,
         )
         draw_text(
-            "Ant Y: {}".format(self.ant_y - self.ant_init_y),
+            "Ant X:{0:>5}".format(self.ant_x - self.ant_init_x),
             TEXTCOLOR,
-            self.dashboard_left + x + dx * 2,
-            self.dashboard_top + y + dy * 2,
+            BGCOLOR,
+            self.dashboard.left + x + dx,
+            self.dashboard.top + y + dy,
         )
-
-    def draw_title(self):
-        """Draw the game title at the top of the screen."""
-        text_surface = FONT.render(GAME_TITLE, True, TEXTCOLOR)
-        WIN.blit(text_surface, (self.margin_x, 5))
-
-    def draw_grid_lines(self):
-        """Draw the main grid."""
-        left = self.margin_x
-        right = self.margin_x + self.grid_width * self.cell_size
-        top = self.margin_y
-        bottom = self.margin_y + self.grid_height * self.cell_size
-
-        # Draw vertical lines
-        for x in range(left, right, self.cell_size):
-            pygame.draw.line(WIN, LIGHTBLUE, (x, top), (x, bottom))
-        # Draw horizontal lines
-        for y in range(top, bottom, self.cell_size):
-            pygame.draw.line(WIN, LIGHTBLUE, (left, y), (right, y))
-
-        # Draw a border around the entire grid
-        pygame.draw.rect(
-            WIN,
-            BLUE,
-            (left - 1, top - 1, right - left + 1, bottom - top + 1),
-            2,
+        draw_text(
+            "Ant Y:{0:>5}".format(self.ant_y - self.ant_init_y),
+            TEXTCOLOR,
+            BGCOLOR,
+            self.dashboard.left + x + dx * 2,
+            self.dashboard.top + y + dy * 2,
         )
-
-        # Save the grid position
-        self.grid_left = left
-        self.grid_right = right
-        self.grid_top = top
-        self.grid_bottom = bottom
-
-    def draw_dashboard(self):
-        """Draw a dashboard to the side of, or below, the main grid."""
-
-        if self.layout == LANDSCAPE:
-            # Place the dashboard to the right of the main grid
-            left = self.grid_right + self.margin_x
-            top = self.margin_y
-            right = self.window_width - self.margin_x
-            bottom = self.grid_bottom
-        else:
-            # Place the dashboard below the main grid
-            left = self.margin_x
-            top = self.grid_bottom + self.margin_y
-            right = self.grid_right
-            bottom = self.window_height - self.margin_y
-
-        # Draw a border around the entire dashboard
-        pygame.draw.rect(WIN, BLUE, (left, top, right - left, bottom - top), 2)
-
-        # Save the dashboard position
-        self.dashboard_left = left
-        self.dashboard_right = right
-        self.dashboard_top = top
-        self.dashboard_bottom = bottom
-
-    def create_buttons(self):
-        """Create control button surfaces and their locations."""
-        size = (width, height) = (100, 50)
-
-        if self.layout == LANDSCAPE:
-            # Place the button at the bottom middle of the dashboard
-            x = self.dashboard_left + int(
-                (self.dashboard_right - self.dashboard_left) / 2
-            )
-        else:
-            # Place the button at the bottom right of the dashboard
-            x = self.dashboard_right - 10 - int(width) / 2
-        y = self.dashboard_bottom - 10 - int(height / 2)
-
-        pos = (x, y)
-        surface, rect = create_button(QUIT, TEXTCOLOR, DARKGRAY, pos, size)
-        self.buttons[QUIT] = [surface, rect]
-
-    def draw_buttons(self):
-        """Draw control buttons on the screen."""
-        for button in self.buttons:
-            surface, rect = self.buttons[button][0], self.buttons[button][1]
-            WIN.blit(surface, rect)
+        draw_text(
+            "FPS:  {0:>5}".format(int(CLOCK.get_fps())),
+            TEXTCOLOR,
+            BGCOLOR,
+            self.dashboard.left + x + dx * 3,
+            self.dashboard.top + y + dy * 3,
+        )
 
 
 def main():
-    """Initialise the game and execute the main game loop."""
+    """Initialise the game and call the main game loop."""
+    # Tell pylint to ignore the use of the 'global' statement in this function.
+    # pylint: disable=global-statement
     global WINDOW_WIDTH, WINDOW_HEIGHT
-    global FONT
+    global PYGAME_SDL2, FONT, BOLD_FONT
     # Initialise logging
     config_logging()
 
     # WINDOW_WIDTH, WINDOW_HEIGHT = start_pygame(640, 480, GAME_TITLE)
-    WINDOW_WIDTH, WINDOW_HEIGHT = start_pygame(1000, 800, GAME_TITLE)
-    # WINDOW_WIDTH, WINDOW_HEIGHT = start_pygame(600, 960, GAME_TITLE)
-    FONT = pygame.font.Font("freesansbold.ttf", FONT_SIZE)
+    # Android tablet screen size
+    WINDOW_WIDTH, WINDOW_HEIGHT = start_pygame(600, 976, GAME_TITLE)
+
+    FONT = pygame.font.SysFont("Courier", FONT_SIZE)
+    BOLD_FONT = pygame.font.SysFont("Courier", FONT_SIZE, bold=True)
 
     run_game()
     end_pygame()
 
 
 def run_game():
-    """Main game loop."""
-    simulation = Grid()
+    """Execute the main game loop."""
+    WIN.fill(BGCOLOR)
+    simulation = Langton()
+    # simulation = Grid()
+    simulation.draw_buttons()
+    pygame.display.update()
     while True:
-        WIN.fill(BGCOLOR)
-        simulation.draw_title()
-        simulation.draw_grid_lines()
-        simulation.draw_dashboard()
-        simulation.create_buttons()
-        simulation.draw_buttons()
         # Handle events
         action = check_user_input(simulation.buttons)
         if action:
@@ -366,12 +445,16 @@ def run_game():
         simulation.update()
         # Update the display
         pygame.display.update()
-        # Pause the game to meet the appropriate frame rate
-        # FPSCLOCK.tick(simulation.frames_per_second)
+        # Update the clock once per game loop.
+        CLOCK.tick()
+        # CLOCK.tick(simulation.frames_per_second)
 
 
 def check_user_input(buttons):
     """Check for any user input and return the requested action."""
+    # Tell pylint to ignore no-member errors.
+    # These occur as pylint cannot find the various pygame event types.
+    # pylint: disable=no-member
     action = None
     for event in pygame.event.get():  # event handling loop
         if event.type == pygame.QUIT:
@@ -405,7 +488,6 @@ def check_user_input(buttons):
 
 def create_button(text, color, bgcolor, pos, size):
     """Create Surface and Rect objects for an on screen button."""
-
     x, y = pos[0], pos[1]
     width, height = size[0], size[1]
     # First, create the button surface
@@ -433,9 +515,9 @@ def create_button(text, color, bgcolor, pos, size):
     return (button_surface, button_rect)
 
 
-def draw_text(text, color, top, left):
+def draw_text(text, color, bgcolor, top, left):
     """Create Surface and Rect objects for on screen text."""
-    text_surface = FONT.render(text, True, color)
+    text_surface = FONT.render(text, True, color, bgcolor)
     text_rect = text_surface.get_rect()
     text_rect.topleft = (top, left)
     WIN.blit(text_surface, (top, left))
@@ -443,11 +525,14 @@ def draw_text(text, color, top, left):
 
 def start_pygame(width, height, title):
     """Start Pygame and create the Pygame window."""
-    global WIN, FPSCLOCK
+    # Tell pylint to ignore the use of the 'global' statement in this function.
+    # pylint: disable=global-statement
+    global WIN, CLOCK
 
     # Initialise the Pygame display window.
     pygame.init()
-    FPSCLOCK = pygame.time.Clock()
+    # Initialise a Pygame clock timer. This helps calculate the frame rate.
+    CLOCK = pygame.time.Clock()
 
     # Set the window title. This has no effect on Android.
     pygame.display.set_caption(title)
@@ -462,6 +547,7 @@ def start_pygame(width, height, title):
     # Check the actual window size
     width = pygame.display.Info().current_w
     height = pygame.display.Info().current_h
+    logging.debug("Pygame window size: (%s, %s)", width, height)
     return (width, height)
 
 
@@ -495,6 +581,9 @@ def config_logging():
 
     # Write some initial log messages
     logging.debug("")
+    logging.debug("")
+    logging.debug("Python %s", sys.version)
+    logging.debug("Platform %s", sys.platform)
     logging.debug("Starting %s", GAME_TITLE)
 
 
