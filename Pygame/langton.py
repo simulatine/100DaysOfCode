@@ -17,6 +17,13 @@ Simulatine, 29 May, 2020 - Updates:
                            separate out the methods specific to the Langton's
                            Ant simulation. This will allow Grid() to be reused
                            in the future.
+Simulatine, 31 May, 2020 - Updates:
+                         - Added a Pause button and a status message to the
+                           dashboard area.
+                         - Checked for ant off screen and added an appropriate
+                           "Completed" message.
+                         - Added an icon image for the window title bar.
+
 """
 import datetime
 import logging
@@ -60,13 +67,14 @@ LIGHTGRAY = pygame.Color(196, 196, 196)
 BGCOLOR = BLACK
 TEXTCOLOR = WHITE
 
-
-# Define the available user actions
+# Define the available user actions. These are implemented via the keyboard
+# and via on screen button controls.
 UP = "Up"
 DOWN = "Down"
 LEFT = "Left"
 RIGHT = "Right"
 QUIT = "Quit"
+PAUSE = "Pause"
 
 # Cardinal directions in clockwise order
 DIRECTIONS = [RIGHT, DOWN, LEFT, UP]
@@ -91,6 +99,7 @@ class Grid:
         self.dashboard = None
 
         self.generation = 1
+        self.paused = False
 
         self.buttons = {}
         self.cells = []
@@ -98,7 +107,7 @@ class Grid:
         self.create_grid()
         self.create_dashboard()
         self.create_cells()
-        self.create_quit_button()
+        self.create_buttons()
         # self.draw_title()
 
     def set_display_parameters(self):
@@ -107,7 +116,7 @@ class Grid:
         self.window_height = WINDOW_HEIGHT
         self.margin_x = 10
         self.margin_y = 10
-        self.cell_size = 10
+        self.cell_size = 5
         if self.window_width >= self.window_height:
             self.layout = LANDSCAPE
             # Make the main grid 70% of the window width
@@ -184,23 +193,47 @@ class Grid:
                 column.append(False)
             self.cells.append(column)
 
-    def create_quit_button(self):
-        """Create control button surfaces and their locations."""
+    def create_buttons(self):
+        """
+        Create standard control button surfaces and their locations.
+
+        On screen buttons are required on tablet devices as keyboard control
+        is not available.
+
+        This function defines a Quit and Pause buttons. Child classes may
+        want to add additional buttons.
+        """
+        # This size is sufficient for buttons up to 4-5 characters.
         size = (width, height) = (100, 50)
 
         if self.layout == LANDSCAPE:
-            # Place the button at the bottom middle of the dashboard
+            # Place the first button at the bottom middle of the dashboard
             x = self.dashboard.left + int(
                 (self.dashboard.right - self.dashboard.left) / 2
             )
+            # Place additional buttons above the first one, with a 10 pixel gap
+            # between each button
+            dx = 0
+            dy = -(height + 10)
         else:
-            # Place the button at the bottom right of the dashboard
+            # Place the first button at the bottom right of the dashboard
             x = self.dashboard.right - 10 - int(width) / 2
+            # Place additional buttons to the left of the the first one, with a
+            # 10 pixel gap between each button
+            dx = -(width + 10)
+            dy = 0
+
         y = self.dashboard.bottom - 10 - int(height / 2)
 
+        # Create a Quit button
         pos = (x, y)
         surface, rect = create_button(QUIT, TEXTCOLOR, DARKGRAY, pos, size)
         self.buttons[QUIT] = [surface, rect]
+
+        # Create a Pause button
+        pos = (x + dx, y + dy)
+        surface, rect = create_button(PAUSE, TEXTCOLOR, DARKGRAY, pos, size)
+        self.buttons[PAUSE] = [surface, rect]
 
     def draw_buttons(self):
         """Draw control buttons on the screen."""
@@ -209,11 +242,15 @@ class Grid:
             WIN.blit(surface, rect)
 
     def update(self):
-        """Update the simulation by one generation."""
-        self.update_simulation()
-        self.update_grid()
-        self.update_dashboard()
-        self.generation += 1
+        """Update the simulation and update the grid and dashboard."""
+        if not self.paused:
+            self.update_simulation()
+            self.update_grid()
+            self.update_dashboard()
+            self.generation += 1
+        else:
+            # The simulation is paused. Display an appropriate message.
+            self.update_dashboard("Paused")
 
     def update_simulation(self):
         """Update the simulation by one generation.
@@ -245,15 +282,23 @@ class Grid:
                     # Leave the cell unfilled.
                     pygame.draw.rect(WIN, BGCOLOR, cell_rect)
 
-    def update_dashboard(self):
+    def update_dashboard(self, msg=None):
         """Update the dashboard display.
 
-        This is the default class method and just refreshes the generation
-        count. A more detailed update method should be created in each child
-        function.
+        This is the default class method: it displays the generation count
+        and displays a message. A more detailed update method should be created
+        in each child class.
         """
         x = 10
         y = 40
+        if self.layout == LANDSCAPE:
+            dx = 0
+            dy = 20
+        else:
+            dx = 0
+            dy = 20
+
+        # Display the current generation number
         draw_text(
             "Gen:   {}".format(self.generation),
             TEXTCOLOR,
@@ -261,11 +306,31 @@ class Grid:
             self.dashboard.left + x,
             self.dashboard.top + y,
         )
+        if msg:
+            # Display any status message
+            draw_text(
+                msg,
+                TEXTCOLOR,
+                BGCOLOR,
+                self.dashboard.left + x + dx,
+                self.dashboard.top + y + dy,
+            )
+        else:
+            # Clear the status message area
+            draw_text(
+                "        ",
+                TEXTCOLOR,
+                BGCOLOR,
+                self.dashboard.left + x + dx,
+                self.dashboard.top + y + dy,
+            )
 
 
 class Langton(Grid):
     """Langton's Ant simulation."""
 
+    # Stop pylint complaining about the number of attributes:
+    # pylint: disable=too-many-instance-attributes
     def __init__(self):
         """Initialise the simulation."""
         # First, call the parent class __init__() method.
@@ -278,15 +343,25 @@ class Langton(Grid):
         self.ant_init_x = self.ant_x
         self.ant_init_y = self.ant_y
         self.ant_direction = LEFT
+        self.out_of_bounds = False
 
     def update(self):
         """Update the simulation by one generation."""
-        self.updated_cells = []
-        self.move_ant()
-        self.update_grid()
-        self.update_ant()
-        self.update_dashboard()
-        self.generation += 1
+        if self.paused:
+            # The simulation is paused. Display an appropriate message.
+            self.update_dashboard("Paused")
+        elif self.out_of_bounds:
+            # The ant has moved off screen. Display a message and end the
+            self.update_dashboard("Completed")
+        else:
+            # The simulation is proceeding normally.
+            self.updated_cells = []
+            self.move_ant()
+            if not self.out_of_bounds:
+                self.update_grid()
+                self.update_ant()
+                self.update_dashboard()
+                self.generation += 1
 
     def move_ant(self):
         """Update the ant's position."""
@@ -302,6 +377,16 @@ class Langton(Grid):
             self.ant_y -= 1
         elif self.ant_direction == DOWN:
             self.ant_y += 1
+
+        # Check whether the new ant position is off screen.
+        if (
+            self.ant_x < 0
+            or self.ant_x >= self.cell_cols
+            or self.ant_y < 0
+            or self.ant_y >= self.cell_rows
+        ):
+            self.out_of_bounds = True
+            return
 
         # Check the color of the new cell:
         if self.cells[self.ant_x][self.ant_y]:
@@ -361,8 +446,10 @@ class Langton(Grid):
                 # Leave the cell unfilled.
                 pygame.draw.rect(WIN, BGCOLOR, cell_rect)
 
-    def update_dashboard(self):
+    def update_dashboard(self, msg=None):
         """Update the dashboard display."""
+        x = 10
+        y = 40
         if self.layout == LANDSCAPE:
             dx = 0
             dy = 20
@@ -370,9 +457,7 @@ class Langton(Grid):
             dx = 0
             dy = 20
 
-        x = 10
-        y = 40
-
+        # Display the current generation number
         draw_text(
             "Gen:  {0:>5}".format(self.generation),
             TEXTCOLOR,
@@ -380,6 +465,7 @@ class Langton(Grid):
             self.dashboard.left + x,
             self.dashboard.top + y,
         )
+        # Display the ant's X position
         draw_text(
             "Ant X:{0:>5}".format(self.ant_x - self.ant_init_x),
             TEXTCOLOR,
@@ -387,6 +473,7 @@ class Langton(Grid):
             self.dashboard.left + x + dx,
             self.dashboard.top + y + dy,
         )
+        # Display the ant's Y position
         draw_text(
             "Ant Y:{0:>5}".format(self.ant_y - self.ant_init_y),
             TEXTCOLOR,
@@ -394,6 +481,7 @@ class Langton(Grid):
             self.dashboard.left + x + dx * 2,
             self.dashboard.top + y + dy * 2,
         )
+        # Display the current simulation update rate in frames per second
         draw_text(
             "FPS:  {0:>5}".format(int(CLOCK.get_fps())),
             TEXTCOLOR,
@@ -401,6 +489,26 @@ class Langton(Grid):
             self.dashboard.left + x + dx * 3,
             self.dashboard.top + y + dy * 3,
         )
+        if msg:
+            # Display any requested status message
+            draw_text(
+                msg,
+                TEXTCOLOR,
+                BGCOLOR,
+                self.dashboard.left + x + dx * 4,
+                self.dashboard.top + y + dy * 4,
+                bold=True,
+            )
+        else:
+            # Clear the status message area
+            draw_text(
+                "        ",
+                TEXTCOLOR,
+                BGCOLOR,
+                self.dashboard.left + x + dx * 4,
+                self.dashboard.top + y + dy * 4,
+                bold=True,
+            )
 
 
 def main():
@@ -412,9 +520,12 @@ def main():
     # Initialise logging
     config_logging()
 
+    # Standard desktop screen size
     # WINDOW_WIDTH, WINDOW_HEIGHT = start_pygame(640, 480, GAME_TITLE)
+    # Larger screen size
+    WINDOW_WIDTH, WINDOW_HEIGHT = start_pygame(1024, 768, GAME_TITLE)
     # Android tablet screen size
-    WINDOW_WIDTH, WINDOW_HEIGHT = start_pygame(600, 976, GAME_TITLE)
+    # WINDOW_WIDTH, WINDOW_HEIGHT = start_pygame(600, 976, GAME_TITLE)
 
     FONT = pygame.font.SysFont("Courier", FONT_SIZE)
     BOLD_FONT = pygame.font.SysFont("Courier", FONT_SIZE, bold=True)
@@ -437,8 +548,13 @@ def run_game():
             # Process the requested action
             print("The player requested action: {}".format(action))
             if action == QUIT:
+                # End the simulation
                 end_pygame()
+            elif action == PAUSE:
+                # Toggled the paused state
+                simulation.paused = not simulation.paused
             else:
+                # No specific simulation action required for any other input
                 pass
 
         # Update the game position
@@ -453,7 +569,8 @@ def run_game():
 def check_user_input(buttons):
     """Check for any user input and return the requested action."""
     # Tell pylint to ignore no-member errors.
-    # These occur as pylint cannot find the various pygame event types.
+    # These occur as pylint cannot find the various pygame event types used
+    # below.
     # pylint: disable=no-member
     action = None
     for event in pygame.event.get():  # event handling loop
@@ -471,7 +588,7 @@ def check_user_input(buttons):
                     # was clicked.
                     action = button
         elif event.type == pygame.KEYDOWN:
-            # The user clicked a key. Check which key was pressed and return
+            # The user clicked a key. Check which key was pressed and assign
             # the appropriate action.
             if event.key in (pygame.K_LEFT, pygame.K_a):
                 action = LEFT
@@ -481,6 +598,8 @@ def check_user_input(buttons):
                 action = UP
             elif event.key in (pygame.K_DOWN, pygame.K_s):
                 action = DOWN
+            elif event.key in (pygame.K_SPACE, pygame.K_p):
+                action = PAUSE
             elif event.key in (pygame.K_ESCAPE, pygame.K_q):
                 action = QUIT
     return action
@@ -488,13 +607,12 @@ def check_user_input(buttons):
 
 def create_button(text, color, bgcolor, pos, size):
     """Create Surface and Rect objects for an on screen button."""
-    x, y = pos[0], pos[1]
     width, height = size[0], size[1]
     # First, create the button surface
     button_surface = pygame.Surface(size)
     button_surface.fill(bgcolor)
     button_rect = button_surface.get_rect()
-    button_rect.center = (int(x), int(y))
+    button_rect.center = (int(pos[0]), int(pos[1]))
 
     # Draw a shadow
     shadow_color = (bgcolor.r * 1.5, bgcolor.g * 1.5, bgcolor.b * 1.5)
@@ -515,9 +633,12 @@ def create_button(text, color, bgcolor, pos, size):
     return (button_surface, button_rect)
 
 
-def draw_text(text, color, bgcolor, top, left):
+def draw_text(text, color, bgcolor, top, left, bold=False):
     """Create Surface and Rect objects for on screen text."""
-    text_surface = FONT.render(text, True, color, bgcolor)
+    if bold:
+        text_surface = BOLD_FONT.render(text, True, color, bgcolor)
+    else:
+        text_surface = FONT.render(text, True, color, bgcolor)
     text_rect = text_surface.get_rect()
     text_rect.topleft = (top, left)
     WIN.blit(text_surface, (top, left))
@@ -529,13 +650,17 @@ def start_pygame(width, height, title):
     # pylint: disable=global-statement
     global WIN, CLOCK
 
-    # Initialise the Pygame display window.
+    # Initialise the Pygame display window
     pygame.init()
     # Initialise a Pygame clock timer. This helps calculate the frame rate.
     CLOCK = pygame.time.Clock()
 
     # Set the window title. This has no effect on Android.
     pygame.display.set_caption(title)
+    
+    # Set the window icon
+    icon = pygame.image.load('langton_icon.png')
+    pygame.display.set_icon(icon)
 
     # Create the Pygame window. On a desktop running standard Pygame, the
     # requested width and height will be used. On an Android device running
