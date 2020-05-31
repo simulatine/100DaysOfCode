@@ -1,6 +1,7 @@
 # 100 Days Of Code #
 
 *May to August 2020*
+
 My daily coding progress for the next 100 days
 
 For more information, see my 
