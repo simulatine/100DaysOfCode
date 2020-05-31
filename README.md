@@ -1,14 +1,16 @@
-# 100 Days Of Code
-My daily coding progress for the next 100 days
+# 100 Days Of Code #
 
-*May 2020*
+*May to August 2020*
+My daily coding progress for the next 100 days
 
 For more information, see my 
 [twitter feed](https://twitter.com/simulatine)
 where I am posting daily updates.
 
-My [blog site](https://simulatine.github.io/100DaysOfCode/) contains less
-frequent posts on topics and approaches I found useful for my coding.
+My
+[blog site](https://simulatine.github.io/100DaysOfCode/)
+contains less frequent posts on topics and approaches I found useful for my
+coding.
 
 ## Useful Links ##
 
