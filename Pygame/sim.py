@@ -536,7 +536,7 @@ def config_logging(title):
 
 def main():
     """Initialise the game and call the main game loop."""
-    title = "Grid"
+    title = "Simulation"
     # Initialise logging
     config_logging(title)
 
