@@ -136,7 +136,7 @@ class Grid:
 
         self.margin_x = 10
         self.margin_y = 10
-        self.cell_size = 5
+        self.cell_size = 45
         if self.display_width >= self.display_height:
             self.layout = LANDSCAPE
             # Make the main grid 70% of the window width
@@ -407,7 +407,7 @@ class Grid:
 
         # Display the current generation number
         self.draw_text(
-            "Gen:   {:>5}".format(self.generation),
+            "Gen: {:>7}".format(self.generation),
             TEXTCOLOR,
             BGCOLOR,
             self.dashboard.left + x + self.dash_offset_x,
@@ -415,7 +415,7 @@ class Grid:
         )
         # Display the current population
         self.draw_text(
-            "Pop:   {:>5}".format(self.population),
+            "Pop: {:>7}".format(self.population),
             TEXTCOLOR,
             BGCOLOR,
             self.dashboard.left + x + self.dash_offset_x * 2,
@@ -423,7 +423,7 @@ class Grid:
         )
         # Display the current simulation update rate in frames per second
         self.draw_text(
-            "FPS:   {:>5}".format(int(self.clock.get_fps())),
+            "FPS: {:>7}".format(int(self.clock.get_fps())),
             TEXTCOLOR,
             BGCOLOR,
             self.dashboard.left + x + self.dash_offset_x * 3,
