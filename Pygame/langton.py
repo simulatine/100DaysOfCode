@@ -96,9 +96,7 @@ class Langton(sim.Grid):
     def move_ant(self):
         """Update the ant's position."""
         # Record the current position and its value
-        self.updated_cells.append(
-            [self.ant_x, self.ant_y, self.cells[self.ant_x][self.ant_y]]
-        )
+        self.updated_cells.append([self.ant_x, self.ant_y])
 
         # Move the ant in its current direction
         self.ant_x += self.dirs[self.ant_direction][0]
@@ -133,9 +131,7 @@ class Langton(sim.Grid):
         self.cells[self.ant_x][self.ant_y] = new_cell_value
         self.population += self.update_population[new_cell_value]
         # Record the new position and its value
-        self.updated_cells.append(
-            [self.ant_x, self.ant_y, self.cells[self.ant_x][self.ant_y]]
-        )
+        self.updated_cells.append([self.ant_x, self.ant_y])
 
     def update_ant(self):
         """Draw the ant on the main grid."""
@@ -155,7 +151,7 @@ class Langton(sim.Grid):
         for cell in self.updated_cells:
             x = cell[0]
             y = cell[1]
-            value = cell[2]
+            value = self.cells[x][y]
             # Make the cell_rect one pixel smaller than the actual grid
             # size in all directions, to prevent drawing over the grid
             # lines.
@@ -195,9 +191,6 @@ class Langton(sim.Grid):
 
 def main():
     """Initialise the game and call the main game loop."""
-    # Tell pylint to ignore the use of the 'global' statement in this function.
-    # pylint: disable=global-statement
-
     title = "Langton's Ant"
     # Initialise logging
     sim.config_logging(title)
